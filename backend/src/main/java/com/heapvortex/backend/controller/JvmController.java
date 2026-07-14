@@ -2,11 +2,7 @@ package com.heapvortex.backend.controller;
 
 import com.heapvortex.backend.dto.*;
 import com.heapvortex.backend.jmx.JmxConnectionService;
-import lombok.Getter;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -19,6 +15,14 @@ public class JvmController {
 
     public JvmController(JmxConnectionService jmxConnectionService) {
         this.jmxConnectionService = jmxConnectionService;
+    }
+
+    @PostMapping("/connect")
+    public String connect(@RequestBody JmxConnectionRequest request) throws IOException {
+
+        jmxConnectionService.connect(request.getHost(), request.getPort());
+
+        return "Connected Successfully";
     }
 
     @GetMapping("/heap")
@@ -55,6 +59,8 @@ public class JvmController {
     public List<JvmMemoryPoolMetrics> getMemoryPoolMetrics() throws IOException {
         return jmxConnectionService.getMemoryPoolMetrics();
     }
+
+
 
 
 

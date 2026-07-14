@@ -1,6 +1,7 @@
 package com.heapvortex.backend.jmx;
 
 import com.heapvortex.backend.dto.*;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.management.MBeanServerConnection;
@@ -19,20 +20,47 @@ public class JmxConnectionService {
     private JMXServiceURL jmxServiceURL;
     private JMXConnector connector;
     private MBeanServerConnection mBeanServerConnection;
-    private static final String HOST = "localhost";
-    private static final int PORT = 9999;
+    @Value("${jmx.host}")
+    private String host;
+    @Value("${jmx.port}")
+    private int port;
 
-    public void connect() throws IOException {
-        String url = "service:jmx:rmi:///jndi/rmi://" + HOST + ":" + PORT + "/jmxrmi";
+    private void ensureConnection() throws IOException {
+        if(!isConnectionAlive())
+            connect(host, port);
+    }
+
+    private boolean isConnectionAlive() {
+        try {
+            return mBeanServerConnection != null && mBeanServerConnection.getMBeanCount() != null;
+        }
+        catch (IOException e) {
+            return false;
+        }
+    }
+
+    public void connect(String host, int port) throws IOException {
+
+        if(connector != null) {
+            connector.close();
+            connector = null;
+            mBeanServerConnection = null;
+        }
+
+        String url = "service:jmx:rmi:///jndi/rmi://" + host + ":" + port + "/jmxrmi";
+
         jmxServiceURL = new JMXServiceURL(url);
         connector = JMXConnectorFactory.connect(jmxServiceURL);
         mBeanServerConnection = connector.getMBeanServerConnection();
+
+        this.host = host;
+        this.port = port;
     }
+
 
     public JvmHeapMetrics getHeapMetrics() throws IOException {
 
-        if(mBeanServerConnection == null)
-            connect();
+        ensureConnection();
 
         MemoryMXBean memoryMXBean = ManagementFactory.newPlatformMXBeanProxy(mBeanServerConnection, ManagementFactory.MEMORY_MXBEAN_NAME, MemoryMXBean.class);
         MemoryUsage memoryUsage = memoryMXBean.getHeapMemoryUsage();
@@ -44,8 +72,7 @@ public class JmxConnectionService {
 
     public JvmRuntimeMetrics getRuntimeMetrics() throws IOException {
 
-        if(mBeanServerConnection == null)
-                connect();
+        ensureConnection();
 
         RuntimeMXBean runtimeMXBean = ManagementFactory.newPlatformMXBeanProxy(mBeanServerConnection, ManagementFactory.RUNTIME_MXBEAN_NAME, RuntimeMXBean.class);
 
@@ -55,8 +82,8 @@ public class JmxConnectionService {
     }
 
     public JvmThreadMetrics getThreadMetrics() throws IOException {
-        if(mBeanServerConnection == null)
-            connect();
+
+        ensureConnection();
 
         ThreadMXBean threadMXBean = ManagementFactory.newPlatformMXBeanProxy(mBeanServerConnection, ManagementFactory.THREAD_MXBEAN_NAME, ThreadMXBean.class);
 
@@ -66,8 +93,8 @@ public class JmxConnectionService {
     }
 
     public JvmOperatingSystemMetrics getOSMetrics() throws IOException {
-        if(mBeanServerConnection == null)
-            connect();
+
+        ensureConnection();
 
         OperatingSystemMXBean osMXBean = ManagementFactory.newPlatformMXBeanProxy(mBeanServerConnection, ManagementFactory.OPERATING_SYSTEM_MXBEAN_NAME, OperatingSystemMXBean.class);
 
@@ -77,8 +104,8 @@ public class JmxConnectionService {
     }
 
     public JvmClassLoadingMetrics getClassLoadingMetrics() throws IOException {
-        if(mBeanServerConnection == null)
-            connect();
+
+        ensureConnection();
 
         ClassLoadingMXBean classLoadingMXBean = ManagementFactory.newPlatformMXBeanProxy(mBeanServerConnection, ManagementFactory.CLASS_LOADING_MXBEAN_NAME, ClassLoadingMXBean.class);
 
@@ -88,14 +115,14 @@ public class JmxConnectionService {
     }
 
     public List<JvmGarbageCollectorMetrics> getGCMetrics() throws IOException {
-        if(mBeanServerConnection == null)
-            connect();
 
-        List<GarbageCollectorMXBean> garbageCollectorMXBean = ManagementFactory.getPlatformMXBeans(mBeanServerConnection, GarbageCollectorMXBean.class);
+        ensureConnection();
+
+        List<GarbageCollectorMXBean> garbageCollectorMXBeans = ManagementFactory.getPlatformMXBeans(mBeanServerConnection, GarbageCollectorMXBean.class);
 
         List<JvmGarbageCollectorMetrics> metricsList = new ArrayList<>();
 
-        for(GarbageCollectorMXBean gc : garbageCollectorMXBean) {
+        for(GarbageCollectorMXBean gc : garbageCollectorMXBeans) {
             JvmGarbageCollectorMetrics metrics = new JvmGarbageCollectorMetrics(gc.getName(), gc.getCollectionCount(), gc.getCollectionTime());
 
             metricsList.add(metrics);
@@ -105,8 +132,8 @@ public class JmxConnectionService {
     }
 
     public List<JvmMemoryPoolMetrics> getMemoryPoolMetrics() throws IOException {
-        if(mBeanServerConnection == null)
-            connect();
+
+        ensureConnection();
 
         List<MemoryPoolMXBean> memoryPoolMXBeans = ManagementFactory.getPlatformMXBeans(mBeanServerConnection, MemoryPoolMXBean.class);
 
@@ -115,8 +142,9 @@ public class JmxConnectionService {
         for(MemoryPoolMXBean pool : memoryPoolMXBeans) {
             MemoryUsage usage = pool.getUsage();
 
-            if(usage == null)
+            if(usage == null) {
                 continue;
+            }
 
             JvmMemoryPoolMetrics metrics = new JvmMemoryPoolMetrics(
                     pool.getName(), pool.getType().toString(),
@@ -128,12 +156,5 @@ public class JmxConnectionService {
 
         return metricsList;
     }
-
-
-
-
-
-    
-
 
 }
