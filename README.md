@@ -73,33 +73,7 @@ src/
 
 ---
 
-## Installation
 
-Clone the repository
-
-```bash
-git clone https://github.com/your-username/Heap-Vortex-Visualizer.git
-```
-
-Go to the project folder
-
-```bash
-cd Heap-Vortex-Visualizer
-```
-
-Install dependencies
-
-```bash
-npm install
-```
-
-Run the application
-
-```bash
-npm run dev
-```
-
----
 
 ## Future Enhancements
 
