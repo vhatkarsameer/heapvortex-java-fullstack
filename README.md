@@ -73,8 +73,6 @@ src/
 
 ---
 
-
-
 ## Future Enhancements
 
 - Mouse click object selection
@@ -88,7 +86,7 @@ src/
 
 ## Learning Outcomes
 
-Through this project, I learned:
+Through this project, I have learned:
 
 - React Functional Components
 - React Hooks
