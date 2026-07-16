@@ -44,6 +44,24 @@ src/
 
 ---
 
+## Overall Flow
+
+User Opens Website
+        │
+        ▼
+Landing Page Opens
+        │
+        ▼
+Views Available Projects
+        │
+        ▼
+Clicks Launch HeapVortex
+        │
+        ▼
+HeapVortex Visualization Opens
+
+---
+
 ## How It Works
 
 ### Scene Initialization
