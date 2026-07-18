@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+
 @RestController
 @RequestMapping("/api/heap")
 public class HeapController {
@@ -20,8 +22,8 @@ public class HeapController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<HeapUploadResponse> uploadHeapDump(@RequestParam("file") MultipartFile file) {
-        HeapUploadResponse response = heapParserService.heapUploadResponse(file);
+    public ResponseEntity<HeapUploadResponse> uploadHeapDump(@RequestParam("file") MultipartFile file) throws IOException {
+        HeapUploadResponse response = heapParserService.uploadHeapDump(file);
         return ResponseEntity.ok(response);
     }
 }
