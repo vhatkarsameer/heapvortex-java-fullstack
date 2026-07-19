@@ -132,3 +132,4 @@ export const HeapVortexVisualizer: React.FC<HeapVisualizerProps> = ({ objects, e
     </div>
   );
 };
+      
