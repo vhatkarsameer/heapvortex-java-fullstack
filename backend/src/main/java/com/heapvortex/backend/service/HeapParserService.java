@@ -19,7 +19,7 @@ public class HeapParserService {
     private final HeapParser heapParser;
     private String uploadDirectory;
 
-    public HeapParserService(HeapParser heapParser, @Value("${heap.upload.directory") String uploadDirectory) {
+    public HeapParserService(HeapParser heapParser, @Value("${heap.upload.directory}") String uploadDirectory) {
         this.heapParser = heapParser;
         this.uploadDirectory = uploadDirectory;
     }
@@ -57,9 +57,9 @@ public class HeapParserService {
 
         Files.copy(file.getInputStream(), destination, StandardCopyOption.REPLACE_EXISTING);
 
-        heapParser.parse(destination);
+        long objectCount = heapParser.parse(destination);
 
-        return new HeapUploadResponse(fileName, file.getSize(), "Heap dump uploaded successfully");
+        return new HeapUploadResponse(fileName, file.getSize(), objectCount, "Heap dump uploaded successfully");
     }
 
 }

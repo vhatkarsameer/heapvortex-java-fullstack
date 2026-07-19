@@ -1,7 +1,8 @@
 package com.heapvortex.backend.heap.parser;
 
+import java.io.IOException;
 import java.nio.file.Path;
 
 public interface HeapParser {
-    void parse(Path heapDumpPath);
+    long parse(Path heapDumpPath) throws IOException;
 }

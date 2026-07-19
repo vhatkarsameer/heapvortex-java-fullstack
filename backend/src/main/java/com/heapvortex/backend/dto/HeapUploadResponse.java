@@ -11,6 +11,7 @@ import lombok.Setter;
 public class HeapUploadResponse {
     private String fileName;
     private long fileSize;
+    private long objectCount;
     private String message;
 
 
