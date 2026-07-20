@@ -1,13 +1,22 @@
 package com.heapvortex.backend.heap.parser;
 
+import com.heapvortex.backend.dto.ClassStatistics;
+import com.heapvortex.backend.dto.HeapStatistics;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
+
+import java.io.Reader;
 
 @Component
 public class MatHeapParser implements HeapParser{
@@ -15,7 +24,7 @@ public class MatHeapParser implements HeapParser{
     private static final Logger logger = LoggerFactory.getLogger(MatHeapParser.class);
 
     @Override
-    public long parse(Path heapDumpPath) throws IOException {
+    public HeapStatistics parse(Path heapDumpPath) throws IOException {
 
         ProcessBuilder processBuilder = new ProcessBuilder(
                 "/Applications/MemoryAnalyzer.app/Contents/Eclipse/ParseHeapDump.sh",
@@ -33,7 +42,6 @@ public class MatHeapParser implements HeapParser{
 
         while ((line = reader.readLine()) != null) {
 
-            logger.info("MAT Output : {}", line);
 
             if (line.contains("contains") && line.contains("objects")) {
 
@@ -44,7 +52,6 @@ public class MatHeapParser implements HeapParser{
 
                 objectCount = Long.parseLong(count.replace(",", ""));
 
-                logger.info("Object Count : {}", objectCount);
             }
         }
 
@@ -60,14 +67,13 @@ public class MatHeapParser implements HeapParser{
             throw new RuntimeException("MAT execution interrupted", e);
         }
 
-        Path reportDirectory = heapDumpPath.getParent().resolve("mat-report");
 
         ProcessBuilder histogramProcessBuilder = new ProcessBuilder(
                 "/Applications/MemoryAnalyzer.app/Contents/Eclipse/ParseHeapDump.sh",
                 heapDumpPath.toAbsolutePath().toString(),
                 "-command=histogram",
                 "-format=csv",
-                "-output=" + reportDirectory.toAbsolutePath(),
+                "-unzip",
                 "org.eclipse.mat.api:query"
         );
 
@@ -82,18 +88,86 @@ public class MatHeapParser implements HeapParser{
         String histogramLine;
 
         while ((histogramLine = histogramReader.readLine()) != null) {
-            logger.info("Histogram: {}", histogramLine);
         }
 
         try {
             int histogramExitCode = histogramProcess.waitFor();
             logger.info("Histogram Exit Code : {}", histogramExitCode);
-            logger.info("Current Working Directory: {}", System.getProperty("user.dir"));
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             throw new RuntimeException("Histogram execution interrupted", e);
         }
 
-        return objectCount;
+
+        File pagesFolder = heapDumpPath.getParent()
+                .resolve("heapdump_Query")
+                .resolve("pages")
+                .toFile();
+
+        File[] csvFiles = pagesFolder.listFiles(file ->
+                file.isFile() &&
+                        file.getName().endsWith(".csv")
+        );
+
+        if (csvFiles == null || csvFiles.length == 0) {
+            throw new RuntimeException("No CSV file found.");
+        }
+
+
+        try (
+                Reader fileReader = new FileReader(csvFiles[0]);
+                CSVParser csvParser = CSVFormat.DEFAULT
+                        .builder()
+                        .setHeader()
+                        .setSkipHeaderRecord(true)
+                        .build()
+                        .parse(fileReader)
+        ) {
+
+            int classCount = 0;
+            long totalShallowHeap = 0;
+
+            List<ClassStatistics> classStatistics = new ArrayList<>();
+
+            for (CSVRecord record : csvParser) {
+
+                String className = record.get("Class Name").trim();
+
+                long objects = Long.parseLong(
+                        record.get("Objects").replace(",", "").trim()
+                );
+
+                long shallowHeap = Long.parseLong(
+                        record.get("Shallow Heap").replace(",", "").trim()
+                );
+
+                classCount++;
+                totalShallowHeap += shallowHeap;
+
+                classStatistics.add(
+                        new ClassStatistics(
+                                className,
+                                objects,
+                                shallowHeap
+                        )
+                );
+            }
+
+            classStatistics.sort(
+                    Comparator.comparingLong(ClassStatistics::getShallowHeap)
+                            .reversed()
+            );
+
+            logger.info("Object Count : {}", objectCount);
+            logger.info("Class Count : {}", classCount);
+            logger.info("Total Shallow Heap : {}", totalShallowHeap);
+
+            return new HeapStatistics(
+                    objectCount,
+                    classCount,
+                    totalShallowHeap,
+                    classStatistics
+            );
+        }
     }
 }

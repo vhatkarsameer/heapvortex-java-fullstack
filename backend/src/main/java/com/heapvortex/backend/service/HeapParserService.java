@@ -1,5 +1,6 @@
 package com.heapvortex.backend.service;
 
+import com.heapvortex.backend.dto.HeapStatistics;
 import com.heapvortex.backend.dto.HeapUploadResponse;
 import com.heapvortex.backend.exception.InvalidHeapDumpException;
 import com.heapvortex.backend.heap.parser.HeapParser;
@@ -57,7 +58,7 @@ public class HeapParserService {
 
         Files.copy(file.getInputStream(), destination, StandardCopyOption.REPLACE_EXISTING);
 
-        long objectCount = heapParser.parse(destination);
+        HeapStatistics heapStatistics = heapParser.parse(destination);
 
         return new HeapUploadResponse(fileName, file.getSize(), objectCount, "Heap dump uploaded successfully");
     }
