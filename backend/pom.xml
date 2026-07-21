@@ -98,6 +98,12 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.eclipse.equinox</groupId>
+			<artifactId>org.eclipse.equinox.registry</artifactId>
+			<version>3.12.600.v20250906-0651</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.eclipse.osgi</groupId>
 			<artifactId>org.eclipse.osgi</artifactId>
 			<version>3.24.200.v20260515-1403</version>

@@ -18,7 +18,7 @@ import java.nio.file.StandardCopyOption;
 public class HeapParserService {
 
     private final HeapParser heapParser;
-    private String uploadDirectory;
+    private final String uploadDirectory;
 
     public HeapParserService(HeapParser heapParser, @Value("${heap.upload.directory}") String uploadDirectory) {
         this.heapParser = heapParser;
@@ -60,7 +60,7 @@ public class HeapParserService {
 
         HeapStatistics heapStatistics = heapParser.parse(destination);
 
-        return new HeapUploadResponse(fileName, file.getSize(), objectCount, "Heap dump uploaded successfully");
+        return new HeapUploadResponse(fileName, file.getSize(), heapStatistics, "Heap dump uploaded successfully");
     }
 
 }

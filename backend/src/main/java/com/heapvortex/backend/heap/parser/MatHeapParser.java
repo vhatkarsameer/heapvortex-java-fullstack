@@ -2,56 +2,78 @@ package com.heapvortex.backend.heap.parser;
 
 import com.heapvortex.backend.dto.ClassStatistics;
 import com.heapvortex.backend.dto.HeapStatistics;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
-
-import java.io.*;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.Reader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Stream;
 
 @Component
-public class MatHeapParser implements HeapParser{
+public class MatHeapParser implements HeapParser {
 
-    private static final Logger logger = LoggerFactory.getLogger(MatHeapParser.class);
+    private final String matCommand;
+
+    public MatHeapParser(@Value("${mat.command}") String matCommand) {
+        this.matCommand = matCommand;
+    }
 
     @Override
     public HeapStatistics parse(Path heapDumpPath) throws IOException {
+        runHistogramReport(heapDumpPath);
 
-        ProcessBuilder processBuilder = new ProcessBuilder(
-                "/Applications/MemoryAnalyzer.app/Contents/Eclipse/ParseHeapDump.sh",
-                heapDumpPath.toAbsolutePath().toString()
+        Path csvReport = findLatestHistogramCsv(heapDumpPath);
+        List<ClassStatistics> classStatistics = readClassStatistics(csvReport);
+
+        long objectCount = classStatistics.stream()
+                .mapToLong(ClassStatistics::getObjectCount)
+                .sum();
+
+        long totalShallowHeap = classStatistics.stream()
+                .mapToLong(ClassStatistics::getShallowHeap)
+                .sum();
+
+        return new HeapStatistics(
+                objectCount,
+                classStatistics.size(),
+                totalShallowHeap,
+                classStatistics
         );
+    }
+
+    private Path executeOql(Path heapDumpPath, String oqlQuery) throws IOException {
+        ProcessBuilder processBuilder = new ProcessBuilder(
+                matCommand,
+                heapDumpPath.toAbsolutePath().toString(),
+                "-command=oql \"" + oqlQuery + "\"",
+                "-format=csv",
+                "-unzip",
+                "org.eclipse.mat.api:query"
+        );
+
+        processBuilder.directory(heapDumpPath.getParent().toFile());
+        processBuilder.redirectErrorStream(true);
 
         Process process = processBuilder.start();
 
-        BufferedReader reader = new BufferedReader(
-                new InputStreamReader(process.getInputStream())
-        );
+        StringBuilder output = new StringBuilder();
 
-        String line;
-        long objectCount = 0;
+        try (BufferedReader reader = new BufferedReader(
+                new InputStreamReader(process.getInputStream(), StandardCharsets.UTF_8))) {
 
-        while ((line = reader.readLine()) != null) {
-
-
-            if (line.contains("contains") && line.contains("objects")) {
-
-                String count = line.replaceAll(
-                        ".*contains\\s+([0-9,]+)\\s+objects.*",
-                        "$1"
-                );
-
-                objectCount = Long.parseLong(count.replace(",", ""));
-
+            String line;
+            while ((line = reader.readLine()) != null) {
+                output.append(line).append(System.lineSeparator());
             }
         }
 
@@ -59,115 +81,124 @@ public class MatHeapParser implements HeapParser{
             int exitCode = process.waitFor();
 
             if (exitCode != 0) {
-                throw new RuntimeException("MAT exited with code " + exitCode);
+                throw new IOException("MAT OQL execution failed:\n" + output);
             }
 
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
-            throw new RuntimeException("MAT execution interrupted", e);
+            throw new IOException("MAT OQL execution interrupted", e);
         }
 
+        return findLatestQueryCsv(heapDumpPath);
+    }
 
-        ProcessBuilder histogramProcessBuilder = new ProcessBuilder(
-                "/Applications/MemoryAnalyzer.app/Contents/Eclipse/ParseHeapDump.sh",
+    private Path findLatestQueryCsv(Path heapDumpPath) throws IOException {
+
+        String reportPrefix = removeExtension(heapDumpPath.getFileName().toString()) + "_Query";
+
+        try (Stream<Path> paths = Files.walk(heapDumpPath.getParent(), 3)) {
+            return paths
+                    .filter(Files::isRegularFile)
+                    .filter(path -> path.getFileName().toString().endsWith(".csv"))
+                    .filter(path -> belongsToMatReport(path, reportPrefix))
+                    .max(Comparator.comparing(this::lastModifiedTime))
+                    .orElseThrow(() -> new IOException("MAT did not produce a query CSV report"));
+        }
+    }
+
+    private void runHistogramReport(Path heapDumpPath) throws IOException {
+        ProcessBuilder processBuilder = new ProcessBuilder(
+                matCommand,
                 heapDumpPath.toAbsolutePath().toString(),
                 "-command=histogram",
                 "-format=csv",
                 "-unzip",
                 "org.eclipse.mat.api:query"
         );
+        processBuilder.directory(heapDumpPath.getParent().toFile());
+        processBuilder.redirectErrorStream(true);
 
-        histogramProcessBuilder.directory(heapDumpPath.getParent().toFile());
+        Process process = processBuilder.start();
+        StringBuilder output = new StringBuilder();
 
-        Process histogramProcess = histogramProcessBuilder.start();
+        try (BufferedReader reader = new BufferedReader(
+                new InputStreamReader(process.getInputStream(), StandardCharsets.UTF_8))) {
 
-        BufferedReader histogramReader = new BufferedReader(
-                new InputStreamReader(histogramProcess.getInputStream())
-        );
-
-        String histogramLine;
-
-        while ((histogramLine = histogramReader.readLine()) != null) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                output.append(line).append(System.lineSeparator());
+            }
         }
 
         try {
-            int histogramExitCode = histogramProcess.waitFor();
-            logger.info("Histogram Exit Code : {}", histogramExitCode);
+            int exitCode = process.waitFor();
+            if (exitCode != 0) {
+                throw new IOException("MAT histogram generation failed: " + output.toString());
+            }
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
-            throw new RuntimeException("Histogram execution interrupted", e);
+            throw new IOException("MAT histogram generation was interrupted", e);
         }
+    }
 
+    private Path findLatestHistogramCsv(Path heapDumpPath) throws IOException {
+        String reportPrefix = removeExtension(heapDumpPath.getFileName().toString()) + "_Query";
 
-        File pagesFolder = heapDumpPath.getParent()
-                .resolve("heapdump_Query")
-                .resolve("pages")
-                .toFile();
-
-        File[] csvFiles = pagesFolder.listFiles(file ->
-                file.isFile() &&
-                        file.getName().endsWith(".csv")
-        );
-
-        if (csvFiles == null || csvFiles.length == 0) {
-            throw new RuntimeException("No CSV file found.");
+        try (Stream<Path> paths = Files.walk(heapDumpPath.getParent(), 3)) {
+            return paths
+                    .filter(Files::isRegularFile)
+                    .filter(path -> path.getFileName().toString().endsWith(".csv"))
+                    .filter(path -> belongsToMatReport(path, reportPrefix))
+                    .max(Comparator.comparing(this::lastModifiedTime))
+                    .orElseThrow(() -> new IOException("MAT did not produce a histogram CSV report"));
         }
+    }
 
+    private boolean belongsToMatReport(Path csvPath, String reportPrefix) {
+        Path reportDirectory = csvPath.getParent() == null ? null : csvPath.getParent().getParent();
+        return reportDirectory != null
+                && reportDirectory.getFileName().toString().startsWith(reportPrefix);
+    }
 
+    private long lastModifiedTime(Path path) {
+        try {
+            return Files.getLastModifiedTime(path).toMillis();
+        } catch (IOException e) {
+            return Long.MIN_VALUE;
+        }
+    }
+
+    private List<ClassStatistics> readClassStatistics(Path csvReport) throws IOException {
         try (
-                Reader fileReader = new FileReader(csvFiles[0]);
-                CSVParser csvParser = CSVFormat.DEFAULT
-                        .builder()
+                Reader fileReader = Files.newBufferedReader(csvReport, StandardCharsets.UTF_8);
+                CSVParser csvParser = CSVFormat.DEFAULT.builder()
                         .setHeader()
                         .setSkipHeaderRecord(true)
-                        .build()
+                        .setAllowMissingColumnNames(true)
+                        .get()
                         .parse(fileReader)
         ) {
-
-            int classCount = 0;
-            long totalShallowHeap = 0;
-
-            List<ClassStatistics> classStatistics = new ArrayList<>();
-
-            for (CSVRecord record : csvParser) {
-
-                String className = record.get("Class Name").trim();
-
-                long objects = Long.parseLong(
-                        record.get("Objects").replace(",", "").trim()
-                );
-
-                long shallowHeap = Long.parseLong(
-                        record.get("Shallow Heap").replace(",", "").trim()
-                );
-
-                classCount++;
-                totalShallowHeap += shallowHeap;
-
-                classStatistics.add(
-                        new ClassStatistics(
-                                className,
-                                objects,
-                                shallowHeap
-                        )
-                );
-            }
-
-            classStatistics.sort(
-                    Comparator.comparingLong(ClassStatistics::getShallowHeap)
-                            .reversed()
-            );
-
-            logger.info("Object Count : {}", objectCount);
-            logger.info("Class Count : {}", classCount);
-            logger.info("Total Shallow Heap : {}", totalShallowHeap);
-
-            return new HeapStatistics(
-                    objectCount,
-                    classCount,
-                    totalShallowHeap,
-                    classStatistics
-            );
+            return csvParser.stream()
+                    .map(this::toClassStatistics)
+                    .sorted(Comparator.comparingLong(ClassStatistics::getShallowHeap).reversed())
+                    .toList();
         }
+    }
+
+    private ClassStatistics toClassStatistics(CSVRecord record) {
+        return new ClassStatistics(
+                record.get("Class Name").trim(),
+                parseNumber(record.get("Objects")),
+                parseNumber(record.get("Shallow Heap"))
+        );
+    }
+
+    private long parseNumber(String value) {
+        return Long.parseLong(value.replace(",", "").trim());
+    }
+
+    private String removeExtension(String fileName) {
+        int extensionIndex = fileName.lastIndexOf('.');
+        return extensionIndex < 0 ? fileName : fileName.substring(0, extensionIndex);
     }
 }
