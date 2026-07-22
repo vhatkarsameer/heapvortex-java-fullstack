@@ -70,6 +70,18 @@ public class JmxConnectionService {
         return metrics;
     }
 
+    public JvmHeapMetrics getNonHeapMetrics() throws IOException {
+
+        ensureConnection();
+
+        MemoryMXBean memoryMXBean = ManagementFactory.newPlatformMXBeanProxy(mBeanServerConnection, ManagementFactory.MEMORY_MXBEAN_NAME, MemoryMXBean.class);
+        MemoryUsage memoryUsage = memoryMXBean.getNonHeapMemoryUsage();
+
+        JvmHeapMetrics metrics = new JvmHeapMetrics(memoryUsage.getUsed(), memoryUsage.getCommitted(), memoryUsage.getMax());
+
+        return metrics;
+    }
+
     public JvmRuntimeMetrics getRuntimeMetrics() throws IOException {
 
         ensureConnection();
