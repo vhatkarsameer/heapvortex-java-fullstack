@@ -345,3 +345,81 @@ Displays a short description of the platform:
 
 The `LandingPage.tsx` component acts as the central dashboard of the HeapVortex platform. It provides users with an intuitive interface to explore engineering projects, navigate between application modules, and launch the HeapVortex visualization environment through a clean, responsive, and modern design.
 
+
+
+1.
+Implement Backend Endpoints:
+
+•
+GET /api/heap/incoming-references
+
+•
+GET /api/heap/path-to-gc-root
+
+•
+GET /api/heap/jvm-metrics
+
+
+
+2.
+Replace Mock Data with Real API Calls:
+
+•
+Remove Math.random() from HeapObjectDetailsPanel
+
+•
+Remove Math.random() from HeapVortexMetrics
+
+•
+Fetch real data from backend
+
+
+
+3.
+Add WebSocket Streaming:
+
+•
+Real-time metric updates
+
+•
+Live object graph changes
+
+•
+Heap snapshot streaming
+
+
+
+4.
+Performance Optimization:
+
+•
+Implement object pooling for large datasets
+
+•
+Add LOD (Level of Detail) for 3D rendering
+
+•
+Optimize raycasting with spatial indexing
+
+
+Support
+
+If you encounter any issues:
+
+1.
+Check that all three files are in the correct locations
+
+2.
+Verify imports in App.tsx
+
+3.
+Ensure backend endpoints return the correct field names
+
+4.
+Check browser console for TypeScript errors
+
+5.
+Verify Three.js and OrbitControls are installed: pnpm add three
+
+
+
