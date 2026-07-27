@@ -1,16 +1,13 @@
-
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import React, { useEffect, useRef, useState } from "react";
-import * as THREE from "three";
 
 interface HeapObject {
   id: number;
   className: string;
-  retainedSize: number;
-  objectId: string;
-
+  address: string;
+  shallowHeap: number;
+  retainedHeap: number;
   referenceChain?: string[];
 }
 
@@ -23,7 +20,6 @@ interface HeapEdge {
 interface HeapVisualizerProps {
   objects: HeapObject[];
   edges: HeapEdge[];
-
   onObjectSelected?: (object: HeapObject | null) => void;
 }
 
@@ -54,24 +50,6 @@ export const HeapVortexVisualizer: React.FC<HeapVisualizerProps> = ({
     sceneRef.current = scene;
 
     // Camera setup
-}
-
-export const HeapVortexVisualizer: React.FC<HeapVisualizerProps> = ({ objects, edges }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const sceneRef = useRef<THREE.Scene | null>(null);
-  const cameraRef = useRef<THREE.Camera | null>(null);
-  const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
-  const [selectedObject, setSelectedObject] = useState<HeapObject | null>(null);
-
-  useEffect(() => {
-    if (!containerRef.current) return;
-
-    // Initialize Three.js scene
-    const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x1a1a1a);
-    sceneRef.current = scene;
-
-
     const camera = new THREE.PerspectiveCamera(
       75,
       containerRef.current.clientWidth / containerRef.current.clientHeight,
@@ -121,11 +99,11 @@ export const HeapVortexVisualizer: React.FC<HeapVisualizerProps> = ({ objects, e
     const nodeObjectMap = new Map<THREE.Mesh, HeapObject>();
 
     objects.forEach((obj, index) => {
-      const size = Math.max(1, Math.log(obj.retainedSize + 1) / 5);
+      const size = Math.max(1, Math.log(obj.retainedHeap + 1) / 5);
       const geometry = new THREE.SphereGeometry(size, 32, 32);
 
-      // Color based on retained size
-      const hue = Math.min(obj.retainedSize / 50000, 1);
+      // Color based on retained heap size
+      const hue = Math.min(obj.retainedHeap / 50000, 1);
       const material = new THREE.MeshPhongMaterial({
         color: new THREE.Color().setHSL(hue, 0.8, 0.5),
         emissive: new THREE.Color().setHSL(hue, 0.8, 0.3),
@@ -149,12 +127,12 @@ export const HeapVortexVisualizer: React.FC<HeapVisualizerProps> = ({ objects, e
       );
 
       mesh.userData = {
-        objectId: obj.objectId,
+        address: obj.address,
         isNode: true,
       };
 
       scene.add(mesh);
-      nodeMap.set(obj.objectId, mesh);
+      nodeMap.set(obj.address, mesh);
       nodeObjectMap.set(mesh, obj);
     });
 
@@ -162,36 +140,6 @@ export const HeapVortexVisualizer: React.FC<HeapVisualizerProps> = ({ objects, e
 
     // Create edges with glow effect
     const edgeGroup = new THREE.Group();
-    camera.position.z = 50;
-    cameraRef.current = camera;
-
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(containerRef.current.clientWidth, containerRef.current.clientHeight);
-    containerRef.current.appendChild(renderer.domElement);
-    rendererRef.current = renderer;
-
-    // Create nodes for each heap object
-    const nodeMap = new Map<string, THREE.Mesh>();
-    objects.forEach((obj, index) => {
-      const geometry = new THREE.SphereGeometry(Math.log(obj.retainedSize + 1) / 5, 32, 32);
-      const material = new THREE.MeshPhongMaterial({
-        color: new THREE.Color().setHSL(Math.random(), 0.7, 0.6),
-      });
-      const mesh = new THREE.Mesh(geometry, material);
-
-      // Position nodes in a circular pattern
-      const angle = (index / objects.length) * Math.PI * 2;
-      const radius = 30;
-      mesh.position.x = Math.cos(angle) * radius;
-      mesh.position.y = Math.sin(angle) * radius;
-      mesh.position.z = (Math.random() - 0.5) * 20;
-
-      mesh.userData = { objectId: obj.objectId, object: obj };
-      scene.add(mesh);
-      nodeMap.set(obj.objectId, mesh);
-    });
-
-    // Create edges between nodes
     edges.forEach((edge) => {
       const sourceNode = nodeMap.get(edge.sourceObjectId);
       const targetNode = nodeMap.get(edge.targetObjectId);
@@ -199,7 +147,6 @@ export const HeapVortexVisualizer: React.FC<HeapVisualizerProps> = ({ objects, e
       if (sourceNode && targetNode) {
         const points = [sourceNode.position, targetNode.position];
         const geometry = new THREE.BufferGeometry().setFromPoints(points);
-
 
         // Main line
         const material = new THREE.LineBasicMaterial({
@@ -223,20 +170,6 @@ export const HeapVortexVisualizer: React.FC<HeapVisualizerProps> = ({ objects, e
       }
     });
     scene.add(edgeGroup);
-        const material = new THREE.LineBasicMaterial({ color: 0x888888, linewidth: 1 });
-        const line = new THREE.Line(geometry, material);
-        scene.add(line);
-      }
-    });
-
-    // Add lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
-    scene.add(ambientLight);
-
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-    directionalLight.position.set(10, 10, 10);
-    scene.add(directionalLight);
-
 
     // Handle window resize
     const handleResize = () => {
@@ -311,20 +244,12 @@ export const HeapVortexVisualizer: React.FC<HeapVisualizerProps> = ({ objects, e
     const animate = () => {
       requestAnimationFrame(animate);
       controls.update();
-
-    // Simple rotation animation
-    const animate = () => {
-      requestAnimationFrame(animate);
-      scene.rotation.x += 0.0001;
-      scene.rotation.y += 0.0002;
-
       renderer.render(scene, camera);
     };
     animate();
 
     return () => {
       window.removeEventListener("resize", handleResize);
-
       renderer.domElement.removeEventListener("mousemove", onMouseMove);
       renderer.domElement.removeEventListener("click", onClick);
       renderer.dispose();
@@ -338,23 +263,8 @@ export const HeapVortexVisualizer: React.FC<HeapVisualizerProps> = ({ objects, e
       {hoveredObject && (
         <div className="absolute top-4 left-4 bg-gray-800 bg-opacity-90 text-white p-3 rounded-lg max-w-xs pointer-events-none">
           <p className="text-sm font-mono text-purple-400">{hoveredObject.className}</p>
-          <p className="text-xs text-gray-400">Size: {hoveredObject.retainedSize} bytes</p>
-
-      renderer.dispose();
-      containerRef.current?.removeChild(renderer.domElement);
-    };
-  }, [objects, edges]);
-
-  return (
-    <div className="flex h-full gap-4">
-      <div ref={containerRef} className="flex-1 bg-gray-900 rounded-lg" />
-      {selectedObject && (
-        <div className="w-64 bg-gray-800 rounded-lg p-4 text-white">
-          <h3 className="text-lg font-bold mb-2">Object Details</h3>
-          <p><strong>Class:</strong> {selectedObject.className}</p>
-          <p><strong>Retained Size:</strong> {selectedObject.retainedSize} bytes</p>
-          <p><strong>Object ID:</strong> {selectedObject.objectId}</p>
-
+          <p className="text-xs text-gray-400">Retained: {hoveredObject.retainedHeap} bytes</p>
+          <p className="text-xs text-gray-400">Shallow: {hoveredObject.shallowHeap} bytes</p>
         </div>
       )}
     </div>
