@@ -1,0 +1,836 @@
+Compiled from "SnapshotFactoryImpl.java"
+public class org.eclipse.mat.parser.internal.SnapshotFactoryImpl implements org.eclipse.mat.snapshot.SnapshotFactory$Implementation {
+  public org.eclipse.mat.parser.internal.SnapshotFactoryImpl();
+    Code:
+       0: aload_0
+       1: invokespecial #14                 // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: new           #16                 // class java/util/HashMap
+       8: dup
+       9: invokespecial #18                 // Method java/util/HashMap."<init>":()V
+      12: putfield      #19                 // Field snapshotCache:Ljava/util/Map;
+      15: return
+
+  public org.eclipse.mat.snapshot.ISnapshot openSnapshot(java.io.File, java.util.Map<java.lang.String, java.lang.String>, org.eclipse.mat.util.IProgressListener) throws org.eclipse.mat.SnapshotException;
+    Code:
+       0: new           #31                 // class org/eclipse/mat/util/WrappedLoggingProgressListener
+       3: dup
+       4: aload_3
+       5: invokespecial #33                 // Method org/eclipse/mat/util/WrappedLoggingProgressListener."<init>":(Lorg/eclipse/mat/util/IProgressListener;)V
+       8: astore        4
+      10: invokestatic  #36                 // Method java/time/ZonedDateTime.now:()Ljava/time/ZonedDateTime;
+      13: astore        5
+      15: aload         4
+      17: getstatic     #42                 // Field org/eclipse/mat/util/IProgressListener$Severity.INFO:Lorg/eclipse/mat/util/IProgressListener$Severity;
+      20: getstatic     #48                 // Field org/eclipse/mat/parser/internal/Messages.SnapshotFactoryImpl_StartOpeningDump:Ljava/lang/String;
+      23: iconst_2
+      24: anewarray     #3                  // class java/lang/Object
+      27: dup
+      28: iconst_0
+      29: aload_1
+      30: invokevirtual #54                 // Method java/io/File.getAbsolutePath:()Ljava/lang/String;
+      33: aastore
+      34: dup
+      35: iconst_1
+      36: getstatic     #60                 // Field java/time/format/DateTimeFormatter.ISO_ZONED_DATE_TIME:Ljava/time/format/DateTimeFormatter;
+      39: aload         5
+      41: invokevirtual #66                 // Method java/time/format/DateTimeFormatter.format:(Ljava/time/temporal/TemporalAccessor;)Ljava/lang/String;
+      44: aastore
+      45: invokestatic  #70                 // Method org/eclipse/mat/util/MessageUtil.format:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+      48: aconst_null
+      49: invokevirtual #75                 // Method org/eclipse/mat/util/WrappedLoggingProgressListener.sendUserMessage:(Lorg/eclipse/mat/util/IProgressListener$Severity;Ljava/lang/String;Ljava/lang/Throwable;)V
+      52: aconst_null
+      53: astore        6
+      55: aload_0
+      56: getfield      #19                 // Field snapshotCache:Ljava/util/Map;
+      59: aload_1
+      60: invokeinterface #79,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      65: checkcast     #85                 // class org/eclipse/mat/parser/internal/SnapshotFactoryImpl$SnapshotEntry
+      68: astore        7
+      70: aload         7
+      72: ifnull        213
+      75: aload         7
+      77: invokestatic  #87                 // Method org/eclipse/mat/parser/internal/SnapshotFactoryImpl$SnapshotEntry.access$0:(Lorg/eclipse/mat/parser/internal/SnapshotFactoryImpl$SnapshotEntry;)Ljava/lang/ref/WeakReference;
+      80: invokevirtual #91                 // Method java/lang/ref/WeakReference.get:()Ljava/lang/Object;
+      83: checkcast     #96                 // class org/eclipse/mat/snapshot/ISnapshot
+      86: astore        6
+      88: aload         6
+      90: ifnull        213
+      93: aload         7
+      95: dup
+      96: invokestatic  #98                 // Method org/eclipse/mat/parser/internal/SnapshotFactoryImpl$SnapshotEntry.access$1:(Lorg/eclipse/mat/parser/internal/SnapshotFactoryImpl$SnapshotEntry;)I
+      99: iconst_1
+     100: iadd
+     101: invokestatic  #102                // Method org/eclipse/mat/parser/internal/SnapshotFactoryImpl$SnapshotEntry.access$2:(Lorg/eclipse/mat/parser/internal/SnapshotFactoryImpl$SnapshotEntry;I)V
+     104: aload         6
+     106: astore        25
+     108: invokestatic  #36                 // Method java/time/ZonedDateTime.now:()Ljava/time/ZonedDateTime;
+     111: astore        26
+     113: aload         5
+     115: aload         26
+     117: invokestatic  #106                // Method java/time/Duration.between:(Ljava/time/temporal/Temporal;Ljava/time/temporal/Temporal;)Ljava/time/Duration;
+     120: astore        27
+     122: aload         27
+     124: invokevirtual #112                // Method java/time/Duration.toString:()Ljava/lang/String;
+     127: iconst_2
+     128: invokevirtual #115                // Method java/lang/String.substring:(I)Ljava/lang/String;
+     131: ldc           #121                // String ([HMS])
+     133: ldc           #123                // String $1
+     135: invokevirtual #125                // Method java/lang/String.replaceAll:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+     138: invokevirtual #129                // Method java/lang/String.toLowerCase:()Ljava/lang/String;
+     141: invokevirtual #132                // Method java/lang/String.trim:()Ljava/lang/String;
+     144: astore        28
+     146: aload         27
+     148: invokevirtual #135                // Method java/time/Duration.toMillis:()J
+     151: l2d
+     152: ldc2_w        #139                // double 1000.0d
+     155: ddiv
+     156: dstore        29
+     158: aload         4
+     160: getstatic     #42                 // Field org/eclipse/mat/util/IProgressListener$Severity.INFO:Lorg/eclipse/mat/util/IProgressListener$Severity;
+     163: getstatic     #141                // Field org/eclipse/mat/parser/internal/Messages.SnapshotFactoryImpl_FinishOpeningDump:Ljava/lang/String;
+     166: iconst_3
+     167: anewarray     #3                  // class java/lang/Object
+     170: dup
+     171: iconst_0
+     172: new           #144                // class java/text/DecimalFormat
+     175: dup
+     176: ldc           #146                // String #,###.00
+     178: invokespecial #148                // Method java/text/DecimalFormat."<init>":(Ljava/lang/String;)V
+     181: dload         29
+     183: invokevirtual #151                // Method java/text/DecimalFormat.format:(D)Ljava/lang/String;
+     186: aastore
+     187: dup
+     188: iconst_1
+     189: aload         28
+     191: aastore
+     192: dup
+     193: iconst_2
+     194: getstatic     #60                 // Field java/time/format/DateTimeFormatter.ISO_ZONED_DATE_TIME:Ljava/time/format/DateTimeFormatter;
+     197: aload         26
+     199: invokevirtual #66                 // Method java/time/format/DateTimeFormatter.format:(Ljava/time/temporal/TemporalAccessor;)Ljava/lang/String;
+     202: aastore
+     203: invokestatic  #70                 // Method org/eclipse/mat/util/MessageUtil.format:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+     206: aconst_null
+     207: invokevirtual #75                 // Method org/eclipse/mat/util/WrappedLoggingProgressListener.sendUserMessage:(Lorg/eclipse/mat/util/IProgressListener$Severity;Ljava/lang/String;Ljava/lang/Throwable;)V
+     210: aload         25
+     212: areturn
+     213: aload_1
+     214: invokevirtual #154                // Method java/io/File.getName:()Ljava/lang/String;
+     217: astore        8
+     219: invokestatic  #157                // Method org/eclipse/core/runtime/Platform.getContentTypeManager:()Lorg/eclipse/core/runtime/content/IContentTypeManager;
+     222: astore        9
+     224: aload         9
+     226: ldc           #163                // String org.eclipse.mat.JavaHeapDump
+     228: invokeinterface #165,  2          // InterfaceMethod org/eclipse/core/runtime/content/IContentTypeManager.getContentType:(Ljava/lang/String;)Lorg/eclipse/core/runtime/content/IContentType;
+     233: astore        10
+     235: new           #171                // class java/util/ArrayList
+     238: dup
+     239: invokespecial #173                // Method java/util/ArrayList."<init>":()V
+     242: astore        11
+     244: aload         10
+     246: ifnull        821
+     249: aload         8
+     251: astore        12
+     253: aconst_null
+     254: astore        14
+     256: aconst_null
+     257: astore        15
+     259: new           #174                // class java/io/FileInputStream
+     262: dup
+     263: aload_1
+     264: invokespecial #176                // Method java/io/FileInputStream."<init>":(Ljava/io/File;)V
+     267: astore        16
+     269: aload         9
+     271: aload         16
+     273: aload_1
+     274: invokevirtual #179                // Method java/io/File.getPath:()Ljava/lang/String;
+     277: invokeinterface #182,  3          // InterfaceMethod org/eclipse/core/runtime/content/IContentTypeManager.findContentTypesFor:(Ljava/io/InputStream;Ljava/lang/String;)[Lorg/eclipse/core/runtime/content/IContentType;
+     282: astore        13
+     284: aload         13
+     286: arraylength
+     287: ifne          377
+     290: aconst_null
+     291: astore        17
+     293: aconst_null
+     294: astore        18
+     296: new           #174                // class java/io/FileInputStream
+     299: dup
+     300: aload_1
+     301: invokespecial #176                // Method java/io/FileInputStream."<init>":(Ljava/io/File;)V
+     304: astore        19
+     306: aload         9
+     308: aload         19
+     310: aconst_null
+     311: invokeinterface #182,  3          // InterfaceMethod org/eclipse/core/runtime/content/IContentTypeManager.findContentTypesFor:(Ljava/io/InputStream;Ljava/lang/String;)[Lorg/eclipse/core/runtime/content/IContentType;
+     316: astore        13
+     318: aload         19
+     320: ifnull        377
+     323: aload         19
+     325: invokevirtual #186                // Method java/io/FileInputStream.close:()V
+     328: goto          377
+     331: astore        17
+     333: aload         19
+     335: ifnull        343
+     338: aload         19
+     340: invokevirtual #186                // Method java/io/FileInputStream.close:()V
+     343: aload         17
+     345: athrow
+     346: astore        18
+     348: aload         17
+     350: ifnonnull     360
+     353: aload         18
+     355: astore        17
+     357: goto          374
+     360: aload         17
+     362: aload         18
+     364: if_acmpeq     374
+     367: aload         17
+     369: aload         18
+     371: invokevirtual #189                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+     374: aload         17
+     376: athrow
+     377: aload         16
+     379: ifnull        451
+     382: aload         16
+     384: invokevirtual #186                // Method java/io/FileInputStream.close:()V
+     387: goto          451
+     390: astore        14
+     392: aload         16
+     394: ifnull        402
+     397: aload         16
+     399: invokevirtual #186                // Method java/io/FileInputStream.close:()V
+     402: aload         14
+     404: athrow
+     405: astore        15
+     407: aload         14
+     409: ifnonnull     419
+     412: aload         15
+     414: astore        14
+     416: goto          433
+     419: aload         14
+     421: aload         15
+     423: if_acmpeq     433
+     426: aload         14
+     428: aload         15
+     430: invokevirtual #189                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+     433: aload         14
+     435: athrow
+     436: astore        14
+     438: aload         9
+     440: aload_1
+     441: invokevirtual #179                // Method java/io/File.getPath:()Ljava/lang/String;
+     444: invokeinterface #195,  2          // InterfaceMethod org/eclipse/core/runtime/content/IContentTypeManager.findContentTypesFor:(Ljava/lang/String;)[Lorg/eclipse/core/runtime/content/IContentType;
+     449: astore        13
+     451: aload         13
+     453: dup
+     454: astore        17
+     456: arraylength
+     457: istore        16
+     459: iconst_0
+     460: istore        15
+     462: goto          810
+     465: aload         17
+     467: iload         15
+     469: aaload
+     470: astore        14
+     472: aload         14
+     474: aload         10
+     476: invokeinterface #198,  2          // InterfaceMethod org/eclipse/core/runtime/content/IContentType.isKindOf:(Lorg/eclipse/core/runtime/content/IContentType;)Z
+     481: ifeq          807
+     484: aconst_null
+     485: astore        20
+     487: aconst_null
+     488: astore        21
+     490: new           #174                // class java/io/FileInputStream
+     493: dup
+     494: aload_1
+     495: invokespecial #176                // Method java/io/FileInputStream."<init>":(Ljava/io/File;)V
+     498: astore        22
+     500: aload         14
+     502: aload         22
+     504: getstatic     #204                // Field org/eclipse/core/runtime/content/IContentDescription.ALL:[Lorg/eclipse/core/runtime/QualifiedName;
+     507: invokeinterface #210,  3          // InterfaceMethod org/eclipse/core/runtime/content/IContentType.getDescriptionFor:(Ljava/io/InputStream;[Lorg/eclipse/core/runtime/QualifiedName;)Lorg/eclipse/core/runtime/content/IContentDescription;
+     512: astore        18
+     514: aload         22
+     516: ifnull        578
+     519: aload         22
+     521: invokevirtual #186                // Method java/io/FileInputStream.close:()V
+     524: goto          578
+     527: astore        20
+     529: aload         22
+     531: ifnull        539
+     534: aload         22
+     536: invokevirtual #186                // Method java/io/FileInputStream.close:()V
+     539: aload         20
+     541: athrow
+     542: astore        21
+     544: aload         20
+     546: ifnonnull     556
+     549: aload         21
+     551: astore        20
+     553: goto          570
+     556: aload         20
+     558: aload         21
+     560: if_acmpeq     570
+     563: aload         20
+     565: aload         21
+     567: invokevirtual #189                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+     570: aload         20
+     572: athrow
+     573: astore        20
+     575: aconst_null
+     576: astore        18
+     578: aconst_null
+     579: astore        20
+     581: aconst_null
+     582: astore        21
+     584: new           #214                // class java/io/ByteArrayInputStream
+     587: dup
+     588: bipush        10
+     590: newarray       byte
+     592: invokespecial #216                // Method java/io/ByteArrayInputStream."<init>":([B)V
+     595: astore        22
+     597: aload         14
+     599: aload         22
+     601: getstatic     #204                // Field org/eclipse/core/runtime/content/IContentDescription.ALL:[Lorg/eclipse/core/runtime/QualifiedName;
+     604: invokeinterface #210,  3          // InterfaceMethod org/eclipse/core/runtime/content/IContentType.getDescriptionFor:(Ljava/io/InputStream;[Lorg/eclipse/core/runtime/QualifiedName;)Lorg/eclipse/core/runtime/content/IContentDescription;
+     609: astore        19
+     611: aload         22
+     613: ifnull        675
+     616: aload         22
+     618: invokevirtual #219                // Method java/io/InputStream.close:()V
+     621: goto          675
+     624: astore        20
+     626: aload         22
+     628: ifnull        636
+     631: aload         22
+     633: invokevirtual #219                // Method java/io/InputStream.close:()V
+     636: aload         20
+     638: athrow
+     639: astore        21
+     641: aload         20
+     643: ifnonnull     653
+     646: aload         21
+     648: astore        20
+     650: goto          667
+     653: aload         20
+     655: aload         21
+     657: if_acmpeq     667
+     660: aload         20
+     662: aload         21
+     664: invokevirtual #189                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+     667: aload         20
+     669: athrow
+     670: astore        20
+     672: aconst_null
+     673: astore        19
+     675: aload         18
+     677: ifnull        807
+     680: aload         19
+     682: ifnonnull     807
+     685: aload         11
+     687: aload         14
+     689: invokeinterface #222,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     694: pop
+     695: aload         14
+     697: bipush        8
+     699: invokeinterface #228,  2          // InterfaceMethod org/eclipse/core/runtime/content/IContentType.getFileSpecs:(I)[Ljava/lang/String;
+     704: dup
+     705: astore        23
+     707: arraylength
+     708: istore        22
+     710: iconst_0
+     711: istore        21
+     713: goto          800
+     716: aload         23
+     718: iload         21
+     720: aaload
+     721: astore        20
+     723: aload         20
+     725: bipush        46
+     727: invokevirtual #232                // Method java/lang/String.indexOf:(I)I
+     730: iflt          797
+     733: aload         8
+     735: new           #236                // class java/lang/StringBuilder
+     738: dup
+     739: ldc           #238                // String .
+     741: invokespecial #240                // Method java/lang/StringBuilder."<init>":(Ljava/lang/String;)V
+     744: aload         20
+     746: invokevirtual #241                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     749: invokevirtual #245                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+     752: invokevirtual #246                // Method java/lang/String.endsWith:(Ljava/lang/String;)Z
+     755: ifeq          797
+     758: aload         8
+     760: iconst_0
+     761: aload         8
+     763: invokevirtual #250                // Method java/lang/String.length:()I
+     766: aload         20
+     768: invokevirtual #250                // Method java/lang/String.length:()I
+     771: isub
+     772: invokevirtual #254                // Method java/lang/String.substring:(II)Ljava/lang/String;
+     775: astore        12
+     777: aload         11
+     779: aload         14
+     781: invokeinterface #257,  2          // InterfaceMethod java/util/List.remove:(Ljava/lang/Object;)Z
+     786: pop
+     787: aload         11
+     789: iconst_0
+     790: aload         14
+     792: invokeinterface #260,  3          // InterfaceMethod java/util/List.add:(ILjava/lang/Object;)V
+     797: iinc          21, 1
+     800: iload         21
+     802: iload         22
+     804: if_icmplt     716
+     807: iinc          15, 1
+     810: iload         15
+     812: iload         16
+     814: if_icmplt     465
+     817: aload         12
+     819: astore        8
+     821: aload         8
+     823: bipush        46
+     825: invokevirtual #263                // Method java/lang/String.lastIndexOf:(I)I
+     828: istore        12
+     830: iload         12
+     832: iflt          848
+     835: aload         8
+     837: iconst_0
+     838: iload         12
+     840: iconst_1
+     841: iadd
+     842: invokevirtual #254                // Method java/lang/String.substring:(II)Ljava/lang/String;
+     845: goto          868
+     848: new           #236                // class java/lang/StringBuilder
+     851: dup
+     852: aload         8
+     854: invokestatic  #266                // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+     857: invokespecial #240                // Method java/lang/StringBuilder."<init>":(Ljava/lang/String;)V
+     860: ldc           #238                // String .
+     862: invokevirtual #241                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     865: invokevirtual #245                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+     868: astore        8
+     870: new           #55                 // class java/io/File
+     873: dup
+     874: aload_1
+     875: invokevirtual #270                // Method java/io/File.getParentFile:()Ljava/io/File;
+     878: aload         8
+     880: invokespecial #274                // Method java/io/File."<init>":(Ljava/io/File;Ljava/lang/String;)V
+     883: invokevirtual #54                 // Method java/io/File.getAbsolutePath:()Ljava/lang/String;
+     886: astore        13
+     888: aload_2
+     889: ldc_w         #277                // String snapshot_identifier
+     892: invokeinterface #79,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     897: checkcast     #116                // class java/lang/String
+     900: astore        14
+     902: aload         14
+     904: ifnull        934
+     907: new           #236                // class java/lang/StringBuilder
+     910: dup
+     911: aload         13
+     913: invokestatic  #266                // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+     916: invokespecial #240                // Method java/lang/StringBuilder."<init>":(Ljava/lang/String;)V
+     919: aload         14
+     921: invokevirtual #241                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     924: ldc           #238                // String .
+     926: invokevirtual #241                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     929: invokevirtual #245                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+     932: astore        13
+     934: aload         4
+     936: new           #55                 // class java/io/File
+     939: dup
+     940: new           #236                // class java/lang/StringBuilder
+     943: dup
+     944: aload         13
+     946: invokestatic  #266                // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+     949: invokespecial #240                // Method java/lang/StringBuilder."<init>":(Ljava/lang/String;)V
+     952: ldc_w         #279                // String log.index
+     955: invokevirtual #241                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     958: invokevirtual #245                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+     961: invokespecial #281                // Method java/io/File."<init>":(Ljava/lang/String;)V
+     964: invokevirtual #282                // Method org/eclipse/mat/util/WrappedLoggingProgressListener.setFile:(Ljava/io/File;)V
+     967: new           #55                 // class java/io/File
+     970: dup
+     971: new           #236                // class java/lang/StringBuilder
+     974: dup
+     975: aload         13
+     977: invokestatic  #266                // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+     980: invokespecial #240                // Method java/lang/StringBuilder."<init>":(Ljava/lang/String;)V
+     983: ldc_w         #285                // String index
+     986: invokevirtual #241                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     989: invokevirtual #245                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+     992: invokespecial #281                // Method java/io/File."<init>":(Ljava/lang/String;)V
+     995: astore        15
+     997: aload         15
+     999: invokevirtual #287                // Method java/io/File.exists:()Z
+    1002: ifeq          1173
+    1005: aload_1
+    1006: invokevirtual #291                // Method java/io/File.lastModified:()J
+    1009: aload         15
+    1011: invokevirtual #291                // Method java/io/File.lastModified:()J
+    1014: lcmp
+    1015: ifgt          1031
+    1018: aload_1
+    1019: aload         13
+    1021: aload         4
+    1023: invokestatic  #294                // Method org/eclipse/mat/parser/internal/SnapshotImpl.readFromFile:(Ljava/io/File;Ljava/lang/String;Lorg/eclipse/mat/util/IProgressListener;)Lorg/eclipse/mat/parser/internal/SnapshotImpl;
+    1026: astore        6
+    1028: goto          1173
+    1031: getstatic     #300                // Field org/eclipse/mat/parser/internal/Messages.SnapshotFactoryImpl_ReparsingHeapDumpAsIndexOutOfDate:Ljava/lang/String;
+    1034: iconst_4
+    1035: anewarray     #3                  // class java/lang/Object
+    1038: dup
+    1039: iconst_0
+    1040: aload_1
+    1041: invokevirtual #179                // Method java/io/File.getPath:()Ljava/lang/String;
+    1044: aastore
+    1045: dup
+    1046: iconst_1
+    1047: new           #303                // class java/util/Date
+    1050: dup
+    1051: aload_1
+    1052: invokevirtual #291                // Method java/io/File.lastModified:()J
+    1055: invokespecial #305                // Method java/util/Date."<init>":(J)V
+    1058: aastore
+    1059: dup
+    1060: iconst_2
+    1061: aload         15
+    1063: invokevirtual #179                // Method java/io/File.getPath:()Ljava/lang/String;
+    1066: aastore
+    1067: dup
+    1068: iconst_3
+    1069: new           #303                // class java/util/Date
+    1072: dup
+    1073: aload         15
+    1075: invokevirtual #291                // Method java/io/File.lastModified:()J
+    1078: invokespecial #305                // Method java/util/Date."<init>":(J)V
+    1081: aastore
+    1082: invokestatic  #70                 // Method org/eclipse/mat/util/MessageUtil.format:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+    1085: astore        16
+    1087: aload         4
+    1089: getstatic     #42                 // Field org/eclipse/mat/util/IProgressListener$Severity.INFO:Lorg/eclipse/mat/util/IProgressListener$Severity;
+    1092: aload         16
+    1094: aconst_null
+    1095: invokevirtual #75                 // Method org/eclipse/mat/util/WrappedLoggingProgressListener.sendUserMessage:(Lorg/eclipse/mat/util/IProgressListener$Severity;Ljava/lang/String;Ljava/lang/Throwable;)V
+    1098: aload         4
+    1100: getstatic     #308                // Field org/eclipse/mat/parser/internal/Messages.SnapshotFactoryImpl_ReparsingHeapDumpWithOutOfDateIndex:Ljava/lang/String;
+    1103: invokevirtual #311                // Method org/eclipse/mat/util/WrappedLoggingProgressListener.subTask:(Ljava/lang/String;)V
+    1106: goto          1173
+    1109: astore        15
+    1111: aload         15
+    1113: invokevirtual #314                // Method java/io/IOException.getMessage:()Ljava/lang/String;
+    1116: ifnull        1127
+    1119: aload         15
+    1121: invokevirtual #314                // Method java/io/IOException.getMessage:()Ljava/lang/String;
+    1124: goto          1135
+    1127: aload         15
+    1129: invokevirtual #319                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+    1132: invokevirtual #323                // Method java/lang/Class.getName:()Ljava/lang/String;
+    1135: astore        16
+    1137: getstatic     #326                // Field org/eclipse/mat/parser/internal/Messages.SnapshotFactoryImpl_Error_ReparsingHeapDump:Ljava/lang/String;
+    1140: iconst_1
+    1141: anewarray     #3                  // class java/lang/Object
+    1144: dup
+    1145: iconst_0
+    1146: aload         16
+    1148: aastore
+    1149: invokestatic  #70                 // Method org/eclipse/mat/util/MessageUtil.format:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+    1152: astore        17
+    1154: aload         4
+    1156: getstatic     #329                // Field org/eclipse/mat/util/IProgressListener$Severity.WARNING:Lorg/eclipse/mat/util/IProgressListener$Severity;
+    1159: aload         17
+    1161: aload         15
+    1163: invokevirtual #75                 // Method org/eclipse/mat/util/WrappedLoggingProgressListener.sendUserMessage:(Lorg/eclipse/mat/util/IProgressListener$Severity;Ljava/lang/String;Ljava/lang/Throwable;)V
+    1166: aload         4
+    1168: aload         17
+    1170: invokevirtual #311                // Method org/eclipse/mat/util/WrappedLoggingProgressListener.subTask:(Ljava/lang/String;)V
+    1173: aload         6
+    1175: ifnonnull     1325
+    1178: new           #55                 // class java/io/File
+    1181: dup
+    1182: new           #236                // class java/lang/StringBuilder
+    1185: dup
+    1186: aload         13
+    1188: invokestatic  #266                // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+    1191: invokespecial #240                // Method java/lang/StringBuilder."<init>":(Ljava/lang/String;)V
+    1194: ldc_w         #332                // String lock.index
+    1197: invokevirtual #241                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    1200: invokevirtual #245                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+    1203: invokespecial #281                // Method java/io/File."<init>":(Ljava/lang/String;)V
+    1206: astore        15
+    1208: aconst_null
+    1209: astore        16
+    1211: aconst_null
+    1212: astore        17
+    1214: aload_0
+    1215: aload_1
+    1216: aload         15
+    1218: aload         4
+    1220: invokespecial #334                // Method lockParse:(Ljava/io/File;Ljava/io/File;Lorg/eclipse/mat/util/IProgressListener;)Ljava/io/Closeable;
+    1223: astore        18
+    1225: aload_0
+    1226: aload_1
+    1227: aload         13
+    1229: aload         15
+    1231: aload         4
+    1233: invokespecial #338                // Method deleteIndexFiles:(Ljava/io/File;Ljava/lang/String;Ljava/io/File;Lorg/eclipse/mat/util/IProgressListener;)V
+    1236: aload_0
+    1237: aload_1
+    1238: aload         13
+    1240: aload_2
+    1241: aload         11
+    1243: aload         4
+    1245: invokespecial #342                // Method parse:(Ljava/io/File;Ljava/lang/String;Ljava/util/Map;Ljava/util/List;Lorg/eclipse/mat/util/IProgressListener;)Lorg/eclipse/mat/snapshot/ISnapshot;
+    1248: astore        6
+    1250: aload         18
+    1252: ifnull        1325
+    1255: aload         18
+    1257: invokeinterface #346,  1          // InterfaceMethod java/io/Closeable.close:()V
+    1262: goto          1325
+    1265: astore        16
+    1267: aload         18
+    1269: ifnull        1279
+    1272: aload         18
+    1274: invokeinterface #346,  1          // InterfaceMethod java/io/Closeable.close:()V
+    1279: aload         16
+    1281: athrow
+    1282: astore        17
+    1284: aload         16
+    1286: ifnonnull     1296
+    1289: aload         17
+    1291: astore        16
+    1293: goto          1310
+    1296: aload         16
+    1298: aload         17
+    1300: if_acmpeq     1310
+    1303: aload         16
+    1305: aload         17
+    1307: invokevirtual #189                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+    1310: aload         16
+    1312: athrow
+    1313: astore        16
+    1315: new           #28                 // class org/eclipse/mat/SnapshotException
+    1318: dup
+    1319: aload         16
+    1321: invokespecial #349                // Method org/eclipse/mat/SnapshotException."<init>":(Ljava/lang/Throwable;)V
+    1324: athrow
+    1325: new           #85                 // class org/eclipse/mat/parser/internal/SnapshotFactoryImpl$SnapshotEntry
+    1328: dup
+    1329: iconst_1
+    1330: aload         6
+    1332: invokespecial #351                // Method org/eclipse/mat/parser/internal/SnapshotFactoryImpl$SnapshotEntry."<init>":(ILorg/eclipse/mat/snapshot/ISnapshot;)V
+    1335: astore        7
+    1337: aload_0
+    1338: getfield      #19                 // Field snapshotCache:Ljava/util/Map;
+    1341: aload_1
+    1342: aload         7
+    1344: invokeinterface #354,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    1349: pop
+    1350: aload         6
+    1352: astore        25
+    1354: invokestatic  #36                 // Method java/time/ZonedDateTime.now:()Ljava/time/ZonedDateTime;
+    1357: astore        26
+    1359: aload         5
+    1361: aload         26
+    1363: invokestatic  #106                // Method java/time/Duration.between:(Ljava/time/temporal/Temporal;Ljava/time/temporal/Temporal;)Ljava/time/Duration;
+    1366: astore        27
+    1368: aload         27
+    1370: invokevirtual #112                // Method java/time/Duration.toString:()Ljava/lang/String;
+    1373: iconst_2
+    1374: invokevirtual #115                // Method java/lang/String.substring:(I)Ljava/lang/String;
+    1377: ldc           #121                // String ([HMS])
+    1379: ldc           #123                // String $1
+    1381: invokevirtual #125                // Method java/lang/String.replaceAll:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+    1384: invokevirtual #129                // Method java/lang/String.toLowerCase:()Ljava/lang/String;
+    1387: invokevirtual #132                // Method java/lang/String.trim:()Ljava/lang/String;
+    1390: astore        28
+    1392: aload         27
+    1394: invokevirtual #135                // Method java/time/Duration.toMillis:()J
+    1397: l2d
+    1398: ldc2_w        #139                // double 1000.0d
+    1401: ddiv
+    1402: dstore        29
+    1404: aload         4
+    1406: getstatic     #42                 // Field org/eclipse/mat/util/IProgressListener$Severity.INFO:Lorg/eclipse/mat/util/IProgressListener$Severity;
+    1409: getstatic     #141                // Field org/eclipse/mat/parser/internal/Messages.SnapshotFactoryImpl_FinishOpeningDump:Ljava/lang/String;
+    1412: iconst_3
+    1413: anewarray     #3                  // class java/lang/Object
+    1416: dup
+    1417: iconst_0
+    1418: new           #144                // class java/text/DecimalFormat
+    1421: dup
+    1422: ldc           #146                // String #,###.00
+    1424: invokespecial #148                // Method java/text/DecimalFormat."<init>":(Ljava/lang/String;)V
+    1427: dload         29
+    1429: invokevirtual #151                // Method java/text/DecimalFormat.format:(D)Ljava/lang/String;
+    1432: aastore
+    1433: dup
+    1434: iconst_1
+    1435: aload         28
+    1437: aastore
+    1438: dup
+    1439: iconst_2
+    1440: getstatic     #60                 // Field java/time/format/DateTimeFormatter.ISO_ZONED_DATE_TIME:Ljava/time/format/DateTimeFormatter;
+    1443: aload         26
+    1445: invokevirtual #66                 // Method java/time/format/DateTimeFormatter.format:(Ljava/time/temporal/TemporalAccessor;)Ljava/lang/String;
+    1448: aastore
+    1449: invokestatic  #70                 // Method org/eclipse/mat/util/MessageUtil.format:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+    1452: aconst_null
+    1453: invokevirtual #75                 // Method org/eclipse/mat/util/WrappedLoggingProgressListener.sendUserMessage:(Lorg/eclipse/mat/util/IProgressListener$Severity;Ljava/lang/String;Ljava/lang/Throwable;)V
+    1456: aload         25
+    1458: areturn
+    1459: astore        24
+    1461: invokestatic  #36                 // Method java/time/ZonedDateTime.now:()Ljava/time/ZonedDateTime;
+    1464: astore        26
+    1466: aload         5
+    1468: aload         26
+    1470: invokestatic  #106                // Method java/time/Duration.between:(Ljava/time/temporal/Temporal;Ljava/time/temporal/Temporal;)Ljava/time/Duration;
+    1473: astore        27
+    1475: aload         27
+    1477: invokevirtual #112                // Method java/time/Duration.toString:()Ljava/lang/String;
+    1480: iconst_2
+    1481: invokevirtual #115                // Method java/lang/String.substring:(I)Ljava/lang/String;
+    1484: ldc           #121                // String ([HMS])
+    1486: ldc           #123                // String $1
+    1488: invokevirtual #125                // Method java/lang/String.replaceAll:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+    1491: invokevirtual #129                // Method java/lang/String.toLowerCase:()Ljava/lang/String;
+    1494: invokevirtual #132                // Method java/lang/String.trim:()Ljava/lang/String;
+    1497: astore        28
+    1499: aload         27
+    1501: invokevirtual #135                // Method java/time/Duration.toMillis:()J
+    1504: l2d
+    1505: ldc2_w        #139                // double 1000.0d
+    1508: ddiv
+    1509: dstore        29
+    1511: aload         4
+    1513: getstatic     #42                 // Field org/eclipse/mat/util/IProgressListener$Severity.INFO:Lorg/eclipse/mat/util/IProgressListener$Severity;
+    1516: getstatic     #141                // Field org/eclipse/mat/parser/internal/Messages.SnapshotFactoryImpl_FinishOpeningDump:Ljava/lang/String;
+    1519: iconst_3
+    1520: anewarray     #3                  // class java/lang/Object
+    1523: dup
+    1524: iconst_0
+    1525: new           #144                // class java/text/DecimalFormat
+    1528: dup
+    1529: ldc           #146                // String #,###.00
+    1531: invokespecial #148                // Method java/text/DecimalFormat."<init>":(Ljava/lang/String;)V
+    1534: dload         29
+    1536: invokevirtual #151                // Method java/text/DecimalFormat.format:(D)Ljava/lang/String;
+    1539: aastore
+    1540: dup
+    1541: iconst_1
+    1542: aload         28
+    1544: aastore
+    1545: dup
+    1546: iconst_2
+    1547: getstatic     #60                 // Field java/time/format/DateTimeFormatter.ISO_ZONED_DATE_TIME:Ljava/time/format/DateTimeFormatter;
+    1550: aload         26
+    1552: invokevirtual #66                 // Method java/time/format/DateTimeFormatter.format:(Ljava/time/temporal/TemporalAccessor;)Ljava/lang/String;
+    1555: aastore
+    1556: invokestatic  #70                 // Method org/eclipse/mat/util/MessageUtil.format:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+    1559: aconst_null
+    1560: invokevirtual #75                 // Method org/eclipse/mat/util/WrappedLoggingProgressListener.sendUserMessage:(Lorg/eclipse/mat/util/IProgressListener$Severity;Ljava/lang/String;Ljava/lang/Throwable;)V
+    1563: aload         24
+    1565: athrow
+    Exception table:
+       from    to  target type
+         306   318   331   any
+         296   346   346   any
+         269   377   390   any
+         259   405   405   any
+         253   436   436   Class java/io/IOException
+         500   514   527   any
+         490   542   542   any
+         484   573   573   Class java/io/IOException
+         597   611   624   any
+         584   639   639   any
+         578   670   670   Class java/io/IOException
+         967  1106  1109   Class java/io/IOException
+        1225  1250  1265   any
+        1214  1282  1282   any
+        1208  1313  1313   Class java/io/IOException
+          52   108  1459   any
+         213  1354  1459   any
+
+  public synchronized void dispose(org.eclipse.mat.snapshot.ISnapshot);
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field snapshotCache:Ljava/util/Map;
+       4: invokeinterface #539,  1          // InterfaceMethod java/util/Map.values:()Ljava/util/Collection;
+       9: invokeinterface #543,  1          // InterfaceMethod java/util/Collection.iterator:()Ljava/util/Iterator;
+      14: astore_2
+      15: goto          90
+      18: aload_2
+      19: invokeinterface #549,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      24: checkcast     #85                 // class org/eclipse/mat/parser/internal/SnapshotFactoryImpl$SnapshotEntry
+      27: astore_3
+      28: aload_3
+      29: invokestatic  #87                 // Method org/eclipse/mat/parser/internal/SnapshotFactoryImpl$SnapshotEntry.access$0:(Lorg/eclipse/mat/parser/internal/SnapshotFactoryImpl$SnapshotEntry;)Ljava/lang/ref/WeakReference;
+      32: invokevirtual #91                 // Method java/lang/ref/WeakReference.get:()Ljava/lang/Object;
+      35: checkcast     #96                 // class org/eclipse/mat/snapshot/ISnapshot
+      38: astore        4
+      40: aload         4
+      42: ifnonnull     54
+      45: aload_2
+      46: invokeinterface #554,  1          // InterfaceMethod java/util/Iterator.remove:()V
+      51: goto          90
+      54: aload         4
+      56: aload_1
+      57: if_acmpne     90
+      60: aload_3
+      61: dup
+      62: invokestatic  #98                 // Method org/eclipse/mat/parser/internal/SnapshotFactoryImpl$SnapshotEntry.access$1:(Lorg/eclipse/mat/parser/internal/SnapshotFactoryImpl$SnapshotEntry;)I
+      65: iconst_1
+      66: isub
+      67: invokestatic  #102                // Method org/eclipse/mat/parser/internal/SnapshotFactoryImpl$SnapshotEntry.access$2:(Lorg/eclipse/mat/parser/internal/SnapshotFactoryImpl$SnapshotEntry;I)V
+      70: aload_3
+      71: invokestatic  #98                 // Method org/eclipse/mat/parser/internal/SnapshotFactoryImpl$SnapshotEntry.access$1:(Lorg/eclipse/mat/parser/internal/SnapshotFactoryImpl$SnapshotEntry;)I
+      74: ifne          89
+      77: aload_1
+      78: invokeinterface #556,  1          // InterfaceMethod org/eclipse/mat/snapshot/ISnapshot.dispose:()V
+      83: aload_2
+      84: invokeinterface #554,  1          // InterfaceMethod java/util/Iterator.remove:()V
+      89: return
+      90: aload_2
+      91: invokeinterface #558,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+      96: ifne          18
+      99: aload_1
+     100: ifnull        109
+     103: aload_1
+     104: invokeinterface #556,  1          // InterfaceMethod org/eclipse/mat/snapshot/ISnapshot.dispose:()V
+     109: return
+
+  public org.eclipse.mat.snapshot.IOQLQuery createQuery(java.lang.String) throws org.eclipse.mat.SnapshotException;
+    Code:
+       0: new           #568                // class org/eclipse/mat/parser/internal/oql/OQLQueryImpl
+       3: dup
+       4: aload_1
+       5: invokespecial #570                // Method org/eclipse/mat/parser/internal/oql/OQLQueryImpl."<init>":(Ljava/lang/String;)V
+       8: areturn
+
+  public java.util.List<org.eclipse.mat.snapshot.SnapshotFormat> getSupportedFormats();
+    Code:
+       0: new           #171                // class java/util/ArrayList
+       3: dup
+       4: invokespecial #173                // Method java/util/ArrayList."<init>":()V
+       7: astore_1
+       8: invokestatic  #575                // Method org/eclipse/mat/parser/internal/ParserPlugin.getDefault:()Lorg/eclipse/mat/parser/internal/ParserPlugin;
+      11: invokevirtual #581                // Method org/eclipse/mat/parser/internal/ParserPlugin.getParserRegistry:()Lorg/eclipse/mat/parser/internal/util/ParserRegistry;
+      14: invokevirtual #585                // Method org/eclipse/mat/parser/internal/util/ParserRegistry.delegates:()Ljava/util/Collection;
+      17: invokeinterface #543,  1          // InterfaceMethod java/util/Collection.iterator:()Ljava/util/Iterator;
+      22: astore_3
+      23: goto          47
+      26: aload_3
+      27: invokeinterface #549,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      32: checkcast     #590                // class org/eclipse/mat/parser/internal/util/ParserRegistry$Parser
+      35: astore_2
+      36: aload_1
+      37: aload_2
+      38: invokevirtual #592                // Method org/eclipse/mat/parser/internal/util/ParserRegistry$Parser.getSnapshotFormat:()Lorg/eclipse/mat/snapshot/SnapshotFormat;
+      41: invokeinterface #222,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      46: pop
+      47: aload_3
+      48: invokeinterface #558,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+      53: ifne          26
+      56: aload_1
+      57: areturn
+}
