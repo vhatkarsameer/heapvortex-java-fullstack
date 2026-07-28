@@ -1,0 +1,3411 @@
+Thread 0x541279c78
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.parkNanos(J)V (LockSupport.java:410)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.park()V (CoroutineScheduler.kt:943)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.tryPark()V (CoroutineScheduler.kt:872)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker()V (CoroutineScheduler.kt:807)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run()V (CoroutineScheduler.kt:762)
+
+  locals:
+    objectId=0x541279c78, line=2
+    objectId=0x541279c78, line=3
+    objectId=0x541279c78, line=4
+    objectId=0x541279c78, line=5
+
+Thread 0x533d3ca90
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.parkNanos(J)V (LockSupport.java:410)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.park()V (CoroutineScheduler.kt:943)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.tryPark()V (CoroutineScheduler.kt:872)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker()V (CoroutineScheduler.kt:807)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run()V (CoroutineScheduler.kt:762)
+
+  locals:
+    objectId=0x533d3ca90, line=2
+    objectId=0x533d3ca90, line=3
+    objectId=0x533d3ca90, line=4
+    objectId=0x533d3ca90, line=5
+
+Thread 0x53a9688f8
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.parkNanos(J)V (LockSupport.java:410)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.park()V (CoroutineScheduler.kt:943)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.tryPark()V (CoroutineScheduler.kt:872)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker()V (CoroutineScheduler.kt:807)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run()V (CoroutineScheduler.kt:762)
+
+  locals:
+    objectId=0x53a9688f8, line=2
+    objectId=0x53a9688f8, line=3
+    objectId=0x53a9688f8, line=4
+    objectId=0x53a9688f8, line=5
+
+Thread 0x52b16c718
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.parkNanos(Ljava/lang/Object;J)V (LockSupport.java:269)
+  at kotlinx.coroutines.DefaultExecutor.run()V (DefaultExecutor.kt:118)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x52b16c718, line=1
+    objectId=0x52b16c790, line=2
+    objectId=0x52b16c718, line=3
+    objectId=0x53f571de0, line=3
+    objectId=0x52b16c790, line=3
+    objectId=0x52b16c718, line=4
+    objectId=0x52b16c790, line=4
+    objectId=0x53f571de0, line=4
+
+Thread 0x5433da498
+  at java.io.FileInputStream.readBytes([BII)I (FileInputStream.java(Native Method))
+  at java.io.FileInputStream.implRead([BII)I (FileInputStream.java:366)
+  at java.io.FileInputStream.read([BII)I (FileInputStream.java:358)
+  at java.io.BufferedInputStream.read1([BII)I (BufferedInputStream.java:345)
+  at java.io.BufferedInputStream.implRead([BII)I (BufferedInputStream.java:420)
+  at java.io.BufferedInputStream.read([BII)I (BufferedInputStream.java:405)
+  at sun.nio.cs.StreamDecoder.readBytes()I (StreamDecoder.java:350)
+  at sun.nio.cs.StreamDecoder.implRead([CII)I (StreamDecoder.java:393)
+  at sun.nio.cs.StreamDecoder.lockedRead([CII)I (StreamDecoder.java:217)
+  at sun.nio.cs.StreamDecoder.read([CII)I (StreamDecoder.java:177)
+  at java.io.InputStreamReader.read([CII)I (InputStreamReader.java:188)
+  at java.io.Reader.read([C)I (Reader.java:265)
+  at com.intellij.util.io.BaseOutputReader.readAvailableBlocking()Z (BaseOutputReader.java:148)
+  at com.intellij.util.io.BaseDataReader.readAvailable()Z (BaseDataReader.java:72)
+  at com.intellij.util.io.BaseDataReader.doRun()V (BaseDataReader.java:153)
+  at com.intellij.util.io.BaseDataReader$$Lambda+0x000000a0028e4ec8.run()V ()
+  at com.intellij.util.ConcurrencyUtil.runUnderThreadName(Ljava/lang/String;Ljava/lang/Runnable;)V (ConcurrencyUtil.java:249)
+  at com.intellij.util.io.BaseDataReader.lambda$start$0(Ljava/lang/String;)V (BaseDataReader.java:48)
+  at com.intellij.util.io.BaseDataReader$$Lambda+0x000000a0028e4a38.run()V ()
+  at java.util.concurrent.Executors$RunnableAdapter.call()Ljava/lang/Object; (Executors.java:572)
+  at java.util.concurrent.FutureTask.run()V (FutureTask.java:317)
+  at com.intellij.util.concurrency.ChildContext$runInChildContext$1.invoke()V (propagation.kt:167)
+  at com.intellij.util.concurrency.ChildContext$runInChildContext$1.invoke()Ljava/lang/Object; (propagation.kt:167)
+  at com.intellij.util.concurrency.ChildContext.runInChildContext(ZLkotlin/jvm/functions/Function0;)Ljava/lang/Object; (propagation.kt:173)
+  at com.intellij.util.concurrency.ChildContext.runInChildContext(Ljava/lang/Runnable;)V (propagation.kt:167)
+  at com.intellij.util.concurrency.ContextRunnable.lambda$run$0()Ljava/lang/Object; (ContextRunnable.java:26)
+  at com.intellij.util.concurrency.ContextRunnable$$Lambda+0x000000a0022bdb58.invoke()Ljava/lang/Object; ()
+  at com.intellij.concurrency.ThreadContext.resetThreadContext(Lkotlin/jvm/functions/Function0;)Ljava/lang/Object; (threadContext.kt:294)
+  at com.intellij.util.concurrency.ContextRunnable.run()V (ContextRunnable.java:25)
+  at java.util.concurrent.ThreadPoolExecutor.runWorker(Ljava/util/concurrent/ThreadPoolExecutor$Worker;)V (ThreadPoolExecutor.java:1144)
+  at java.util.concurrent.ThreadPoolExecutor$Worker.run()V (ThreadPoolExecutor.java:642)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Void; (Executors.java:735)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Object; (Executors.java:732)
+  at java.security.AccessController.executePrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;Ljava/lang/Class;)Ljava/lang/Object; (AccessController.java:778)
+  at java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (AccessController.java:400)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1.run()V (Executors.java:732)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x5433da510, line=0
+    objectId=0x5433dc578, line=4
+    objectId=0x5433da568, line=4
+    objectId=0x5433dc578, line=5
+    objectId=0x5433dc5a8, line=6
+    objectId=0x5433dc5a8, line=7
+    objectId=0x5436e0fd8, line=7
+    objectId=0x5433dc5d8, line=9
+    objectId=0x5433dc5f8, line=12
+    objectId=0x5433dc5f8, line=14
+    objectId=0x5433da498, line=16
+    objectId=0x5433dc630, line=16
+    objectId=0x5433dc648, line=19
+    objectId=0x5433dc660, line=20
+    objectId=0x5433dc680, line=23
+    objectId=0x5433dc698, line=27
+    objectId=0x52f308b68, line=29
+    objectId=0x5433dc6b0, line=29
+    objectId=0x5433da498, line=29
+    objectId=0x5433dc6e0, line=29
+    objectId=0x5433dc6b0, line=30
+    objectId=0x5433dc6f8, line=31
+    objectId=0x5433dc6f8, line=32
+    objectId=0x52f308d18, line=33
+    objectId=0x53f5cb090, line=33
+    objectId=0x5433dc708, line=35
+    objectId=0x53f571de0, line=36
+
+Thread 0x5305fb348
+  at java.lang.ProcessHandleImpl.waitForProcessExit0(JZ)I (ProcessHandleImpl.java(Native Method))
+  at java.lang.ProcessHandleImpl$1.run()V (ProcessHandleImpl.java:163)
+  at java.util.concurrent.ThreadPoolExecutor.runWorker(Ljava/util/concurrent/ThreadPoolExecutor$Worker;)V (ThreadPoolExecutor.java:1144)
+  at java.util.concurrent.ThreadPoolExecutor$Worker.run()V (ThreadPoolExecutor.java:642)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+  at jdk.internal.misc.InnocuousThread.run()V (InnocuousThread.java:186)
+
+  locals:
+    objectId=0x54312a650, line=1
+    objectId=0x5305fb348, line=1
+    objectId=0x5aa5c8a88, line=1
+    objectId=0x52b16c698, line=2
+    objectId=0x5305fb3c0, line=2
+    objectId=0x5305fb348, line=2
+    objectId=0x54312a650, line=2
+    objectId=0x5305fb3c0, line=3
+    objectId=0x5305fb348, line=4
+    objectId=0x53f571de0, line=4
+    objectId=0x5305fb3c0, line=4
+    objectId=0x5305fb348, line=5
+    objectId=0x5305fb3c0, line=5
+    objectId=0x53f571de0, line=5
+    objectId=0x5305fb348, line=6
+
+Thread 0x542502208
+
+  locals:
+
+Thread 0x52f51bd30
+  at sun.nio.ch.KQueue.poll(IJIJ)I (KQueue.java(Native Method))
+  at sun.nio.ch.KQueueSelectorImpl.doSelect(Ljava/util/function/Consumer;J)I (KQueueSelectorImpl.java:125)
+  at sun.nio.ch.SelectorImpl.lockAndDoSelect(Ljava/util/function/Consumer;J)I (SelectorImpl.java:130)
+  at sun.nio.ch.SelectorImpl.select(J)I (SelectorImpl.java:142)
+  at io.netty.channel.nio.SelectedSelectionKeySetSelector.select(J)I (SelectedSelectionKeySetSelector.java:62)
+  at io.netty.channel.nio.NioIoHandler.select(Lio/netty/channel/IoExecutionContext;Z)V (NioIoHandler.java:646)
+  at io.netty.channel.nio.NioIoHandler.run(Lio/netty/channel/IoExecutionContext;)I (NioIoHandler.java:432)
+  at io.netty.channel.SingleThreadIoEventLoop.runIo()I (SingleThreadIoEventLoop.java:203)
+  at io.netty.channel.SingleThreadIoEventLoop.run()V (SingleThreadIoEventLoop.java:174)
+  at io.netty.util.concurrent.SingleThreadEventExecutor$5.run()V (SingleThreadEventExecutor.java:1123)
+  at io.netty.util.internal.ThreadExecutorMap$2.run()V (ThreadExecutorMap.java:74)
+  at io.netty.util.concurrent.FastThreadLocalRunnable.run()V (FastThreadLocalRunnable.java:30)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x52f51bdb0, line=1
+    objectId=0x52f51bdb0, line=2
+    objectId=0x52f51bdb0, line=2
+    objectId=0x52f51be08, line=2
+    objectId=0x52f51be38, line=5
+    objectId=0x52f51be68, line=5
+    objectId=0x52f51be20, line=5
+    objectId=0x52f51be38, line=6
+    objectId=0x52f51be78, line=8
+    objectId=0x52f51bf08, line=9
+    objectId=0x52f51bf18, line=10
+    objectId=0x52f51bf30, line=11
+    objectId=0x52f51bd30, line=12
+    objectId=0x53f571de0, line=12
+    objectId=0x52f51bf30, line=12
+    objectId=0x52f51bd30, line=13
+    objectId=0x52f51bf30, line=13
+    objectId=0x53f571de0, line=13
+
+Thread 0x53b2ba588
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.park()V (LockSupport.java:371)
+  at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionNode.block()Z (AbstractQueuedSynchronizer.java:519)
+  at java.util.concurrent.ForkJoinPool.unmanagedBlock(Ljava/util/concurrent/ForkJoinPool$ManagedBlocker;)V (ForkJoinPool.java:4013)
+  at java.util.concurrent.ForkJoinPool.managedBlock(Ljava/util/concurrent/ForkJoinPool$ManagedBlocker;)V (ForkJoinPool.java:3961)
+  at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await()V (AbstractQueuedSynchronizer.java:1746)
+  at java.lang.ProcessImpl.waitFor()I (ProcessImpl.java:425)
+  at com.intellij.execution.process.ProcessWaitFor.lambda$new$0(Ljava/lang/Process;)V (ProcessWaitFor.java:28)
+  at com.intellij.execution.process.ProcessWaitFor$$Lambda+0x000000a0028db6e8.run()V ()
+  at com.intellij.util.ConcurrencyUtil.runUnderThreadName(Ljava/lang/String;Ljava/lang/Runnable;)V (ConcurrencyUtil.java:249)
+  at com.intellij.execution.process.ProcessWaitFor.lambda$new$1(Ljava/lang/String;Ljava/lang/Process;)V (ProcessWaitFor.java:23)
+  at com.intellij.execution.process.ProcessWaitFor$$Lambda+0x000000a0028dade8.run()V ()
+  at java.util.concurrent.Executors$RunnableAdapter.call()Ljava/lang/Object; (Executors.java:572)
+  at java.util.concurrent.FutureTask.run()V (FutureTask.java:317)
+  at com.intellij.util.concurrency.ChildContext$runInChildContext$1.invoke()V (propagation.kt:167)
+  at com.intellij.util.concurrency.ChildContext$runInChildContext$1.invoke()Ljava/lang/Object; (propagation.kt:167)
+  at com.intellij.util.concurrency.ChildContext.runInChildContext(ZLkotlin/jvm/functions/Function0;)Ljava/lang/Object; (propagation.kt:173)
+  at com.intellij.util.concurrency.ChildContext.runInChildContext(Ljava/lang/Runnable;)V (propagation.kt:167)
+  at com.intellij.util.concurrency.ContextRunnable.lambda$run$0()Ljava/lang/Object; (ContextRunnable.java:26)
+  at com.intellij.util.concurrency.ContextRunnable$$Lambda+0x000000a0022bdb58.invoke()Ljava/lang/Object; ()
+  at com.intellij.concurrency.ThreadContext.resetThreadContext(Lkotlin/jvm/functions/Function0;)Ljava/lang/Object; (threadContext.kt:294)
+  at com.intellij.util.concurrency.ContextRunnable.run()V (ContextRunnable.java:25)
+  at java.util.concurrent.ThreadPoolExecutor.runWorker(Ljava/util/concurrent/ThreadPoolExecutor$Worker;)V (ThreadPoolExecutor.java:1144)
+  at java.util.concurrent.ThreadPoolExecutor$Worker.run()V (ThreadPoolExecutor.java:642)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Void; (Executors.java:735)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Object; (Executors.java:732)
+  at java.security.AccessController.executePrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;Ljava/lang/Class;)Ljava/lang/Object; (AccessController.java:778)
+  at java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (AccessController.java:400)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1.run()V (Executors.java:732)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x54431a470, line=2
+    objectId=0x54431a470, line=3
+    objectId=0x54431a458, line=5
+    objectId=0x54431a470, line=5
+    objectId=0x54431a490, line=6
+    objectId=0x54431a4d8, line=7
+    objectId=0x54431a490, line=7
+    objectId=0x54431a4f0, line=8
+    objectId=0x53b2ba588, line=9
+    objectId=0x53b2ba678, line=9
+    objectId=0x54431a4d8, line=10
+    objectId=0x54431a508, line=10
+    objectId=0x54431a490, line=10
+    objectId=0x54431a508, line=10
+    objectId=0x54431a520, line=11
+    objectId=0x54431a538, line=12
+    objectId=0x54431a550, line=13
+    objectId=0x54431a570, line=16
+    objectId=0x54431a588, line=20
+    objectId=0x52f308b68, line=22
+    objectId=0x53b2ba540, line=22
+    objectId=0x53b2ba588, line=22
+    objectId=0x54431a5a0, line=22
+    objectId=0x53b2ba540, line=23
+    objectId=0x53b2ba860, line=24
+    objectId=0x53b2ba860, line=25
+    objectId=0x52f308d18, line=26
+    objectId=0x53f5cb090, line=26
+    objectId=0x53b2ba570, line=28
+    objectId=0x53f571de0, line=29
+
+Thread 0x52aec2ea8
+  at java.lang.Object.wait0(J)V (Object.java(Native Method))
+  at java.lang.Object.wait(J)V (Object.java:366)
+  at java.lang.Object.wait()V (Object.java:339)
+  at java.lang.ref.NativeReferenceQueue.await()V (NativeReferenceQueue.java:48)
+  at java.lang.ref.ReferenceQueue.remove0()Ljava/lang/ref/Reference; (ReferenceQueue.java:158)
+  at java.lang.ref.NativeReferenceQueue.remove()Ljava/lang/ref/Reference; (NativeReferenceQueue.java:89)
+  at java.lang.ref.Finalizer$FinalizerThread.run()V (Finalizer.java:173)
+
+  locals:
+    objectId=0x52aec2f30, line=3
+    objectId=0x52aec2f30, line=4
+    objectId=0x52aec2f20, line=5
+    objectId=0x52aec2f58, line=6
+
+Thread 0x5435f5780
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.parkNanos(J)V (LockSupport.java:410)
+  at java.util.concurrent.LinkedTransferQueue$DualNode.await(Ljava/lang/Object;JLjava/lang/Object;Z)Ljava/lang/Object; (LinkedTransferQueue.java:452)
+  at java.util.concurrent.SynchronousQueue$Transferer.xferLifo(Ljava/lang/Object;J)Ljava/lang/Object; (SynchronousQueue.java:194)
+  at java.util.concurrent.SynchronousQueue.xfer(Ljava/lang/Object;J)Ljava/lang/Object; (SynchronousQueue.java:235)
+  at java.util.concurrent.SynchronousQueue.poll(JLjava/util/concurrent/TimeUnit;)Ljava/lang/Object; (SynchronousQueue.java:338)
+  at java.util.concurrent.ThreadPoolExecutor.getTask()Ljava/lang/Runnable; (ThreadPoolExecutor.java:1069)
+  at java.util.concurrent.ThreadPoolExecutor.runWorker(Ljava/util/concurrent/ThreadPoolExecutor$Worker;)V (ThreadPoolExecutor.java:1130)
+  at java.util.concurrent.ThreadPoolExecutor$Worker.run()V (ThreadPoolExecutor.java:642)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Void; (Executors.java:735)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Object; (Executors.java:732)
+  at java.security.AccessController.executePrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;Ljava/lang/Class;)Ljava/lang/Object; (AccessController.java:778)
+  at java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (AccessController.java:400)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1.run()V (Executors.java:732)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x5432df8e0, line=2
+    objectId=0x52f51bf40, line=2
+    objectId=0x5435f5780, line=2
+    objectId=0x52f51bf40, line=3
+    objectId=0x5432df8e0, line=3
+    objectId=0x52f51bf78, line=6
+    objectId=0x52f51bf78, line=7
+    objectId=0x5435f57f8, line=7
+    objectId=0x5435f5780, line=7
+    objectId=0x5435f57f8, line=8
+    objectId=0x5435f5828, line=9
+    objectId=0x5435f5828, line=10
+    objectId=0x52c7148f8, line=11
+    objectId=0x53f5cb090, line=11
+    objectId=0x5435f5838, line=13
+    objectId=0x53f571de0, line=14
+
+Thread 0x532543268
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.park()V (LockSupport.java:371)
+  at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionNode.block()Z (AbstractQueuedSynchronizer.java:519)
+  at java.util.concurrent.ForkJoinPool.unmanagedBlock(Ljava/util/concurrent/ForkJoinPool$ManagedBlocker;)V (ForkJoinPool.java:4013)
+  at java.util.concurrent.ForkJoinPool.managedBlock(Ljava/util/concurrent/ForkJoinPool$ManagedBlocker;)V (ForkJoinPool.java:3961)
+  at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await()V (AbstractQueuedSynchronizer.java:1746)
+  at java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take()Ljava/util/concurrent/RunnableScheduledFuture; (ScheduledThreadPoolExecutor.java:1170)
+  at java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take()Ljava/lang/Object; (ScheduledThreadPoolExecutor.java:899)
+  at java.util.concurrent.ThreadPoolExecutor.getTask()Ljava/lang/Runnable; (ThreadPoolExecutor.java:1070)
+  at java.util.concurrent.ThreadPoolExecutor.runWorker(Ljava/util/concurrent/ThreadPoolExecutor$Worker;)V (ThreadPoolExecutor.java:1130)
+  at java.util.concurrent.ThreadPoolExecutor$Worker.run()V (ThreadPoolExecutor.java:642)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x5325432e0, line=2
+    objectId=0x5325432e0, line=3
+    objectId=0x5325432e0, line=4
+    objectId=0x532543268, line=4
+    objectId=0x532543300, line=5
+    objectId=0x5325432e0, line=5
+    objectId=0x532543318, line=6
+    objectId=0x532543338, line=6
+    objectId=0x532543318, line=7
+    objectId=0x532543348, line=8
+    objectId=0x532543348, line=9
+    objectId=0x532543398, line=9
+    objectId=0x532543268, line=9
+    objectId=0x532543398, line=10
+    objectId=0x532543268, line=11
+    objectId=0x53f571de0, line=11
+    objectId=0x532543398, line=11
+    objectId=0x532543268, line=12
+    objectId=0x532543398, line=12
+    objectId=0x53f571de0, line=12
+
+Thread 0x53d0ba5c8
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.park()V (LockSupport.java:371)
+  at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionNode.block()Z (AbstractQueuedSynchronizer.java:519)
+  at java.util.concurrent.ForkJoinPool.unmanagedBlock(Ljava/util/concurrent/ForkJoinPool$ManagedBlocker;)V (ForkJoinPool.java:4013)
+  at java.util.concurrent.ForkJoinPool.managedBlock(Ljava/util/concurrent/ForkJoinPool$ManagedBlocker;)V (ForkJoinPool.java:3961)
+  at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await()V (AbstractQueuedSynchronizer.java:1746)
+  at java.util.concurrent.LinkedBlockingQueue.take()Ljava/lang/Object; (LinkedBlockingQueue.java:435)
+  at java.util.concurrent.ThreadPoolExecutor.getTask()Ljava/lang/Runnable; (ThreadPoolExecutor.java:1070)
+  at java.util.concurrent.ThreadPoolExecutor.runWorker(Ljava/util/concurrent/ThreadPoolExecutor$Worker;)V (ThreadPoolExecutor.java:1130)
+  at java.util.concurrent.ThreadPoolExecutor$Worker.run()V (ThreadPoolExecutor.java:642)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x54416cbc8, line=2
+    objectId=0x54416cbc8, line=3
+    objectId=0x52c8d0da8, line=5
+    objectId=0x54416cbc8, line=5
+    objectId=0x52c8d0d38, line=6
+    objectId=0x52c8d0d68, line=6
+    objectId=0x52c8d0d78, line=6
+    objectId=0x52c8d0cd8, line=7
+    objectId=0x52c8d0cd8, line=8
+    objectId=0x53d0ba640, line=8
+    objectId=0x53d0ba5c8, line=8
+    objectId=0x53d0ba640, line=9
+    objectId=0x53f571de0, line=10
+
+Thread 0x52b169640
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.park()V (LockSupport.java:371)
+  at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionNode.block()Z (AbstractQueuedSynchronizer.java:519)
+  at java.util.concurrent.ForkJoinPool.unmanagedBlock(Ljava/util/concurrent/ForkJoinPool$ManagedBlocker;)V (ForkJoinPool.java:4013)
+  at java.util.concurrent.ForkJoinPool.managedBlock(Ljava/util/concurrent/ForkJoinPool$ManagedBlocker;)V (ForkJoinPool.java:3961)
+  at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await()V (AbstractQueuedSynchronizer.java:1746)
+  at java.awt.EventQueue.getNextEvent()Ljava/awt/AWTEvent; (EventQueue.java:573)
+  at com.intellij.ide.IdeEventQueue.getNextEvent()Ljava/awt/AWTEvent; (IdeEventQueue.kt:403)
+  at java.awt.EventDispatchThread.pumpOneEventForFilters(I)V (EventDispatchThread.java:194)
+  at java.awt.EventDispatchThread.pumpEventsForFilter(ILjava/awt/Conditional;Ljava/awt/EventFilter;)V (EventDispatchThread.java:128)
+  at java.awt.EventDispatchThread.pumpEventsForHierarchy(ILjava/awt/Conditional;Ljava/awt/Component;)V (EventDispatchThread.java:117)
+  at java.awt.EventDispatchThread.pumpEvents(ILjava/awt/Conditional;)V (EventDispatchThread.java:113)
+  at java.awt.EventDispatchThread.pumpEvents(Ljava/awt/Conditional;)V (EventDispatchThread.java:105)
+  at java.awt.EventDispatchThread.run()V (EventDispatchThread.java:92)
+
+  locals:
+    objectId=0x5442cc5a0, line=2
+    objectId=0x5442cc5a0, line=3
+    objectId=0x52b169798, line=5
+    objectId=0x5442cc5a0, line=5
+    objectId=0x52b180840, line=6
+    objectId=0x52b180840, line=7
+    objectId=0x52b169640, line=8
+    objectId=0x52b180840, line=8
+    objectId=0x52b169640, line=9
+    objectId=0x52b18a470, line=9
+    objectId=0x52b1854d8, line=9
+    objectId=0x52b169640, line=10
+    objectId=0x52b18a470, line=10
+    objectId=0x52b169640, line=11
+    objectId=0x52b18a470, line=11
+    objectId=0x52b169640, line=12
+    objectId=0x52b18a470, line=12
+    objectId=0x52b169640, line=13
+
+Thread 0x54498b938
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.parkNanos(J)V (LockSupport.java:410)
+  at java.util.concurrent.LinkedTransferQueue$DualNode.await(Ljava/lang/Object;JLjava/lang/Object;Z)Ljava/lang/Object; (LinkedTransferQueue.java:452)
+  at java.util.concurrent.SynchronousQueue$Transferer.xferLifo(Ljava/lang/Object;J)Ljava/lang/Object; (SynchronousQueue.java:194)
+  at java.util.concurrent.SynchronousQueue.xfer(Ljava/lang/Object;J)Ljava/lang/Object; (SynchronousQueue.java:235)
+  at java.util.concurrent.SynchronousQueue.poll(JLjava/util/concurrent/TimeUnit;)Ljava/lang/Object; (SynchronousQueue.java:338)
+  at java.util.concurrent.ThreadPoolExecutor.getTask()Ljava/lang/Runnable; (ThreadPoolExecutor.java:1069)
+  at java.util.concurrent.ThreadPoolExecutor.runWorker(Ljava/util/concurrent/ThreadPoolExecutor$Worker;)V (ThreadPoolExecutor.java:1130)
+  at java.util.concurrent.ThreadPoolExecutor$Worker.run()V (ThreadPoolExecutor.java:642)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Void; (Executors.java:735)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Object; (Executors.java:732)
+  at java.security.AccessController.executePrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;Ljava/lang/Class;)Ljava/lang/Object; (AccessController.java:778)
+  at java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (AccessController.java:400)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1.run()V (Executors.java:732)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x54498c2e0, line=2
+    objectId=0x52f308be8, line=2
+    objectId=0x54498b938, line=2
+    objectId=0x52f308be8, line=3
+    objectId=0x54498c2e0, line=3
+    objectId=0x52f308b68, line=6
+    objectId=0x52f308b68, line=7
+    objectId=0x54498b8f0, line=7
+    objectId=0x54498b938, line=7
+    objectId=0x54498c228, line=9
+    objectId=0x54498c228, line=10
+    objectId=0x52f308d18, line=11
+    objectId=0x53f5cb090, line=11
+    objectId=0x54498b920, line=13
+    objectId=0x53f571de0, line=14
+
+Thread 0x53a5fb918
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.parkNanos(J)V (LockSupport.java:410)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.park()V (CoroutineScheduler.kt:943)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.tryPark()V (CoroutineScheduler.kt:872)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker()V (CoroutineScheduler.kt:807)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run()V (CoroutineScheduler.kt:762)
+
+  locals:
+    objectId=0x53a5fb918, line=2
+    objectId=0x53a5fb918, line=3
+    objectId=0x53a5fb918, line=4
+    objectId=0x53a5fb918, line=5
+
+Thread 0x542e9ce38
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.ForkJoinPool.awaitWork(Ljava/util/concurrent/ForkJoinPool$WorkQueue;I)I (ForkJoinPool.java:2145)
+  at java.util.concurrent.ForkJoinPool.runWorker(Ljava/util/concurrent/ForkJoinPool$WorkQueue;)V (ForkJoinPool.java:2036)
+  at java.util.concurrent.ForkJoinWorkerThread.run()V (ForkJoinWorkerThread.java:187)
+
+  locals:
+    objectId=0x52c24cc30, line=1
+    objectId=0x542e9cef8, line=1
+    objectId=0x52c24cc30, line=2
+    objectId=0x542e9cef8, line=2
+    objectId=0x542e9ce38, line=3
+    objectId=0x52c24cc30, line=3
+    objectId=0x542e9cef8, line=3
+
+Thread 0x52f40fe20
+  at sun.nio.ch.KQueue.poll(IJIJ)I (KQueue.java(Native Method))
+  at sun.nio.ch.KQueueSelectorImpl.doSelect(Ljava/util/function/Consumer;J)I (KQueueSelectorImpl.java:125)
+  at sun.nio.ch.SelectorImpl.lockAndDoSelect(Ljava/util/function/Consumer;J)I (SelectorImpl.java:130)
+  at sun.nio.ch.SelectorImpl.select(J)I (SelectorImpl.java:142)
+  at io.netty.channel.nio.SelectedSelectionKeySetSelector.select(J)I (SelectedSelectionKeySetSelector.java:62)
+  at io.netty.channel.nio.NioIoHandler.select(Lio/netty/channel/IoExecutionContext;Z)V (NioIoHandler.java:646)
+  at io.netty.channel.nio.NioIoHandler.run(Lio/netty/channel/IoExecutionContext;)I (NioIoHandler.java:432)
+  at io.netty.channel.SingleThreadIoEventLoop.runIo()I (SingleThreadIoEventLoop.java:203)
+  at io.netty.channel.SingleThreadIoEventLoop.run()V (SingleThreadIoEventLoop.java:174)
+  at io.netty.util.concurrent.SingleThreadEventExecutor$5.run()V (SingleThreadEventExecutor.java:1123)
+  at io.netty.util.internal.ThreadExecutorMap$2.run()V (ThreadExecutorMap.java:74)
+  at io.netty.util.concurrent.FastThreadLocalRunnable.run()V (FastThreadLocalRunnable.java:30)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x52e959950, line=1
+    objectId=0x52e959950, line=2
+    objectId=0x52e959950, line=2
+    objectId=0x52e958928, line=2
+    objectId=0x52e9588d0, line=5
+    objectId=0x52e9588c0, line=5
+    objectId=0x52e958910, line=5
+    objectId=0x52e9588d0, line=6
+    objectId=0x52e9584f8, line=8
+    objectId=0x52f40fea0, line=9
+    objectId=0x52f40feb0, line=10
+    objectId=0x52f40fec8, line=11
+    objectId=0x52f40fe20, line=12
+    objectId=0x53f571de0, line=12
+    objectId=0x52f40fec8, line=12
+    objectId=0x52f40fe20, line=13
+    objectId=0x52f40fec8, line=13
+    objectId=0x53f571de0, line=13
+
+Thread 0x5346d6008
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.parkNanos(J)V (LockSupport.java:410)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.park()V (CoroutineScheduler.kt:943)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.tryPark()V (CoroutineScheduler.kt:872)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker()V (CoroutineScheduler.kt:807)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run()V (CoroutineScheduler.kt:762)
+
+  locals:
+    objectId=0x5346d6008, line=2
+    objectId=0x5346d6008, line=3
+    objectId=0x5346d6008, line=4
+    objectId=0x5346d6008, line=5
+
+Thread 0x52b169150
+  at java.lang.Object.wait0(J)V (Object.java(Native Method))
+  at java.lang.Object.wait(J)V (Object.java:366)
+  at java.lang.Object.wait()V (Object.java:339)
+  at java.util.TimerThread.mainLoop()V (Timer.java:537)
+  at java.util.TimerThread.run()V (Timer.java:516)
+
+  locals:
+    objectId=0x52b169150, line=3
+    objectId=0x52b1691d0, line=3
+    objectId=0x52b169150, line=4
+
+Thread 0x54432ffd0
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.parkNanos(J)V (LockSupport.java:410)
+  at java.util.concurrent.LinkedTransferQueue$DualNode.await(Ljava/lang/Object;JLjava/lang/Object;Z)Ljava/lang/Object; (LinkedTransferQueue.java:452)
+  at java.util.concurrent.SynchronousQueue$Transferer.xferLifo(Ljava/lang/Object;J)Ljava/lang/Object; (SynchronousQueue.java:194)
+  at java.util.concurrent.SynchronousQueue.xfer(Ljava/lang/Object;J)Ljava/lang/Object; (SynchronousQueue.java:235)
+  at java.util.concurrent.SynchronousQueue.poll(JLjava/util/concurrent/TimeUnit;)Ljava/lang/Object; (SynchronousQueue.java:338)
+  at java.util.concurrent.ThreadPoolExecutor.getTask()Ljava/lang/Runnable; (ThreadPoolExecutor.java:1069)
+  at java.util.concurrent.ThreadPoolExecutor.runWorker(Ljava/util/concurrent/ThreadPoolExecutor$Worker;)V (ThreadPoolExecutor.java:1130)
+  at java.util.concurrent.ThreadPoolExecutor$Worker.run()V (ThreadPoolExecutor.java:642)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Void; (Executors.java:735)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Object; (Executors.java:732)
+  at java.security.AccessController.executePrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;Ljava/lang/Class;)Ljava/lang/Object; (AccessController.java:778)
+  at java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (AccessController.java:400)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1.run()V (Executors.java:732)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x5445536e8, line=2
+    objectId=0x52f51bf40, line=2
+    objectId=0x54432ffd0, line=2
+    objectId=0x52f51bf40, line=3
+    objectId=0x5445536e8, line=3
+    objectId=0x52f51bf78, line=6
+    objectId=0x52f51bf78, line=7
+    objectId=0x544330048, line=7
+    objectId=0x54432ffd0, line=7
+    objectId=0x544330048, line=8
+    objectId=0x544330078, line=9
+    objectId=0x544330078, line=10
+    objectId=0x52c7148f8, line=11
+    objectId=0x53f5cb090, line=11
+    objectId=0x544330088, line=13
+    objectId=0x53f571de0, line=14
+
+Thread 0x5305fd760
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.parkNanos(J)V (LockSupport.java:410)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.park()V (CoroutineScheduler.kt:943)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.tryPark()V (CoroutineScheduler.kt:872)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker()V (CoroutineScheduler.kt:807)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run()V (CoroutineScheduler.kt:762)
+
+  locals:
+    objectId=0x5305fd760, line=2
+    objectId=0x5305fd760, line=3
+    objectId=0x5305fd760, line=4
+    objectId=0x5305fd760, line=5
+
+Thread 0x53d2df920
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.parkNanos(J)V (LockSupport.java:410)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.park()V (CoroutineScheduler.kt:943)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.tryPark()V (CoroutineScheduler.kt:872)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker()V (CoroutineScheduler.kt:807)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run()V (CoroutineScheduler.kt:762)
+
+  locals:
+    objectId=0x53d2df920, line=2
+    objectId=0x53d2df920, line=3
+    objectId=0x53d2df920, line=4
+    objectId=0x53d2df920, line=5
+
+Thread 0x52eba0800
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.parkNanos(Ljava/lang/Object;J)V (LockSupport.java:269)
+  at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(J)J (AbstractQueuedSynchronizer.java:1797)
+  at java.util.concurrent.DelayQueue.take()Ljava/util/concurrent/Delayed; (DelayQueue.java:255)
+  at com.intellij.util.concurrency.AppDelayQueue$TransferThread.run()V (AppDelayQueue.java:83)
+
+  locals:
+    objectId=0x52eba0800, line=1
+    objectId=0x52eba0878, line=2
+    objectId=0x5442cc5e0, line=2
+    objectId=0x52eba0890, line=3
+    objectId=0x52eba08b8, line=3
+    objectId=0x52eba0800, line=3
+    objectId=0x52eba0800, line=4
+
+Thread 0x53dddb0a0
+  at java.io.FileInputStream.readBytes([BII)I (FileInputStream.java(Native Method))
+  at java.io.FileInputStream.implRead([BII)I (FileInputStream.java:366)
+  at java.io.FileInputStream.read([BII)I (FileInputStream.java:358)
+  at java.io.BufferedInputStream.read1([BII)I (BufferedInputStream.java:345)
+  at java.io.BufferedInputStream.implRead([BII)I (BufferedInputStream.java:420)
+  at java.io.BufferedInputStream.read([BII)I (BufferedInputStream.java:405)
+  at sun.nio.cs.StreamDecoder.readBytes()I (StreamDecoder.java:350)
+  at sun.nio.cs.StreamDecoder.implRead([CII)I (StreamDecoder.java:393)
+  at sun.nio.cs.StreamDecoder.lockedRead([CII)I (StreamDecoder.java:217)
+  at sun.nio.cs.StreamDecoder.read([CII)I (StreamDecoder.java:177)
+  at java.io.InputStreamReader.read([CII)I (InputStreamReader.java:188)
+  at java.io.Reader.read([C)I (Reader.java:265)
+  at com.intellij.util.io.BaseOutputReader.readAvailableBlocking()Z (BaseOutputReader.java:148)
+  at com.intellij.util.io.BaseDataReader.readAvailable()Z (BaseDataReader.java:72)
+  at com.intellij.util.io.BaseDataReader.doRun()V (BaseDataReader.java:153)
+  at com.intellij.util.io.BaseDataReader$$Lambda+0x000000a0028e4ec8.run()V ()
+  at com.intellij.util.ConcurrencyUtil.runUnderThreadName(Ljava/lang/String;Ljava/lang/Runnable;)V (ConcurrencyUtil.java:249)
+  at com.intellij.util.io.BaseDataReader.lambda$start$0(Ljava/lang/String;)V (BaseDataReader.java:48)
+  at com.intellij.util.io.BaseDataReader$$Lambda+0x000000a0028e4a38.run()V ()
+  at java.util.concurrent.Executors$RunnableAdapter.call()Ljava/lang/Object; (Executors.java:572)
+  at java.util.concurrent.FutureTask.run()V (FutureTask.java:317)
+  at com.intellij.util.concurrency.ChildContext$runInChildContext$1.invoke()V (propagation.kt:167)
+  at com.intellij.util.concurrency.ChildContext$runInChildContext$1.invoke()Ljava/lang/Object; (propagation.kt:167)
+  at com.intellij.util.concurrency.ChildContext.runInChildContext(ZLkotlin/jvm/functions/Function0;)Ljava/lang/Object; (propagation.kt:173)
+  at com.intellij.util.concurrency.ChildContext.runInChildContext(Ljava/lang/Runnable;)V (propagation.kt:167)
+  at com.intellij.util.concurrency.ContextRunnable.lambda$run$0()Ljava/lang/Object; (ContextRunnable.java:26)
+  at com.intellij.util.concurrency.ContextRunnable$$Lambda+0x000000a0022bdb58.invoke()Ljava/lang/Object; ()
+  at com.intellij.concurrency.ThreadContext.resetThreadContext(Lkotlin/jvm/functions/Function0;)Ljava/lang/Object; (threadContext.kt:294)
+  at com.intellij.util.concurrency.ContextRunnable.run()V (ContextRunnable.java:25)
+  at java.util.concurrent.ThreadPoolExecutor.runWorker(Ljava/util/concurrent/ThreadPoolExecutor$Worker;)V (ThreadPoolExecutor.java:1144)
+  at java.util.concurrent.ThreadPoolExecutor$Worker.run()V (ThreadPoolExecutor.java:642)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Void; (Executors.java:735)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Object; (Executors.java:732)
+  at java.security.AccessController.executePrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;Ljava/lang/Class;)Ljava/lang/Object; (AccessController.java:778)
+  at java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (AccessController.java:400)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1.run()V (Executors.java:732)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x54410a350, line=0
+    objectId=0x54410c3b8, line=4
+    objectId=0x54410a3a8, line=4
+    objectId=0x54410c3b8, line=5
+    objectId=0x54410c3e8, line=6
+    objectId=0x54410c3e8, line=7
+    objectId=0x54410c438, line=7
+    objectId=0x54410c418, line=9
+    objectId=0x54410c470, line=12
+    objectId=0x54410c470, line=14
+    objectId=0x53dddb0a0, line=16
+    objectId=0x53dddb150, line=16
+    objectId=0x54410c4a8, line=18
+    objectId=0x54410c4c0, line=19
+    objectId=0x54410c4d8, line=20
+    objectId=0x54410c4f8, line=23
+    objectId=0x54410c510, line=27
+    objectId=0x52f308b68, line=29
+    objectId=0x53dddb058, line=29
+    objectId=0x53dddb0a0, line=29
+    objectId=0x54410c528, line=29
+    objectId=0x53dddb058, line=30
+    objectId=0x53dddd688, line=31
+    objectId=0x53dddd688, line=32
+    objectId=0x52f308d18, line=33
+    objectId=0x53f5cb090, line=33
+    objectId=0x53dddb088, line=35
+    objectId=0x53f571de0, line=36
+
+Thread 0x52aebe788
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.parkNanos(Ljava/lang/Object;J)V (LockSupport.java:269)
+  at kotlinx.coroutines.BlockingCoroutine.joinBlocking()Ljava/lang/Object; (Builders.kt:121)
+  at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$BuildersKt__BuildersKt(Lkotlin/coroutines/CoroutineContext;ZLkotlin/jvm/functions/Function2;)Ljava/lang/Object; (Builders.kt:85)
+  at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Lkotlin/coroutines/CoroutineContext;Lkotlin/jvm/functions/Function2;)Ljava/lang/Object; (Builders.kt:53)
+  at kotlinx.coroutines.BuildersKt.runBlocking(Lkotlin/coroutines/CoroutineContext;Lkotlin/jvm/functions/Function2;)Ljava/lang/Object; (:1)
+  at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Lkotlin/coroutines/CoroutineContext;Lkotlin/jvm/functions/Function2;ILjava/lang/Object;)Ljava/lang/Object; (Builders.kt:48)
+  at kotlinx.coroutines.BuildersKt.runBlocking$default(Lkotlin/coroutines/CoroutineContext;Lkotlin/jvm/functions/Function2;ILjava/lang/Object;)Ljava/lang/Object; (:1)
+  at com.intellij.idea.Main.mainImpl([Ljava/lang/String;Ljava/util/ArrayList;JLjava/util/function/Consumer;)V (Main.kt:66)
+  at com.intellij.idea.Main.main([Ljava/lang/String;)V (Main.kt:47)
+
+  locals:
+    objectId=0x52aebe788, line=1
+    objectId=0x52b164440, line=2
+    objectId=0x52b164548, line=3
+    objectId=0x52b164558, line=3
+    objectId=0x52aebe788, line=3
+    objectId=0x52b164598, line=3
+    objectId=0x52b164598, line=3
+    objectId=0x52b164440, line=3
+    objectId=0x52b164548, line=4
+    objectId=0x52b164558, line=4
+    objectId=0x52b164548, line=5
+    objectId=0x52b164558, line=5
+    objectId=0x52b164548, line=6
+    objectId=0x52b164558, line=6
+    objectId=0x52b164558, line=7
+    objectId=0x52aebe878, line=8
+    objectId=0x52aebe888, line=8
+    objectId=0x52aebe8a0, line=8
+    objectId=0x52aebe878, line=9
+    objectId=0x52aebe888, line=9
+
+Thread 0x541279868
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.parkNanos(J)V (LockSupport.java:410)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.park()V (CoroutineScheduler.kt:943)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.tryPark()V (CoroutineScheduler.kt:872)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker()V (CoroutineScheduler.kt:807)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run()V (CoroutineScheduler.kt:762)
+
+  locals:
+    objectId=0x541279868, line=2
+    objectId=0x541279868, line=3
+    objectId=0x541279868, line=4
+    objectId=0x541279868, line=5
+
+Thread 0x533e08f88
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.parkNanos(J)V (LockSupport.java:410)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.park()V (CoroutineScheduler.kt:943)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.tryPark()V (CoroutineScheduler.kt:872)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker()V (CoroutineScheduler.kt:807)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run()V (CoroutineScheduler.kt:762)
+
+  locals:
+    objectId=0x533e08f88, line=2
+    objectId=0x533e08f88, line=3
+    objectId=0x533e08f88, line=4
+    objectId=0x533e08f88, line=5
+
+Thread 0x5354455e0
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.park()V (LockSupport.java:371)
+  at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionNode.block()Z (AbstractQueuedSynchronizer.java:519)
+  at java.util.concurrent.ForkJoinPool.unmanagedBlock(Ljava/util/concurrent/ForkJoinPool$ManagedBlocker;)V (ForkJoinPool.java:4013)
+  at java.util.concurrent.ForkJoinPool.managedBlock(Ljava/util/concurrent/ForkJoinPool$ManagedBlocker;)V (ForkJoinPool.java:3961)
+  at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await()V (AbstractQueuedSynchronizer.java:1746)
+  at java.lang.ProcessImpl.waitFor()I (ProcessImpl.java:425)
+  at com.intellij.execution.process.ProcessWaitFor.lambda$new$0(Ljava/lang/Process;)V (ProcessWaitFor.java:28)
+  at com.intellij.execution.process.ProcessWaitFor$$Lambda+0x000000a0028db6e8.run()V ()
+  at com.intellij.util.ConcurrencyUtil.runUnderThreadName(Ljava/lang/String;Ljava/lang/Runnable;)V (ConcurrencyUtil.java:249)
+  at com.intellij.execution.process.ProcessWaitFor.lambda$new$1(Ljava/lang/String;Ljava/lang/Process;)V (ProcessWaitFor.java:23)
+  at com.intellij.execution.process.ProcessWaitFor$$Lambda+0x000000a0028dade8.run()V ()
+  at java.util.concurrent.Executors$RunnableAdapter.call()Ljava/lang/Object; (Executors.java:572)
+  at java.util.concurrent.FutureTask.run()V (FutureTask.java:317)
+  at com.intellij.util.concurrency.ChildContext$runInChildContext$1.invoke()V (propagation.kt:167)
+  at com.intellij.util.concurrency.ChildContext$runInChildContext$1.invoke()Ljava/lang/Object; (propagation.kt:167)
+  at com.intellij.util.concurrency.ChildContext.runInChildContext(ZLkotlin/jvm/functions/Function0;)Ljava/lang/Object; (propagation.kt:173)
+  at com.intellij.util.concurrency.ChildContext.runInChildContext(Ljava/lang/Runnable;)V (propagation.kt:167)
+  at com.intellij.util.concurrency.ContextRunnable.lambda$run$0()Ljava/lang/Object; (ContextRunnable.java:26)
+  at com.intellij.util.concurrency.ContextRunnable$$Lambda+0x000000a0022bdb58.invoke()Ljava/lang/Object; ()
+  at com.intellij.concurrency.ThreadContext.resetThreadContext(Lkotlin/jvm/functions/Function0;)Ljava/lang/Object; (threadContext.kt:294)
+  at com.intellij.util.concurrency.ContextRunnable.run()V (ContextRunnable.java:25)
+  at java.util.concurrent.ThreadPoolExecutor.runWorker(Ljava/util/concurrent/ThreadPoolExecutor$Worker;)V (ThreadPoolExecutor.java:1144)
+  at java.util.concurrent.ThreadPoolExecutor$Worker.run()V (ThreadPoolExecutor.java:642)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Void; (Executors.java:735)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Object; (Executors.java:732)
+  at java.security.AccessController.executePrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;Ljava/lang/Class;)Ljava/lang/Object; (AccessController.java:778)
+  at java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (AccessController.java:400)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1.run()V (Executors.java:732)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x5412f7d38, line=2
+    objectId=0x5412f7d38, line=3
+    objectId=0x5412f7d20, line=5
+    objectId=0x5412f7d38, line=5
+    objectId=0x5412f7d58, line=6
+    objectId=0x5412f7da0, line=7
+    objectId=0x5412f7d58, line=7
+    objectId=0x5412f7db8, line=8
+    objectId=0x5354455e0, line=9
+    objectId=0x5354456d8, line=9
+    objectId=0x5412f7da0, line=10
+    objectId=0x5412f7dd0, line=10
+    objectId=0x5412f7d58, line=10
+    objectId=0x5412f7dd0, line=10
+    objectId=0x5412f7de8, line=11
+    objectId=0x5412f7e00, line=12
+    objectId=0x5412f7e18, line=13
+    objectId=0x5412f7e38, line=16
+    objectId=0x5412f7e50, line=20
+    objectId=0x52f308b68, line=22
+    objectId=0x535445598, line=22
+    objectId=0x5354455e0, line=22
+    objectId=0x5412f7e68, line=22
+    objectId=0x535445598, line=23
+    objectId=0x5354462e8, line=24
+    objectId=0x5354462e8, line=25
+    objectId=0x52f308d18, line=26
+    objectId=0x53f5cb090, line=26
+    objectId=0x5354455c8, line=28
+    objectId=0x53f571de0, line=29
+
+Thread 0x52b16c868
+  at java.lang.Object.wait0(J)V (Object.java(Native Method))
+  at java.lang.Object.wait(J)V (Object.java:366)
+  at java.lang.Object.wait()V (Object.java:339)
+  at sun.awt.AWTAutoShutdown.run()V (AWTAutoShutdown.java:291)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x52b16c968, line=3
+    objectId=0x52b16c868, line=3
+    objectId=0x52b16c8e0, line=3
+    objectId=0x52b16c868, line=4
+    objectId=0x53f571de0, line=4
+    objectId=0x52b16c968, line=4
+    objectId=0x52b16c868, line=5
+    objectId=0x52b16c968, line=5
+    objectId=0x53f571de0, line=5
+
+Thread 0x5434ab5e8
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.parkNanos(J)V (LockSupport.java:410)
+  at java.util.concurrent.LinkedTransferQueue$DualNode.await(Ljava/lang/Object;JLjava/lang/Object;Z)Ljava/lang/Object; (LinkedTransferQueue.java:452)
+  at java.util.concurrent.SynchronousQueue$Transferer.xferLifo(Ljava/lang/Object;J)Ljava/lang/Object; (SynchronousQueue.java:194)
+  at java.util.concurrent.SynchronousQueue.xfer(Ljava/lang/Object;J)Ljava/lang/Object; (SynchronousQueue.java:235)
+  at java.util.concurrent.SynchronousQueue.poll(JLjava/util/concurrent/TimeUnit;)Ljava/lang/Object; (SynchronousQueue.java:338)
+  at java.util.concurrent.ThreadPoolExecutor.getTask()Ljava/lang/Runnable; (ThreadPoolExecutor.java:1069)
+  at java.util.concurrent.ThreadPoolExecutor.runWorker(Ljava/util/concurrent/ThreadPoolExecutor$Worker;)V (ThreadPoolExecutor.java:1130)
+  at java.util.concurrent.ThreadPoolExecutor$Worker.run()V (ThreadPoolExecutor.java:642)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Void; (Executors.java:735)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Object; (Executors.java:732)
+  at java.security.AccessController.executePrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;Ljava/lang/Class;)Ljava/lang/Object; (AccessController.java:778)
+  at java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (AccessController.java:400)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1.run()V (Executors.java:732)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x54498bdf0, line=2
+    objectId=0x52f308be8, line=2
+    objectId=0x5434ab5e8, line=2
+    objectId=0x52f308be8, line=3
+    objectId=0x54498bdf0, line=3
+    objectId=0x52f308b68, line=6
+    objectId=0x52f308b68, line=7
+    objectId=0x5434ab5a0, line=7
+    objectId=0x5434ab5e8, line=7
+    objectId=0x544544198, line=9
+    objectId=0x544544198, line=10
+    objectId=0x52f308d18, line=11
+    objectId=0x53f5cb090, line=11
+    objectId=0x5434ab5d0, line=13
+    objectId=0x53f571de0, line=14
+
+Thread 0x534521af8
+  at sun.nio.ch.KQueue.poll(IJIJ)I (KQueue.java(Native Method))
+  at sun.nio.ch.KQueueSelectorImpl.doSelect(Ljava/util/function/Consumer;J)I (KQueueSelectorImpl.java:125)
+  at sun.nio.ch.SelectorImpl.lockAndDoSelect(Ljava/util/function/Consumer;J)I (SelectorImpl.java:130)
+  at sun.nio.ch.SelectorImpl.select(J)I (SelectorImpl.java:142)
+  at io.netty.channel.nio.SelectedSelectionKeySetSelector.select(J)I (SelectedSelectionKeySetSelector.java:62)
+  at io.netty.channel.nio.NioIoHandler.select(Lio/netty/channel/IoExecutionContext;Z)V (NioIoHandler.java:646)
+  at io.netty.channel.nio.NioIoHandler.run(Lio/netty/channel/IoExecutionContext;)I (NioIoHandler.java:432)
+  at io.netty.channel.SingleThreadIoEventLoop.runIo()I (SingleThreadIoEventLoop.java:203)
+  at io.netty.channel.SingleThreadIoEventLoop.run()V (SingleThreadIoEventLoop.java:174)
+  at io.netty.util.concurrent.SingleThreadEventExecutor$5.run()V (SingleThreadEventExecutor.java:1123)
+  at io.netty.util.internal.ThreadExecutorMap$2.run()V (ThreadExecutorMap.java:74)
+  at io.netty.util.concurrent.FastThreadLocalRunnable.run()V (FastThreadLocalRunnable.java:30)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x52f51eef0, line=1
+    objectId=0x52f51eef0, line=2
+    objectId=0x52f51eef0, line=2
+    objectId=0x52f51dec8, line=2
+    objectId=0x52f51de70, line=5
+    objectId=0x52f51de60, line=5
+    objectId=0x52f51deb0, line=5
+    objectId=0x52f51de70, line=6
+    objectId=0x52f51db20, line=8
+    objectId=0x534521b78, line=9
+    objectId=0x534521b88, line=10
+    objectId=0x534521ba0, line=11
+    objectId=0x534521af8, line=12
+    objectId=0x53f571de0, line=12
+    objectId=0x534521ba0, line=12
+    objectId=0x534521af8, line=13
+    objectId=0x534521ba0, line=13
+    objectId=0x53f571de0, line=13
+
+Thread 0x5405e8aa0
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.ForkJoinPool.awaitWork(Ljava/util/concurrent/ForkJoinPool$WorkQueue;I)I (ForkJoinPool.java:2145)
+  at java.util.concurrent.ForkJoinPool.runWorker(Ljava/util/concurrent/ForkJoinPool$WorkQueue;)V (ForkJoinPool.java:2036)
+  at java.util.concurrent.ForkJoinWorkerThread.run()V (ForkJoinWorkerThread.java:187)
+
+  locals:
+    objectId=0x52c24cc30, line=1
+    objectId=0x5405e8b60, line=1
+    objectId=0x52c24cc30, line=2
+    objectId=0x5405e8b60, line=2
+    objectId=0x5405e8aa0, line=3
+    objectId=0x52c24cc30, line=3
+    objectId=0x5405e8b60, line=3
+
+Thread 0x52ce096a0
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.park()V (LockSupport.java:371)
+  at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionNode.block()Z (AbstractQueuedSynchronizer.java:519)
+  at java.util.concurrent.ForkJoinPool.unmanagedBlock(Ljava/util/concurrent/ForkJoinPool$ManagedBlocker;)V (ForkJoinPool.java:4013)
+  at java.util.concurrent.ForkJoinPool.managedBlock(Ljava/util/concurrent/ForkJoinPool$ManagedBlocker;)V (ForkJoinPool.java:3961)
+  at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await()V (AbstractQueuedSynchronizer.java:1746)
+  at java.lang.ProcessImpl.waitFor()I (ProcessImpl.java:425)
+  at com.intellij.execution.process.ProcessWaitFor.lambda$new$0(Ljava/lang/Process;)V (ProcessWaitFor.java:28)
+  at com.intellij.execution.process.ProcessWaitFor$$Lambda+0x000000a0028db6e8.run()V ()
+  at com.intellij.util.ConcurrencyUtil.runUnderThreadName(Ljava/lang/String;Ljava/lang/Runnable;)V (ConcurrencyUtil.java:249)
+  at com.intellij.execution.process.ProcessWaitFor.lambda$new$1(Ljava/lang/String;Ljava/lang/Process;)V (ProcessWaitFor.java:23)
+  at com.intellij.execution.process.ProcessWaitFor$$Lambda+0x000000a0028dade8.run()V ()
+  at java.util.concurrent.Executors$RunnableAdapter.call()Ljava/lang/Object; (Executors.java:572)
+  at java.util.concurrent.FutureTask.run()V (FutureTask.java:317)
+  at com.intellij.util.concurrency.ChildContext$runInChildContext$1.invoke()V (propagation.kt:167)
+  at com.intellij.util.concurrency.ChildContext$runInChildContext$1.invoke()Ljava/lang/Object; (propagation.kt:167)
+  at com.intellij.util.concurrency.ChildContext.runInChildContext(ZLkotlin/jvm/functions/Function0;)Ljava/lang/Object; (propagation.kt:173)
+  at com.intellij.util.concurrency.ChildContext.runInChildContext(Ljava/lang/Runnable;)V (propagation.kt:167)
+  at com.intellij.util.concurrency.ContextRunnable.lambda$run$0()Ljava/lang/Object; (ContextRunnable.java:26)
+  at com.intellij.util.concurrency.ContextRunnable$$Lambda+0x000000a0022bdb58.invoke()Ljava/lang/Object; ()
+  at com.intellij.concurrency.ThreadContext.resetThreadContext(Lkotlin/jvm/functions/Function0;)Ljava/lang/Object; (threadContext.kt:294)
+  at com.intellij.util.concurrency.ContextRunnable.run()V (ContextRunnable.java:25)
+  at java.util.concurrent.ThreadPoolExecutor.runWorker(Ljava/util/concurrent/ThreadPoolExecutor$Worker;)V (ThreadPoolExecutor.java:1144)
+  at java.util.concurrent.ThreadPoolExecutor$Worker.run()V (ThreadPoolExecutor.java:642)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Void; (Executors.java:735)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Object; (Executors.java:732)
+  at java.security.AccessController.executePrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;Ljava/lang/Class;)Ljava/lang/Object; (AccessController.java:778)
+  at java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (AccessController.java:400)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1.run()V (Executors.java:732)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x52ce09718, line=2
+    objectId=0x52ce09718, line=3
+    objectId=0x52ce09718, line=4
+    objectId=0x52ce096a0, line=4
+    objectId=0x52ce09738, line=5
+    objectId=0x52ce09718, line=5
+    objectId=0x52ce09750, line=6
+    objectId=0x52ce09810, line=7
+    objectId=0x52ce09750, line=7
+    objectId=0x52ce09898, line=8
+    objectId=0x52ce098b0, line=9
+    objectId=0x52ce09898, line=9
+    objectId=0x52ce096a0, line=9
+    objectId=0x52ce098c8, line=9
+    objectId=0x52ce09810, line=10
+    objectId=0x52ce098b0, line=10
+    objectId=0x52ce09750, line=10
+    objectId=0x52ce098b0, line=10
+    objectId=0x52ce09950, line=11
+    objectId=0x52ce09968, line=12
+    objectId=0x52ce09980, line=13
+    objectId=0x52ce09968, line=13
+    objectId=0x52ce099a0, line=14
+    objectId=0x52ce099a0, line=15
+    objectId=0x52ce099d0, line=16
+    objectId=0x52ce099a0, line=16
+    objectId=0x52ce099f0, line=16
+    objectId=0x52ce099f0, line=16
+    objectId=0x52ce099d0, line=17
+    objectId=0x52ce09980, line=17
+    objectId=0x52ce09a08, line=18
+    objectId=0x52ce09a20, line=19
+    objectId=0x52ce09a20, line=20
+    objectId=0x52ce09a30, line=20
+    objectId=0x52ce09a30, line=20
+    objectId=0x52ce09a08, line=21
+    objectId=0x52f308b68, line=22
+    objectId=0x52ce09a48, line=22
+    objectId=0x52ce096a0, line=22
+    objectId=0x52ce09a08, line=22
+    objectId=0x52ce09a48, line=23
+    objectId=0x52ce09a78, line=24
+    objectId=0x52ce09a78, line=25
+    objectId=0x52f308d18, line=26
+    objectId=0x53f5cb090, line=26
+    objectId=0x52ce09a78, line=27
+    objectId=0x52f308d18, line=27
+    objectId=0x53f5cb090, line=27
+    objectId=0x52ce09a88, line=28
+    objectId=0x52ce096a0, line=29
+    objectId=0x53f571de0, line=29
+    objectId=0x52ce09a88, line=29
+    objectId=0x52ce096a0, line=30
+    objectId=0x52ce09a88, line=30
+    objectId=0x53f571de0, line=30
+
+Thread 0x53b657138
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.parkNanos(J)V (LockSupport.java:410)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.park()V (CoroutineScheduler.kt:943)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.tryPark()V (CoroutineScheduler.kt:872)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker()V (CoroutineScheduler.kt:807)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run()V (CoroutineScheduler.kt:762)
+
+  locals:
+    objectId=0x53b657138, line=2
+    objectId=0x53b657138, line=3
+    objectId=0x53b657138, line=4
+    objectId=0x53b657138, line=5
+
+Thread 0x52a807f10
+
+  locals:
+
+Thread 0x5412ebfa8
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.ForkJoinPool.awaitWork(Ljava/util/concurrent/ForkJoinPool$WorkQueue;I)I (ForkJoinPool.java:2145)
+  at java.util.concurrent.ForkJoinPool.runWorker(Ljava/util/concurrent/ForkJoinPool$WorkQueue;)V (ForkJoinPool.java:2036)
+  at java.util.concurrent.ForkJoinWorkerThread.run()V (ForkJoinWorkerThread.java:187)
+
+  locals:
+    objectId=0x52c24cc30, line=1
+    objectId=0x5412ec030, line=1
+    objectId=0x52c24cc30, line=2
+    objectId=0x5412ec030, line=2
+    objectId=0x5412ebfa8, line=3
+    objectId=0x52c24cc30, line=3
+    objectId=0x5412ec030, line=3
+
+Thread 0x530568860
+  at sun.nio.ch.KQueue.poll(IJIJ)I (KQueue.java(Native Method))
+  at sun.nio.ch.KQueueSelectorImpl.doSelect(Ljava/util/function/Consumer;J)I (KQueueSelectorImpl.java:125)
+  at sun.nio.ch.SelectorImpl.lockAndDoSelect(Ljava/util/function/Consumer;J)I (SelectorImpl.java:130)
+  at sun.nio.ch.SelectorImpl.select(J)I (SelectorImpl.java:142)
+  at jdk.internal.net.http.HttpClientImpl$SelectorManager.run()V (HttpClientImpl.java:1376)
+
+  locals:
+    objectId=0x530568a80, line=1
+    objectId=0x530568a80, line=2
+    objectId=0x530568a80, line=2
+    objectId=0x5326f08f8, line=2
+    objectId=0x530568860, line=4
+    objectId=0x5326f0908, line=4
+    objectId=0x5326f0920, line=4
+    objectId=0x5326f0938, line=4
+
+Thread 0x53d070dd8
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.parkNanos(J)V (LockSupport.java:410)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.park()V (CoroutineScheduler.kt:943)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.tryPark()V (CoroutineScheduler.kt:872)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker()V (CoroutineScheduler.kt:807)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run()V (CoroutineScheduler.kt:762)
+
+  locals:
+    objectId=0x53d070dd8, line=2
+    objectId=0x53d070dd8, line=3
+    objectId=0x53d070dd8, line=4
+    objectId=0x53d070dd8, line=5
+
+Thread 0x52b557750
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.parkNanos(Ljava/lang/Object;J)V (LockSupport.java:269)
+  at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(JLjava/util/concurrent/TimeUnit;)Z (AbstractQueuedSynchronizer.java:1886)
+  at java.lang.ref.ReferenceQueue.await(J)V (ReferenceQueue.java:71)
+  at java.lang.ref.ReferenceQueue.remove0(J)Ljava/lang/ref/Reference; (ReferenceQueue.java:143)
+  at java.lang.ref.ReferenceQueue.remove(J)Ljava/lang/ref/Reference; (ReferenceQueue.java:218)
+  at com.sun.jna.internal.Cleaner$CleanerThread.run()V (Cleaner.java:154)
+
+  locals:
+    objectId=0x52b557750, line=1
+    objectId=0x52b5577c8, line=2
+    objectId=0x544579e88, line=2
+    objectId=0x52b5577e0, line=4
+    objectId=0x52b5577e0, line=5
+    objectId=0x52b557750, line=6
+
+Thread 0x539162718
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.park()V (LockSupport.java:371)
+  at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionNode.block()Z (AbstractQueuedSynchronizer.java:519)
+  at java.util.concurrent.ForkJoinPool.unmanagedBlock(Ljava/util/concurrent/ForkJoinPool$ManagedBlocker;)V (ForkJoinPool.java:4013)
+  at java.util.concurrent.ForkJoinPool.managedBlock(Ljava/util/concurrent/ForkJoinPool$ManagedBlocker;)V (ForkJoinPool.java:3961)
+  at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await()V (AbstractQueuedSynchronizer.java:1746)
+  at java.lang.ProcessImpl.waitFor()I (ProcessImpl.java:425)
+  at com.intellij.execution.process.ProcessWaitFor.lambda$new$0(Ljava/lang/Process;)V (ProcessWaitFor.java:28)
+  at com.intellij.execution.process.ProcessWaitFor$$Lambda+0x000000a0028db6e8.run()V ()
+  at com.intellij.util.ConcurrencyUtil.runUnderThreadName(Ljava/lang/String;Ljava/lang/Runnable;)V (ConcurrencyUtil.java:249)
+  at com.intellij.execution.process.ProcessWaitFor.lambda$new$1(Ljava/lang/String;Ljava/lang/Process;)V (ProcessWaitFor.java:23)
+  at com.intellij.execution.process.ProcessWaitFor$$Lambda+0x000000a0028dade8.run()V ()
+  at java.util.concurrent.Executors$RunnableAdapter.call()Ljava/lang/Object; (Executors.java:572)
+  at java.util.concurrent.FutureTask.run()V (FutureTask.java:317)
+  at com.intellij.util.concurrency.ChildContext$runInChildContext$1.invoke()V (propagation.kt:167)
+  at com.intellij.util.concurrency.ChildContext$runInChildContext$1.invoke()Ljava/lang/Object; (propagation.kt:167)
+  at com.intellij.util.concurrency.ChildContext.runInChildContext(ZLkotlin/jvm/functions/Function0;)Ljava/lang/Object; (propagation.kt:173)
+  at com.intellij.util.concurrency.ChildContext.runInChildContext(Ljava/lang/Runnable;)V (propagation.kt:167)
+  at com.intellij.util.concurrency.ContextRunnable.lambda$run$0()Ljava/lang/Object; (ContextRunnable.java:26)
+  at com.intellij.util.concurrency.ContextRunnable$$Lambda+0x000000a0022bdb58.invoke()Ljava/lang/Object; ()
+  at com.intellij.concurrency.ThreadContext.resetThreadContext(Lkotlin/jvm/functions/Function0;)Ljava/lang/Object; (threadContext.kt:294)
+  at com.intellij.util.concurrency.ContextRunnable.run()V (ContextRunnable.java:25)
+  at java.util.concurrent.ThreadPoolExecutor.runWorker(Ljava/util/concurrent/ThreadPoolExecutor$Worker;)V (ThreadPoolExecutor.java:1144)
+  at java.util.concurrent.ThreadPoolExecutor$Worker.run()V (ThreadPoolExecutor.java:642)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Void; (Executors.java:735)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Object; (Executors.java:732)
+  at java.security.AccessController.executePrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;Ljava/lang/Class;)Ljava/lang/Object; (AccessController.java:778)
+  at java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (AccessController.java:400)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1.run()V (Executors.java:732)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x544136140, line=2
+    objectId=0x544136140, line=3
+    objectId=0x544136128, line=5
+    objectId=0x544136140, line=5
+    objectId=0x544136160, line=6
+    objectId=0x5441361a8, line=7
+    objectId=0x544136160, line=7
+    objectId=0x5441361c0, line=8
+    objectId=0x539162718, line=9
+    objectId=0x539162790, line=9
+    objectId=0x5441361a8, line=10
+    objectId=0x5441361d8, line=10
+    objectId=0x544136160, line=10
+    objectId=0x5441361d8, line=10
+    objectId=0x5441361f0, line=11
+    objectId=0x544136208, line=12
+    objectId=0x544136220, line=13
+    objectId=0x544136240, line=16
+    objectId=0x544136258, line=20
+    objectId=0x52f308b68, line=22
+    objectId=0x5391627a8, line=22
+    objectId=0x539162718, line=22
+    objectId=0x544136270, line=22
+    objectId=0x5391627a8, line=23
+    objectId=0x5391627d8, line=24
+    objectId=0x5391627d8, line=25
+    objectId=0x52f308d18, line=26
+    objectId=0x53f5cb090, line=26
+    objectId=0x5391627e8, line=28
+    objectId=0x539162718, line=29
+    objectId=0x53f571de0, line=29
+    objectId=0x5391627e8, line=29
+    objectId=0x539162718, line=30
+    objectId=0x5391627e8, line=30
+    objectId=0x53f571de0, line=30
+
+Thread 0x542e9f1d8
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.ForkJoinPool.awaitWork(Ljava/util/concurrent/ForkJoinPool$WorkQueue;I)I (ForkJoinPool.java:2145)
+  at java.util.concurrent.ForkJoinPool.runWorker(Ljava/util/concurrent/ForkJoinPool$WorkQueue;)V (ForkJoinPool.java:2036)
+  at java.util.concurrent.ForkJoinWorkerThread.run()V (ForkJoinWorkerThread.java:187)
+
+  locals:
+    objectId=0x52c24cc30, line=1
+    objectId=0x542e9f298, line=1
+    objectId=0x52c24cc30, line=2
+    objectId=0x542e9f298, line=2
+    objectId=0x542e9f1d8, line=3
+    objectId=0x52c24cc30, line=3
+    objectId=0x542e9f298, line=3
+
+Thread 0x533d37bd0
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.parkNanos(J)V (LockSupport.java:410)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.park()V (CoroutineScheduler.kt:943)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.tryPark()V (CoroutineScheduler.kt:872)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker()V (CoroutineScheduler.kt:807)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run()V (CoroutineScheduler.kt:762)
+
+  locals:
+    objectId=0x533d37bd0, line=2
+    objectId=0x533d37bd0, line=3
+    objectId=0x533d37bd0, line=4
+    objectId=0x533d37bd0, line=5
+
+Thread 0x536b737b8
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.parkNanos(J)V (LockSupport.java:410)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.park()V (CoroutineScheduler.kt:943)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.tryPark()V (CoroutineScheduler.kt:872)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker()V (CoroutineScheduler.kt:807)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run()V (CoroutineScheduler.kt:762)
+
+  locals:
+    objectId=0x536b737b8, line=2
+    objectId=0x536b737b8, line=3
+    objectId=0x536b737b8, line=4
+    objectId=0x536b737b8, line=5
+
+Thread 0x52b16c5e8
+  at java.lang.ProcessHandleImpl.waitForProcessExit0(JZ)I (ProcessHandleImpl.java(Native Method))
+  at java.lang.ProcessHandleImpl$1.run()V (ProcessHandleImpl.java:163)
+  at java.util.concurrent.ThreadPoolExecutor.runWorker(Ljava/util/concurrent/ThreadPoolExecutor$Worker;)V (ThreadPoolExecutor.java:1144)
+  at java.util.concurrent.ThreadPoolExecutor$Worker.run()V (ThreadPoolExecutor.java:642)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+  at jdk.internal.misc.InnocuousThread.run()V (InnocuousThread.java:186)
+
+  locals:
+    objectId=0x52b1da608, line=1
+    objectId=0x52b16c5e8, line=1
+    objectId=0x5aa5c8a88, line=1
+    objectId=0x52b16c698, line=2
+    objectId=0x52b16c6e8, line=2
+    objectId=0x52b16c5e8, line=2
+    objectId=0x52b1da608, line=2
+    objectId=0x52b16c6e8, line=3
+    objectId=0x52b16c5e8, line=4
+    objectId=0x53f571de0, line=4
+    objectId=0x52b16c6e8, line=4
+    objectId=0x52b16c5e8, line=5
+    objectId=0x52b16c6e8, line=5
+    objectId=0x53f571de0, line=5
+    objectId=0x52b16c5e8, line=6
+
+Thread 0x5443300a0
+  at java.lang.ProcessHandleImpl.waitForProcessExit0(JZ)I (ProcessHandleImpl.java(Native Method))
+  at java.lang.ProcessHandleImpl$1.run()V (ProcessHandleImpl.java:163)
+  at java.util.concurrent.ThreadPoolExecutor.runWorker(Ljava/util/concurrent/ThreadPoolExecutor$Worker;)V (ThreadPoolExecutor.java:1144)
+  at java.util.concurrent.ThreadPoolExecutor$Worker.run()V (ThreadPoolExecutor.java:642)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+  at jdk.internal.misc.InnocuousThread.run()V (InnocuousThread.java:186)
+
+  locals:
+    objectId=0x544330118, line=1
+    objectId=0x5443300a0, line=1
+    objectId=0x5aa5c8a88, line=1
+    objectId=0x52b16c698, line=2
+    objectId=0x544330138, line=2
+    objectId=0x5443300a0, line=2
+    objectId=0x544330118, line=2
+    objectId=0x544330138, line=3
+    objectId=0x53f571de0, line=4
+    objectId=0x5443300a0, line=6
+
+Thread 0x5305fd990
+  at java.io.FileInputStream.readBytes([BII)I (FileInputStream.java(Native Method))
+  at java.io.FileInputStream.implRead([BII)I (FileInputStream.java:366)
+  at java.io.FileInputStream.read([BII)I (FileInputStream.java:358)
+  at java.io.BufferedInputStream.read1([BII)I (BufferedInputStream.java:345)
+  at java.io.BufferedInputStream.implRead([BII)I (BufferedInputStream.java:420)
+  at java.io.BufferedInputStream.read([BII)I (BufferedInputStream.java:405)
+  at sun.nio.cs.StreamDecoder.readBytes()I (StreamDecoder.java:350)
+  at sun.nio.cs.StreamDecoder.implRead([CII)I (StreamDecoder.java:393)
+  at sun.nio.cs.StreamDecoder.lockedRead([CII)I (StreamDecoder.java:217)
+  at sun.nio.cs.StreamDecoder.read([CII)I (StreamDecoder.java:177)
+  at java.io.InputStreamReader.read([CII)I (InputStreamReader.java:188)
+  at java.io.Reader.read([C)I (Reader.java:265)
+  at com.intellij.util.io.BaseOutputReader.readAvailableBlocking()Z (BaseOutputReader.java:148)
+  at com.intellij.util.io.BaseDataReader.readAvailable()Z (BaseDataReader.java:72)
+  at com.intellij.util.io.BaseDataReader.doRun()V (BaseDataReader.java:153)
+  at com.intellij.util.io.BaseDataReader$$Lambda+0x000000a0028e4ec8.run()V ()
+  at com.intellij.util.ConcurrencyUtil.runUnderThreadName(Ljava/lang/String;Ljava/lang/Runnable;)V (ConcurrencyUtil.java:249)
+  at com.intellij.util.io.BaseDataReader.lambda$start$0(Ljava/lang/String;)V (BaseDataReader.java:48)
+  at com.intellij.util.io.BaseDataReader$$Lambda+0x000000a0028e4a38.run()V ()
+  at java.util.concurrent.Executors$RunnableAdapter.call()Ljava/lang/Object; (Executors.java:572)
+  at java.util.concurrent.FutureTask.run()V (FutureTask.java:317)
+  at com.intellij.util.concurrency.ChildContext$runInChildContext$1.invoke()V (propagation.kt:167)
+  at com.intellij.util.concurrency.ChildContext$runInChildContext$1.invoke()Ljava/lang/Object; (propagation.kt:167)
+  at com.intellij.util.concurrency.ChildContext.runInChildContext(ZLkotlin/jvm/functions/Function0;)Ljava/lang/Object; (propagation.kt:173)
+  at com.intellij.util.concurrency.ChildContext.runInChildContext(Ljava/lang/Runnable;)V (propagation.kt:167)
+  at com.intellij.util.concurrency.ContextRunnable.lambda$run$0()Ljava/lang/Object; (ContextRunnable.java:26)
+  at com.intellij.util.concurrency.ContextRunnable$$Lambda+0x000000a0022bdb58.invoke()Ljava/lang/Object; ()
+  at com.intellij.concurrency.ThreadContext.resetThreadContext(Lkotlin/jvm/functions/Function0;)Ljava/lang/Object; (threadContext.kt:294)
+  at com.intellij.util.concurrency.ContextRunnable.run()V (ContextRunnable.java:25)
+  at java.util.concurrent.ThreadPoolExecutor.runWorker(Ljava/util/concurrent/ThreadPoolExecutor$Worker;)V (ThreadPoolExecutor.java:1144)
+  at java.util.concurrent.ThreadPoolExecutor$Worker.run()V (ThreadPoolExecutor.java:642)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Void; (Executors.java:735)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Object; (Executors.java:732)
+  at java.security.AccessController.executePrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;Ljava/lang/Class;)Ljava/lang/Object; (AccessController.java:778)
+  at java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (AccessController.java:400)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1.run()V (Executors.java:732)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x544133f38, line=0
+    objectId=0x544135fa0, line=4
+    objectId=0x544133f90, line=4
+    objectId=0x544135fa0, line=5
+    objectId=0x544135fd0, line=6
+    objectId=0x544135fd0, line=7
+    objectId=0x544136020, line=7
+    objectId=0x544136000, line=9
+    objectId=0x544136058, line=12
+    objectId=0x544136058, line=14
+    objectId=0x5305fd990, line=16
+    objectId=0x53a151b40, line=16
+    objectId=0x544136090, line=18
+    objectId=0x5441360a8, line=19
+    objectId=0x5441360c0, line=20
+    objectId=0x5441360e0, line=23
+    objectId=0x5441360f8, line=27
+    objectId=0x52f308b68, line=29
+    objectId=0x5305fda08, line=29
+    objectId=0x5305fd990, line=29
+    objectId=0x544136110, line=29
+    objectId=0x5305fda08, line=30
+    objectId=0x5305fda38, line=31
+    objectId=0x5305fda38, line=32
+    objectId=0x52f308d18, line=33
+    objectId=0x53f5cb090, line=33
+    objectId=0x5305fda48, line=35
+    objectId=0x5305fd990, line=36
+    objectId=0x53f571de0, line=36
+    objectId=0x5305fda48, line=36
+    objectId=0x5305fd990, line=37
+    objectId=0x5305fda48, line=37
+    objectId=0x53f571de0, line=37
+
+Thread 0x5429ffc20
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.parkNanos(J)V (LockSupport.java:410)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.park()V (CoroutineScheduler.kt:943)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.tryPark()V (CoroutineScheduler.kt:872)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker()V (CoroutineScheduler.kt:807)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run()V (CoroutineScheduler.kt:762)
+
+  locals:
+    objectId=0x5429ffc20, line=2
+    objectId=0x5429ffc20, line=3
+    objectId=0x5429ffc20, line=4
+    objectId=0x5429ffc20, line=5
+
+Thread 0x52f51bc78
+  at sun.nio.ch.KQueue.poll(IJIJ)I (KQueue.java(Native Method))
+  at sun.nio.ch.KQueueSelectorImpl.doSelect(Ljava/util/function/Consumer;J)I (KQueueSelectorImpl.java:125)
+  at sun.nio.ch.SelectorImpl.lockAndDoSelect(Ljava/util/function/Consumer;J)I (SelectorImpl.java:130)
+  at sun.nio.ch.SelectorImpl.select(J)I (SelectorImpl.java:142)
+  at io.netty.channel.nio.SelectedSelectionKeySetSelector.select(J)I (SelectedSelectionKeySetSelector.java:62)
+  at io.netty.channel.nio.NioIoHandler.select(Lio/netty/channel/IoExecutionContext;Z)V (NioIoHandler.java:646)
+  at io.netty.channel.nio.NioIoHandler.run(Lio/netty/channel/IoExecutionContext;)I (NioIoHandler.java:432)
+  at io.netty.channel.SingleThreadIoEventLoop.runIo()I (SingleThreadIoEventLoop.java:203)
+  at io.netty.channel.SingleThreadIoEventLoop.run()V (SingleThreadIoEventLoop.java:174)
+  at io.netty.util.concurrent.SingleThreadEventExecutor$5.run()V (SingleThreadEventExecutor.java:1123)
+  at io.netty.util.internal.ThreadExecutorMap$2.run()V (ThreadExecutorMap.java:74)
+  at io.netty.util.concurrent.FastThreadLocalRunnable.run()V (FastThreadLocalRunnable.java:30)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x52e95af30, line=1
+    objectId=0x52e95af30, line=2
+    objectId=0x52e95af30, line=2
+    objectId=0x52e959f08, line=2
+    objectId=0x52e959eb0, line=5
+    objectId=0x52e959ea0, line=5
+    objectId=0x52e959ef0, line=5
+    objectId=0x52e959eb0, line=6
+    objectId=0x52e959b60, line=8
+    objectId=0x52f51bcf8, line=9
+    objectId=0x52f51bd08, line=10
+    objectId=0x52f51bd20, line=11
+    objectId=0x52f51bc78, line=12
+    objectId=0x53f571de0, line=12
+    objectId=0x52f51bd20, line=12
+    objectId=0x52f51bc78, line=13
+    objectId=0x52f51bd20, line=13
+    objectId=0x53f571de0, line=13
+
+Thread 0x53b2ba340
+  at java.io.FileInputStream.readBytes([BII)I (FileInputStream.java(Native Method))
+  at java.io.FileInputStream.implRead([BII)I (FileInputStream.java:366)
+  at java.io.FileInputStream.read([BII)I (FileInputStream.java:358)
+  at java.io.BufferedInputStream.read1([BII)I (BufferedInputStream.java:345)
+  at java.io.BufferedInputStream.implRead([BII)I (BufferedInputStream.java:420)
+  at java.io.BufferedInputStream.read([BII)I (BufferedInputStream.java:405)
+  at sun.nio.cs.StreamDecoder.readBytes()I (StreamDecoder.java:350)
+  at sun.nio.cs.StreamDecoder.implRead([CII)I (StreamDecoder.java:393)
+  at sun.nio.cs.StreamDecoder.lockedRead([CII)I (StreamDecoder.java:217)
+  at sun.nio.cs.StreamDecoder.read([CII)I (StreamDecoder.java:177)
+  at java.io.InputStreamReader.read([CII)I (InputStreamReader.java:188)
+  at java.io.Reader.read([C)I (Reader.java:265)
+  at com.intellij.util.io.BaseOutputReader.readAvailableBlocking()Z (BaseOutputReader.java:148)
+  at com.intellij.util.io.BaseDataReader.readAvailable()Z (BaseDataReader.java:72)
+  at com.intellij.util.io.BaseDataReader.doRun()V (BaseDataReader.java:153)
+  at com.intellij.util.io.BaseDataReader$$Lambda+0x000000a0028e4ec8.run()V ()
+  at com.intellij.util.ConcurrencyUtil.runUnderThreadName(Ljava/lang/String;Ljava/lang/Runnable;)V (ConcurrencyUtil.java:249)
+  at com.intellij.util.io.BaseDataReader.lambda$start$0(Ljava/lang/String;)V (BaseDataReader.java:48)
+  at com.intellij.util.io.BaseDataReader$$Lambda+0x000000a0028e4a38.run()V ()
+  at java.util.concurrent.Executors$RunnableAdapter.call()Ljava/lang/Object; (Executors.java:572)
+  at java.util.concurrent.FutureTask.run()V (FutureTask.java:317)
+  at com.intellij.util.concurrency.ChildContext$runInChildContext$1.invoke()V (propagation.kt:167)
+  at com.intellij.util.concurrency.ChildContext$runInChildContext$1.invoke()Ljava/lang/Object; (propagation.kt:167)
+  at com.intellij.util.concurrency.ChildContext.runInChildContext(ZLkotlin/jvm/functions/Function0;)Ljava/lang/Object; (propagation.kt:173)
+  at com.intellij.util.concurrency.ChildContext.runInChildContext(Ljava/lang/Runnable;)V (propagation.kt:167)
+  at com.intellij.util.concurrency.ContextRunnable.lambda$run$0()Ljava/lang/Object; (ContextRunnable.java:26)
+  at com.intellij.util.concurrency.ContextRunnable$$Lambda+0x000000a0022bdb58.invoke()Ljava/lang/Object; ()
+  at com.intellij.concurrency.ThreadContext.resetThreadContext(Lkotlin/jvm/functions/Function0;)Ljava/lang/Object; (threadContext.kt:294)
+  at com.intellij.util.concurrency.ContextRunnable.run()V (ContextRunnable.java:25)
+  at java.util.concurrent.ThreadPoolExecutor.runWorker(Ljava/util/concurrent/ThreadPoolExecutor$Worker;)V (ThreadPoolExecutor.java:1144)
+  at java.util.concurrent.ThreadPoolExecutor$Worker.run()V (ThreadPoolExecutor.java:642)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Void; (Executors.java:735)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Object; (Executors.java:732)
+  at java.security.AccessController.executePrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;Ljava/lang/Class;)Ljava/lang/Object; (AccessController.java:778)
+  at java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (AccessController.java:400)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1.run()V (Executors.java:732)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x5433fdfb8, line=0
+    objectId=0x5412ebe38, line=4
+    objectId=0x5412e9e28, line=4
+    objectId=0x5412ebe38, line=5
+    objectId=0x5412ebe68, line=6
+    objectId=0x5412ebe68, line=7
+    objectId=0x5412ebeb8, line=7
+    objectId=0x5412ebe98, line=9
+    objectId=0x5412ebef0, line=12
+    objectId=0x5412ebef0, line=14
+    objectId=0x53b2ba340, line=16
+    objectId=0x53b2ba430, line=16
+    objectId=0x5412ebf28, line=19
+    objectId=0x5412ebf40, line=20
+    objectId=0x5412ebf60, line=23
+    objectId=0x5412ebf78, line=27
+    objectId=0x52f308b68, line=29
+    objectId=0x53b2ba2f8, line=29
+    objectId=0x53b2ba340, line=29
+    objectId=0x5412ebf90, line=29
+    objectId=0x53b2ba2f8, line=30
+    objectId=0x53b2ba488, line=31
+    objectId=0x53b2ba488, line=32
+    objectId=0x52f308d18, line=33
+    objectId=0x53f5cb090, line=33
+    objectId=0x53b2ba328, line=35
+    objectId=0x53f571de0, line=36
+
+Thread 0x52aec0b10
+  at java.lang.ref.Reference.waitForReferencePendingList()V (Reference.java(Native Method))
+  at java.lang.ref.Reference.processPendingReferences()V (Reference.java:246)
+  at java.lang.ref.Reference$ReferenceHandler.run()V (Reference.java:208)
+
+  locals:
+    objectId=0x52aec0b10, line=2
+
+Thread 0x5431a83d0
+  at sun.nio.ch.KQueue.poll(IJIJ)I (KQueue.java(Native Method))
+  at sun.nio.ch.KQueuePort$EventHandlerTask.poll()Lsun/nio/ch/KQueuePort$Event; (KQueuePort.java:200)
+  at sun.nio.ch.KQueuePort$EventHandlerTask.run()V (KQueuePort.java:287)
+  at sun.nio.ch.AsynchronousChannelGroupImpl$1.run()V (AsynchronousChannelGroupImpl.java:113)
+  at java.util.concurrent.ThreadPoolExecutor.runWorker(Ljava/util/concurrent/ThreadPoolExecutor$Worker;)V (ThreadPoolExecutor.java:1144)
+  at java.util.concurrent.ThreadPoolExecutor$Worker.run()V (ThreadPoolExecutor.java:642)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x5431a8448, line=1
+    objectId=0x5431a8448, line=2
+    objectId=0x5431a8458, line=2
+    objectId=0x5431a8470, line=2
+    objectId=0x5431a8488, line=3
+    objectId=0x5431a84a0, line=4
+    objectId=0x5431a84f0, line=4
+    objectId=0x5431a83d0, line=4
+    objectId=0x5431a8488, line=4
+    objectId=0x5431a84f0, line=5
+    objectId=0x53f571de0, line=6
+
+Thread 0x533e0b570
+  at java.lang.Object.wait0(J)V (Object.java(Native Method))
+  at java.lang.Object.wait(J)V (Object.java:366)
+  at java.lang.Object.wait()V (Object.java:339)
+  at com.pty4j.unix.UnixPtyProcess.waitForWithoutLauncher()I (UnixPtyProcess.java:159)
+  at com.pty4j.unix.UnixPtyProcess.waitFor()I (UnixPtyProcess.java:154)
+  at com.intellij.util.io.ProcessKt.awaitExit$lambda$0(Ljava/lang/Process;Lkotlin/time/Duration;)Lcom/intellij/util/io/Attempt; (process.kt:22)
+  at com.intellij.util.io.ProcessKt$$Lambda+0x000000a003f5a718.invoke(Ljava/lang/Object;)Ljava/lang/Object; ()
+  at com.intellij.util.io.BlockingKt.loopInterruptible$lambda$1(Lkotlin/jvm/functions/Function1;)Lcom/intellij/util/io/Attempt; (blocking.kt:68)
+  at com.intellij.util.io.BlockingKt$$Lambda+0x000000a004e01130.invoke()Ljava/lang/Object; ()
+  at kotlinx.coroutines.InterruptibleKt.runInterruptibleInExpectedContext(Lkotlin/coroutines/CoroutineContext;Lkotlin/jvm/functions/Function0;)Ljava/lang/Object; (Interruptible.kt:48)
+  at kotlinx.coroutines.InterruptibleKt.access$runInterruptibleInExpectedContext(Lkotlin/coroutines/CoroutineContext;Lkotlin/jvm/functions/Function0;)Ljava/lang/Object; (Interruptible.kt:1)
+  at kotlinx.coroutines.InterruptibleKt$runInterruptible$2.invokeSuspend(Ljava/lang/Object;)Ljava/lang/Object; (Interruptible.kt:40)
+  at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(Ljava/lang/Object;)V (ContinuationImpl.kt:34)
+  at kotlinx.coroutines.DispatchedTask.run()V (DispatchedTask.kt:100)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(Lkotlinx/coroutines/scheduling/Task;)V (CoroutineScheduler.kt:610)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(Lkotlinx/coroutines/scheduling/Task;)V (CoroutineScheduler.kt:1188)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker()V (CoroutineScheduler.kt:775)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run()V (CoroutineScheduler.kt:762)
+
+  locals:
+    objectId=0x53524a2f0, line=2
+    objectId=0x53524a2f0, line=3
+    objectId=0x53524a2f0, line=4
+    objectId=0x53524a2f0, line=5
+    objectId=0x53a43d890, line=5
+    objectId=0x534b5ded8, line=5
+    objectId=0x53524a418, line=6
+    objectId=0x53a43d890, line=6
+    objectId=0x53524a418, line=7
+    objectId=0x53a43d708, line=8
+    objectId=0x53a43d758, line=9
+    objectId=0x53a43d708, line=9
+    objectId=0x53a43d868, line=9
+    objectId=0x53a43d758, line=10
+    objectId=0x53a43d708, line=10
+    objectId=0x53a43d788, line=11
+    objectId=0x52b16b180, line=11
+    objectId=0x53a43d718, line=11
+    objectId=0x53a43d788, line=12
+    objectId=0x53a43d718, line=12
+    objectId=0x53a43d7b0, line=13
+    objectId=0x53a43d758, line=13
+    objectId=0x53a43d7e0, line=13
+    objectId=0x533e0b570, line=15
+    objectId=0x533e0b570, line=15
+    objectId=0x533e0b570, line=16
+    objectId=0x533e0b570, line=17
+
+Thread 0x53d090cf8
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.park()V (LockSupport.java:371)
+  at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionNode.block()Z (AbstractQueuedSynchronizer.java:519)
+  at java.util.concurrent.ForkJoinPool.unmanagedBlock(Ljava/util/concurrent/ForkJoinPool$ManagedBlocker;)V (ForkJoinPool.java:4013)
+  at java.util.concurrent.ForkJoinPool.managedBlock(Ljava/util/concurrent/ForkJoinPool$ManagedBlocker;)V (ForkJoinPool.java:3961)
+  at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await()V (AbstractQueuedSynchronizer.java:1746)
+  at java.util.concurrent.LinkedBlockingQueue.take()Ljava/lang/Object; (LinkedBlockingQueue.java:435)
+  at java.util.concurrent.ThreadPoolExecutor.getTask()Ljava/lang/Runnable; (ThreadPoolExecutor.java:1070)
+  at java.util.concurrent.ThreadPoolExecutor.runWorker(Ljava/util/concurrent/ThreadPoolExecutor$Worker;)V (ThreadPoolExecutor.java:1130)
+  at java.util.concurrent.ThreadPoolExecutor$Worker.run()V (ThreadPoolExecutor.java:642)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x54416d300, line=2
+    objectId=0x54416d300, line=3
+    objectId=0x52c8d1380, line=5
+    objectId=0x54416d300, line=5
+    objectId=0x52c8d1310, line=6
+    objectId=0x52c8d1340, line=6
+    objectId=0x52c8d1350, line=6
+    objectId=0x52c8d12b0, line=7
+    objectId=0x52c8d12b0, line=8
+    objectId=0x53d0bd358, line=8
+    objectId=0x53d090cf8, line=8
+    objectId=0x53d0bd358, line=9
+    objectId=0x53f571de0, line=10
+
+Thread 0x52b16c990
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.park()V (LockSupport.java:371)
+  at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionNode.block()Z (AbstractQueuedSynchronizer.java:519)
+  at java.util.concurrent.ForkJoinPool.unmanagedBlock(Ljava/util/concurrent/ForkJoinPool$ManagedBlocker;)V (ForkJoinPool.java:4013)
+  at java.util.concurrent.ForkJoinPool.managedBlock(Ljava/util/concurrent/ForkJoinPool$ManagedBlocker;)V (ForkJoinPool.java:3961)
+  at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await()V (AbstractQueuedSynchronizer.java:1746)
+  at java.lang.ref.ReferenceQueue.await()V (ReferenceQueue.java:67)
+  at java.lang.ref.ReferenceQueue.remove0()Ljava/lang/ref/Reference; (ReferenceQueue.java:158)
+  at java.lang.ref.ReferenceQueue.remove()Ljava/lang/ref/Reference; (ReferenceQueue.java:234)
+  at sun.java2d.Disposer.run()V (Disposer.java:145)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x54440e508, line=2
+    objectId=0x54440e508, line=3
+    objectId=0x52b16ca08, line=5
+    objectId=0x54440e508, line=5
+    objectId=0x52b16ca20, line=7
+    objectId=0x52b16ca20, line=8
+    objectId=0x52b16cad0, line=9
+    objectId=0x52b16c990, line=10
+    objectId=0x53f571de0, line=10
+    objectId=0x52b16cad0, line=10
+    objectId=0x52b16c990, line=11
+    objectId=0x52b16cad0, line=11
+    objectId=0x53f571de0, line=11
+
+Thread 0x54498b7a0
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.parkNanos(J)V (LockSupport.java:410)
+  at java.util.concurrent.LinkedTransferQueue$DualNode.await(Ljava/lang/Object;JLjava/lang/Object;Z)Ljava/lang/Object; (LinkedTransferQueue.java:452)
+  at java.util.concurrent.SynchronousQueue$Transferer.xferLifo(Ljava/lang/Object;J)Ljava/lang/Object; (SynchronousQueue.java:194)
+  at java.util.concurrent.SynchronousQueue.xfer(Ljava/lang/Object;J)Ljava/lang/Object; (SynchronousQueue.java:235)
+  at java.util.concurrent.SynchronousQueue.poll(JLjava/util/concurrent/TimeUnit;)Ljava/lang/Object; (SynchronousQueue.java:338)
+  at java.util.concurrent.ThreadPoolExecutor.getTask()Ljava/lang/Runnable; (ThreadPoolExecutor.java:1069)
+  at java.util.concurrent.ThreadPoolExecutor.runWorker(Ljava/util/concurrent/ThreadPoolExecutor$Worker;)V (ThreadPoolExecutor.java:1130)
+  at java.util.concurrent.ThreadPoolExecutor$Worker.run()V (ThreadPoolExecutor.java:642)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Void; (Executors.java:735)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Object; (Executors.java:732)
+  at java.security.AccessController.executePrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;Ljava/lang/Class;)Ljava/lang/Object; (AccessController.java:778)
+  at java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (AccessController.java:400)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1.run()V (Executors.java:732)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x54498c208, line=2
+    objectId=0x52f308be8, line=2
+    objectId=0x54498b7a0, line=2
+    objectId=0x52f308be8, line=3
+    objectId=0x54498c208, line=3
+    objectId=0x52f308b68, line=6
+    objectId=0x52f308b68, line=7
+    objectId=0x54498b758, line=7
+    objectId=0x54498b7a0, line=7
+    objectId=0x54498be10, line=9
+    objectId=0x54498be10, line=10
+    objectId=0x52f308d18, line=11
+    objectId=0x53f5cb090, line=11
+    objectId=0x54498b788, line=13
+    objectId=0x53f571de0, line=14
+
+Thread 0x53be4c988
+  at java.lang.Object.wait0(J)V (Object.java(Native Method))
+  at java.lang.Object.wait(J)V (Object.java:366)
+  at java.lang.Object.wait()V (Object.java:339)
+  at com.pty4j.unix.UnixPtyProcess.waitForWithoutLauncher()I (UnixPtyProcess.java:159)
+  at com.pty4j.unix.UnixPtyProcess.waitFor()I (UnixPtyProcess.java:154)
+  at com.intellij.util.io.ProcessKt.awaitExit$lambda$0(Ljava/lang/Process;Lkotlin/time/Duration;)Lcom/intellij/util/io/Attempt; (process.kt:22)
+  at com.intellij.util.io.ProcessKt$$Lambda+0x000000a003f5a718.invoke(Ljava/lang/Object;)Ljava/lang/Object; ()
+  at com.intellij.util.io.BlockingKt.loopInterruptible$lambda$1(Lkotlin/jvm/functions/Function1;)Lcom/intellij/util/io/Attempt; (blocking.kt:68)
+  at com.intellij.util.io.BlockingKt$$Lambda+0x000000a004e01130.invoke()Ljava/lang/Object; ()
+  at kotlinx.coroutines.InterruptibleKt.runInterruptibleInExpectedContext(Lkotlin/coroutines/CoroutineContext;Lkotlin/jvm/functions/Function0;)Ljava/lang/Object; (Interruptible.kt:48)
+  at kotlinx.coroutines.InterruptibleKt.access$runInterruptibleInExpectedContext(Lkotlin/coroutines/CoroutineContext;Lkotlin/jvm/functions/Function0;)Ljava/lang/Object; (Interruptible.kt:1)
+  at kotlinx.coroutines.InterruptibleKt$runInterruptible$2.invokeSuspend(Ljava/lang/Object;)Ljava/lang/Object; (Interruptible.kt:40)
+  at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(Ljava/lang/Object;)V (ContinuationImpl.kt:34)
+  at kotlinx.coroutines.DispatchedTask.run()V (DispatchedTask.kt:100)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(Lkotlinx/coroutines/scheduling/Task;)V (CoroutineScheduler.kt:610)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(Lkotlinx/coroutines/scheduling/Task;)V (CoroutineScheduler.kt:1188)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker()V (CoroutineScheduler.kt:775)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run()V (CoroutineScheduler.kt:762)
+
+  locals:
+    objectId=0x5346d5f00, line=3
+    objectId=0x5346d5f00, line=4
+    objectId=0x5346d5f00, line=5
+    objectId=0x536f6c410, line=5
+    objectId=0x534b5ded8, line=5
+    objectId=0x5346d5f48, line=6
+    objectId=0x536f6c410, line=6
+    objectId=0x5346d5f48, line=7
+    objectId=0x536f6c428, line=8
+    objectId=0x536f6c438, line=9
+    objectId=0x536f6c428, line=9
+    objectId=0x536f6c450, line=9
+    objectId=0x536f6c438, line=10
+    objectId=0x536f6c428, line=10
+    objectId=0x536f6c478, line=11
+    objectId=0x52b16b180, line=11
+    objectId=0x536f6c4a0, line=11
+    objectId=0x536f6c478, line=12
+    objectId=0x536f6c4a0, line=12
+    objectId=0x536f6c4c0, line=13
+    objectId=0x536f6c438, line=13
+    objectId=0x536f6c4f0, line=13
+    objectId=0x53be4c988, line=15
+    objectId=0x53be4c988, line=15
+    objectId=0x53be4c988, line=16
+    objectId=0x53be4c988, line=17
+
+Thread 0x542e9cc00
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.ForkJoinPool.awaitWork(Ljava/util/concurrent/ForkJoinPool$WorkQueue;I)I (ForkJoinPool.java:2145)
+  at java.util.concurrent.ForkJoinPool.runWorker(Ljava/util/concurrent/ForkJoinPool$WorkQueue;)V (ForkJoinPool.java:2036)
+  at java.util.concurrent.ForkJoinWorkerThread.run()V (ForkJoinWorkerThread.java:187)
+
+  locals:
+    objectId=0x52c24cc30, line=1
+    objectId=0x542e9ccc0, line=1
+    objectId=0x52c24cc30, line=2
+    objectId=0x542e9ccc0, line=2
+    objectId=0x542e9cc00, line=3
+    objectId=0x52c24cc30, line=3
+    objectId=0x542e9ccc0, line=3
+
+Thread 0x52c6eb3a8
+  at java.io.FileInputStream.readBytes([BII)I (FileInputStream.java(Native Method))
+  at java.io.FileInputStream.implRead([BII)I (FileInputStream.java:366)
+  at java.io.FileInputStream.read([BII)I (FileInputStream.java:358)
+  at java.io.BufferedInputStream.read1([BII)I (BufferedInputStream.java:345)
+  at java.io.BufferedInputStream.implRead([BII)I (BufferedInputStream.java:420)
+  at java.io.BufferedInputStream.read([BII)I (BufferedInputStream.java:405)
+  at sun.nio.cs.StreamDecoder.readBytes()I (StreamDecoder.java:350)
+  at sun.nio.cs.StreamDecoder.implRead([CII)I (StreamDecoder.java:393)
+  at sun.nio.cs.StreamDecoder.lockedRead([CII)I (StreamDecoder.java:217)
+  at sun.nio.cs.StreamDecoder.read([CII)I (StreamDecoder.java:177)
+  at java.io.InputStreamReader.read([CII)I (InputStreamReader.java:188)
+  at java.io.Reader.read([C)I (Reader.java:265)
+  at com.intellij.util.io.BaseOutputReader.readAvailableBlocking()Z (BaseOutputReader.java:148)
+  at com.intellij.util.io.BaseDataReader.readAvailable()Z (BaseDataReader.java:72)
+  at com.intellij.util.io.BaseDataReader.doRun()V (BaseDataReader.java:153)
+  at com.intellij.util.io.BaseDataReader$$Lambda+0x000000a0028e4ec8.run()V ()
+  at com.intellij.util.ConcurrencyUtil.runUnderThreadName(Ljava/lang/String;Ljava/lang/Runnable;)V (ConcurrencyUtil.java:249)
+  at com.intellij.util.io.BaseDataReader.lambda$start$0(Ljava/lang/String;)V (BaseDataReader.java:48)
+  at com.intellij.util.io.BaseDataReader$$Lambda+0x000000a0028e4a38.run()V ()
+  at java.util.concurrent.Executors$RunnableAdapter.call()Ljava/lang/Object; (Executors.java:572)
+  at java.util.concurrent.FutureTask.run()V (FutureTask.java:317)
+  at com.intellij.util.concurrency.ChildContext$runInChildContext$1.invoke()V (propagation.kt:167)
+  at com.intellij.util.concurrency.ChildContext$runInChildContext$1.invoke()Ljava/lang/Object; (propagation.kt:167)
+  at com.intellij.util.concurrency.ChildContext.runInChildContext(ZLkotlin/jvm/functions/Function0;)Ljava/lang/Object; (propagation.kt:173)
+  at com.intellij.util.concurrency.ChildContext.runInChildContext(Ljava/lang/Runnable;)V (propagation.kt:167)
+  at com.intellij.util.concurrency.ContextRunnable.lambda$run$0()Ljava/lang/Object; (ContextRunnable.java:26)
+  at com.intellij.util.concurrency.ContextRunnable$$Lambda+0x000000a0022bdb58.invoke()Ljava/lang/Object; ()
+  at com.intellij.concurrency.ThreadContext.resetThreadContext(Lkotlin/jvm/functions/Function0;)Ljava/lang/Object; (threadContext.kt:294)
+  at com.intellij.util.concurrency.ContextRunnable.run()V (ContextRunnable.java:25)
+  at java.util.concurrent.ThreadPoolExecutor.runWorker(Ljava/util/concurrent/ThreadPoolExecutor$Worker;)V (ThreadPoolExecutor.java:1144)
+  at java.util.concurrent.ThreadPoolExecutor$Worker.run()V (ThreadPoolExecutor.java:642)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Void; (Executors.java:735)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Object; (Executors.java:732)
+  at java.security.AccessController.executePrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;Ljava/lang/Class;)Ljava/lang/Object; (AccessController.java:778)
+  at java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (AccessController.java:400)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1.run()V (Executors.java:732)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x52c6eb420, line=0
+    objectId=0x52c6eb448, line=1
+    objectId=0x52c6eb478, line=1
+    objectId=0x52c6eb448, line=2
+    objectId=0x52c6eb478, line=2
+    objectId=0x52c6ed488, line=4
+    objectId=0x52c6eb478, line=4
+    objectId=0x52c6ed488, line=5
+    objectId=0x52c6eb478, line=5
+    objectId=0x52c6ed488, line=5
+    objectId=0x52c6ed4b8, line=6
+    objectId=0x52c6ed4b8, line=7
+    objectId=0x52c6ed4e8, line=7
+    objectId=0x52c6f14f8, line=7
+    objectId=0x52b939f98, line=7
+    objectId=0x52c6ed4b8, line=8
+    objectId=0x52c6ed4e8, line=8
+    objectId=0x52c6ed4b8, line=9
+    objectId=0x52c6ed4e8, line=9
+    objectId=0x52c6f1530, line=9
+    objectId=0x52c6f1530, line=9
+    objectId=0x52c6f1530, line=10
+    objectId=0x52c6ed4e8, line=10
+    objectId=0x52c6f1530, line=11
+    objectId=0x52c6ed4e8, line=11
+    objectId=0x52c6f15c0, line=12
+    objectId=0x52c6f15c0, line=13
+    objectId=0x52c6f15c0, line=14
+    objectId=0x52c6f16e0, line=15
+    objectId=0x52c6f16f0, line=16
+    objectId=0x52c6f16e0, line=16
+    objectId=0x52c6eb3a8, line=16
+    objectId=0x52c6f1708, line=16
+    objectId=0x52c6f15c0, line=17
+    objectId=0x52c6f1720, line=17
+    objectId=0x52c6f17a8, line=18
+    objectId=0x52c6f17c0, line=19
+    objectId=0x52c6f17d8, line=20
+    objectId=0x52c6f17c0, line=20
+    objectId=0x52c6f17f8, line=21
+    objectId=0x52c6f17f8, line=22
+    objectId=0x52c6f1828, line=23
+    objectId=0x52c6f17f8, line=23
+    objectId=0x52c6f1848, line=23
+    objectId=0x52c6f1848, line=23
+    objectId=0x52c6f1828, line=24
+    objectId=0x52c6f17d8, line=24
+    objectId=0x52c6f1860, line=25
+    objectId=0x52c6f1878, line=26
+    objectId=0x52c6f1878, line=27
+    objectId=0x52c6f1888, line=27
+    objectId=0x52c6f1888, line=27
+    objectId=0x52c6f1860, line=28
+    objectId=0x52f308b68, line=29
+    objectId=0x52c6f18a0, line=29
+    objectId=0x52c6eb3a8, line=29
+    objectId=0x52c6f1860, line=29
+    objectId=0x52c6f18a0, line=30
+    objectId=0x52c6f18d0, line=31
+    objectId=0x52c6f18d0, line=32
+    objectId=0x52f308d18, line=33
+    objectId=0x53f5cb090, line=33
+    objectId=0x52c6f18d0, line=34
+    objectId=0x52f308d18, line=34
+    objectId=0x53f5cb090, line=34
+    objectId=0x52c6f18e0, line=35
+    objectId=0x52c6eb3a8, line=36
+    objectId=0x53f571de0, line=36
+    objectId=0x52c6f18e0, line=36
+    objectId=0x52c6eb3a8, line=37
+    objectId=0x52c6f18e0, line=37
+    objectId=0x53f571de0, line=37
+
+Thread 0x5346d5f58
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.parkNanos(J)V (LockSupport.java:410)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.park()V (CoroutineScheduler.kt:943)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.tryPark()V (CoroutineScheduler.kt:872)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker()V (CoroutineScheduler.kt:807)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run()V (CoroutineScheduler.kt:762)
+
+  locals:
+    objectId=0x5346d5f58, line=2
+    objectId=0x5346d5f58, line=3
+    objectId=0x5346d5f58, line=4
+    objectId=0x5346d5f58, line=5
+
+Thread 0x52b168ea0
+  at sun.nio.ch.UnixDomainSockets.accept0(Ljava/io/FileDescriptor;Ljava/io/FileDescriptor;[Ljava/lang/Object;)I (UnixDomainSockets.java(Native Method))
+  at sun.nio.ch.UnixDomainSockets.accept(Ljava/io/FileDescriptor;Ljava/io/FileDescriptor;[Ljava/lang/String;)I (UnixDomainSockets.java:173)
+  at sun.nio.ch.ServerSocketChannelImpl.implAccept(Ljava/io/FileDescriptor;Ljava/io/FileDescriptor;[Ljava/net/SocketAddress;)I (ServerSocketChannelImpl.java:427)
+  at sun.nio.ch.ServerSocketChannelImpl.accept()Ljava/nio/channels/SocketChannel; (ServerSocketChannelImpl.java:399)
+  at com.intellij.platform.ide.bootstrap.DirectoryLock.acceptConnections()V (DirectoryLock.java:365)
+  at com.intellij.platform.ide.bootstrap.DirectoryLock$$Lambda+0x000000a0020e2318.run()V ()
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x52b168f18, line=1
+    objectId=0x52b168f40, line=1
+    objectId=0x52b168f80, line=1
+    objectId=0x52b168f68, line=1
+    objectId=0x52b168f98, line=2
+    objectId=0x52b168f18, line=2
+    objectId=0x52b168f40, line=2
+    objectId=0x52b168ff0, line=2
+    objectId=0x52b168f80, line=2
+    objectId=0x52b168f98, line=3
+    objectId=0x52b168f40, line=3
+    objectId=0x52b168ff0, line=3
+    objectId=0x52b1690a0, line=4
+    objectId=0x52b168f98, line=4
+    objectId=0x52b169140, line=5
+    objectId=0x52b168ea0, line=6
+    objectId=0x53f571de0, line=6
+    objectId=0x52b169140, line=6
+    objectId=0x52b168ea0, line=7
+    objectId=0x52b169140, line=7
+    objectId=0x53f571de0, line=7
+
+Thread 0x5433da3a8
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.parkNanos(J)V (LockSupport.java:410)
+  at java.util.concurrent.LinkedTransferQueue$DualNode.await(Ljava/lang/Object;JLjava/lang/Object;Z)Ljava/lang/Object; (LinkedTransferQueue.java:452)
+  at java.util.concurrent.SynchronousQueue$Transferer.xferLifo(Ljava/lang/Object;J)Ljava/lang/Object; (SynchronousQueue.java:194)
+  at java.util.concurrent.SynchronousQueue.xfer(Ljava/lang/Object;J)Ljava/lang/Object; (SynchronousQueue.java:235)
+  at java.util.concurrent.SynchronousQueue.poll(JLjava/util/concurrent/TimeUnit;)Ljava/lang/Object; (SynchronousQueue.java:338)
+  at java.util.concurrent.ThreadPoolExecutor.getTask()Ljava/lang/Runnable; (ThreadPoolExecutor.java:1069)
+  at java.util.concurrent.ThreadPoolExecutor.runWorker(Ljava/util/concurrent/ThreadPoolExecutor$Worker;)V (ThreadPoolExecutor.java:1130)
+  at java.util.concurrent.ThreadPoolExecutor$Worker.run()V (ThreadPoolExecutor.java:642)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Void; (Executors.java:735)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Object; (Executors.java:732)
+  at java.security.AccessController.executePrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;Ljava/lang/Class;)Ljava/lang/Object; (AccessController.java:778)
+  at java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (AccessController.java:400)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1.run()V (Executors.java:732)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x544553608, line=2
+    objectId=0x52f51bf40, line=2
+    objectId=0x5433da3a8, line=2
+    objectId=0x52f51bf40, line=3
+    objectId=0x544553608, line=3
+    objectId=0x52f51bf78, line=6
+    objectId=0x52f51bf78, line=7
+    objectId=0x5433da440, line=7
+    objectId=0x5433da3a8, line=7
+    objectId=0x5433da440, line=8
+    objectId=0x5433da470, line=9
+    objectId=0x5433da470, line=10
+    objectId=0x52c7148f8, line=11
+    objectId=0x53f5cb090, line=11
+    objectId=0x5433da480, line=13
+    objectId=0x53f571de0, line=14
+
+Thread 0x5305fb208
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.park()V (LockSupport.java:371)
+  at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionNode.block()Z (AbstractQueuedSynchronizer.java:519)
+  at java.util.concurrent.ForkJoinPool.unmanagedBlock(Ljava/util/concurrent/ForkJoinPool$ManagedBlocker;)V (ForkJoinPool.java:4013)
+  at java.util.concurrent.ForkJoinPool.managedBlock(Ljava/util/concurrent/ForkJoinPool$ManagedBlocker;)V (ForkJoinPool.java:3961)
+  at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await()V (AbstractQueuedSynchronizer.java:1746)
+  at java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take()Ljava/util/concurrent/RunnableScheduledFuture; (ScheduledThreadPoolExecutor.java:1170)
+  at java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take()Ljava/lang/Object; (ScheduledThreadPoolExecutor.java:899)
+  at java.util.concurrent.ThreadPoolExecutor.getTask()Ljava/lang/Runnable; (ThreadPoolExecutor.java:1070)
+  at java.util.concurrent.ThreadPoolExecutor.runWorker(Ljava/util/concurrent/ThreadPoolExecutor$Worker;)V (ThreadPoolExecutor.java:1130)
+  at java.util.concurrent.ThreadPoolExecutor$Worker.run()V (ThreadPoolExecutor.java:642)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x53e4ecef0, line=2
+    objectId=0x53e4ecef0, line=3
+    objectId=0x5305fb280, line=5
+    objectId=0x53e4ecef0, line=5
+    objectId=0x5305fb298, line=6
+    objectId=0x5305fb2b8, line=6
+    objectId=0x5305fb298, line=7
+    objectId=0x5305fb2c8, line=8
+    objectId=0x5305fb2c8, line=9
+    objectId=0x5305fb318, line=9
+    objectId=0x5305fb208, line=9
+    objectId=0x5305fb318, line=10
+    objectId=0x5305fb208, line=11
+    objectId=0x53f571de0, line=11
+    objectId=0x5305fb318, line=11
+    objectId=0x5305fb208, line=12
+    objectId=0x5305fb318, line=12
+    objectId=0x53f571de0, line=12
+
+Thread 0x53d2de1a0
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.parkNanos(J)V (LockSupport.java:410)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.park()V (CoroutineScheduler.kt:943)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.tryPark()V (CoroutineScheduler.kt:872)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker()V (CoroutineScheduler.kt:807)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run()V (CoroutineScheduler.kt:762)
+
+  locals:
+    objectId=0x53d2de1a0, line=2
+    objectId=0x53d2de1a0, line=3
+    objectId=0x53d2de1a0, line=4
+    objectId=0x53d2de1a0, line=5
+
+Thread 0x52f75d300
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.parkNanos(Ljava/lang/Object;J)V (LockSupport.java:269)
+  at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(J)J (AbstractQueuedSynchronizer.java:1797)
+  at java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take()Ljava/util/concurrent/RunnableScheduledFuture; (ScheduledThreadPoolExecutor.java:1182)
+  at java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take()Ljava/lang/Object; (ScheduledThreadPoolExecutor.java:899)
+  at java.util.concurrent.ThreadPoolExecutor.getTask()Ljava/lang/Runnable; (ThreadPoolExecutor.java:1070)
+  at java.util.concurrent.ThreadPoolExecutor.runWorker(Ljava/util/concurrent/ThreadPoolExecutor$Worker;)V (ThreadPoolExecutor.java:1130)
+  at java.util.concurrent.ThreadPoolExecutor$Worker.run()V (ThreadPoolExecutor.java:642)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x52f75d300, line=1
+    objectId=0x52f75d378, line=2
+    objectId=0x5436a84f8, line=2
+    objectId=0x52f75d390, line=3
+    objectId=0x52f75d3b0, line=3
+    objectId=0x52f75d300, line=3
+    objectId=0x52f75d390, line=4
+    objectId=0x52f75d3c0, line=5
+    objectId=0x52f75d3c0, line=6
+    objectId=0x52f75d410, line=6
+    objectId=0x52f75d300, line=6
+    objectId=0x52f75d410, line=7
+    objectId=0x52f75d300, line=8
+    objectId=0x53f571de0, line=8
+    objectId=0x52f75d410, line=8
+    objectId=0x52f75d300, line=9
+    objectId=0x52f75d410, line=9
+    objectId=0x53f571de0, line=9
+
+Thread 0x53dddaf50
+  at java.io.FileInputStream.readBytes([BII)I (FileInputStream.java(Native Method))
+  at java.io.FileInputStream.implRead([BII)I (FileInputStream.java:366)
+  at java.io.FileInputStream.read([BII)I (FileInputStream.java:358)
+  at java.io.BufferedInputStream.read1([BII)I (BufferedInputStream.java:345)
+  at java.io.BufferedInputStream.implRead([BII)I (BufferedInputStream.java:420)
+  at java.io.BufferedInputStream.read([BII)I (BufferedInputStream.java:405)
+  at sun.nio.cs.StreamDecoder.readBytes()I (StreamDecoder.java:350)
+  at sun.nio.cs.StreamDecoder.implRead([CII)I (StreamDecoder.java:393)
+  at sun.nio.cs.StreamDecoder.lockedRead([CII)I (StreamDecoder.java:217)
+  at sun.nio.cs.StreamDecoder.read([CII)I (StreamDecoder.java:177)
+  at java.io.InputStreamReader.read([CII)I (InputStreamReader.java:188)
+  at java.io.Reader.read([C)I (Reader.java:265)
+  at com.intellij.util.io.BaseOutputReader.readAvailableBlocking()Z (BaseOutputReader.java:148)
+  at com.intellij.util.io.BaseDataReader.readAvailable()Z (BaseDataReader.java:72)
+  at com.intellij.util.io.BaseDataReader.doRun()V (BaseDataReader.java:153)
+  at com.intellij.util.io.BaseDataReader$$Lambda+0x000000a0028e4ec8.run()V ()
+  at com.intellij.util.ConcurrencyUtil.runUnderThreadName(Ljava/lang/String;Ljava/lang/Runnable;)V (ConcurrencyUtil.java:249)
+  at com.intellij.util.io.BaseDataReader.lambda$start$0(Ljava/lang/String;)V (BaseDataReader.java:48)
+  at com.intellij.util.io.BaseDataReader$$Lambda+0x000000a0028e4a38.run()V ()
+  at java.util.concurrent.Executors$RunnableAdapter.call()Ljava/lang/Object; (Executors.java:572)
+  at java.util.concurrent.FutureTask.run()V (FutureTask.java:317)
+  at com.intellij.util.concurrency.ChildContext$runInChildContext$1.invoke()V (propagation.kt:167)
+  at com.intellij.util.concurrency.ChildContext$runInChildContext$1.invoke()Ljava/lang/Object; (propagation.kt:167)
+  at com.intellij.util.concurrency.ChildContext.runInChildContext(ZLkotlin/jvm/functions/Function0;)Ljava/lang/Object; (propagation.kt:173)
+  at com.intellij.util.concurrency.ChildContext.runInChildContext(Ljava/lang/Runnable;)V (propagation.kt:167)
+  at com.intellij.util.concurrency.ContextRunnable.lambda$run$0()Ljava/lang/Object; (ContextRunnable.java:26)
+  at com.intellij.util.concurrency.ContextRunnable$$Lambda+0x000000a0022bdb58.invoke()Ljava/lang/Object; ()
+  at com.intellij.concurrency.ThreadContext.resetThreadContext(Lkotlin/jvm/functions/Function0;)Ljava/lang/Object; (threadContext.kt:294)
+  at com.intellij.util.concurrency.ContextRunnable.run()V (ContextRunnable.java:25)
+  at java.util.concurrent.ThreadPoolExecutor.runWorker(Ljava/util/concurrent/ThreadPoolExecutor$Worker;)V (ThreadPoolExecutor.java:1144)
+  at java.util.concurrent.ThreadPoolExecutor$Worker.run()V (ThreadPoolExecutor.java:642)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Void; (Executors.java:735)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Object; (Executors.java:732)
+  at java.security.AccessController.executePrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;Ljava/lang/Class;)Ljava/lang/Object; (AccessController.java:778)
+  at java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (AccessController.java:400)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1.run()V (Executors.java:732)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x54411e580, line=0
+    objectId=0x5441205e8, line=4
+    objectId=0x54411e5d8, line=4
+    objectId=0x5441205e8, line=5
+    objectId=0x544120618, line=6
+    objectId=0x544120618, line=7
+    objectId=0x544120668, line=7
+    objectId=0x544120648, line=9
+    objectId=0x5441206a0, line=12
+    objectId=0x5441206a0, line=14
+    objectId=0x53dddaf50, line=16
+    objectId=0x53dddb000, line=16
+    objectId=0x5441206d8, line=18
+    objectId=0x5441206f0, line=19
+    objectId=0x544120708, line=20
+    objectId=0x544120728, line=23
+    objectId=0x544120740, line=27
+    objectId=0x52f308b68, line=29
+    objectId=0x53dddaf08, line=29
+    objectId=0x53dddaf50, line=29
+    objectId=0x544120758, line=29
+    objectId=0x53dddaf08, line=30
+    objectId=0x53dddbbe8, line=31
+    objectId=0x53dddbbe8, line=32
+    objectId=0x52f308d18, line=33
+    objectId=0x53f5cb090, line=33
+    objectId=0x53dddaf38, line=35
+    objectId=0x53f571de0, line=36
+
+Thread 0x5412c0708
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.parkNanos(J)V (LockSupport.java:410)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.park()V (CoroutineScheduler.kt:943)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.tryPark()V (CoroutineScheduler.kt:872)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker()V (CoroutineScheduler.kt:807)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run()V (CoroutineScheduler.kt:762)
+
+  locals:
+    objectId=0x5412c0708, line=2
+    objectId=0x5412c0708, line=3
+    objectId=0x5412c0708, line=4
+    objectId=0x5412c0708, line=5
+
+Thread 0x533d3f460
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.parkNanos(J)V (LockSupport.java:410)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.park()V (CoroutineScheduler.kt:943)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.tryPark()V (CoroutineScheduler.kt:872)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker()V (CoroutineScheduler.kt:807)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run()V (CoroutineScheduler.kt:762)
+
+  locals:
+    objectId=0x533d3f460, line=2
+    objectId=0x533d3f460, line=3
+    objectId=0x533d3f460, line=4
+    objectId=0x533d3f460, line=5
+
+Thread 0x53a9689a8
+  at com.sun.jna.Native.invokeInt(Lcom/sun/jna/Function;JI[Ljava/lang/Object;)I (Native.java(Native Method))
+  at com.sun.jna.Function.invoke([Ljava/lang/Object;Ljava/lang/Class;ZI)Ljava/lang/Object; (Function.java:429)
+  at com.sun.jna.Function.invoke(Ljava/lang/reflect/Method;[Ljava/lang/Class;Ljava/lang/Class;[Ljava/lang/Object;Ljava/util/Map;)Ljava/lang/Object; (Function.java:364)
+  at com.sun.jna.Library$Handler.invoke(Ljava/lang/Object;Ljava/lang/reflect/Method;[Ljava/lang/Object;)Ljava/lang/Object; (Library.java:270)
+  at com.pty4j.unix.$Proxy170.wait_for_child_process_exit(I)I ()
+  at com.pty4j.unix.NativePtyExecutor.waitForProcessExitAndGetExitCode(I)I (NativePtyExecutor.java:31)
+  at com.pty4j.unix.UnixPtyProcess$Reaper.run()V (UnixPtyProcess.java:393)
+
+  locals:
+    objectId=0x53a968a48, line=0
+    objectId=0x53528ff00, line=2
+    objectId=0x53528ff40, line=2
+    objectId=0x53f571098, line=2
+    objectId=0x53a968a70, line=2
+    objectId=0x53a968a58, line=2
+    objectId=0x535290040, line=4
+    objectId=0x5352900c0, line=5
+    objectId=0x53a9689a8, line=6
+    objectId=0x5346d5f00, line=6
+    objectId=0x5346d5f00, line=6
+
+Thread 0x52b1a2da0
+
+  locals:
+    objectId=0x52d9a9980, line=-1
+    objectId=0x536f6bcd0, line=-1
+    objectId=0x52b16c8f0, line=-1
+    objectId=0x52b169348, line=-1
+    objectId=0x52f33d4e8, line=-1
+    objectId=0x52f3dfec8, line=-1
+    objectId=0x52f3dfec8, line=-1
+    objectId=0x52b1693f0, line=-1
+    objectId=0x52b169470, line=-1
+    objectId=0x536f6cbd8, line=-1
+    objectId=0x52e6b8990, line=-1
+    objectId=0x53891d7c8, line=-1
+    objectId=0x52e6b8990, line=-1
+    objectId=0x53f571b90, line=-1
+    objectId=0x52f3dfec8, line=-1
+    objectId=0x52e6b8990, line=-1
+    objectId=0x52f7707c8, line=-1
+    objectId=0x52f771078, line=-1
+    objectId=0x52d848fe8, line=-1
+    objectId=0x536f6cce8, line=-1
+    objectId=0x52d9a9980, line=-1
+    objectId=0x52e6b8990, line=-1
+    objectId=0x54312a5e0, line=-1
+    objectId=0x537f9f4e8, line=-1
+    objectId=0x53562e6d0, line=-1
+    objectId=0x53ab42910, line=-1
+    objectId=0x52f199fb8, line=-1
+    objectId=0x52f3dfec8, line=-1
+    objectId=0x53891d7c8, line=-1
+
+Thread 0x544330168
+  at java.io.FileInputStream.readBytes([BII)I (FileInputStream.java(Native Method))
+  at java.io.FileInputStream.implRead([BII)I (FileInputStream.java:366)
+  at java.io.FileInputStream.read([BII)I (FileInputStream.java:358)
+  at java.io.BufferedInputStream.read1([BII)I (BufferedInputStream.java:345)
+  at java.io.BufferedInputStream.implRead([BII)I (BufferedInputStream.java:420)
+  at java.io.BufferedInputStream.read([BII)I (BufferedInputStream.java:405)
+  at sun.nio.cs.StreamDecoder.readBytes()I (StreamDecoder.java:350)
+  at sun.nio.cs.StreamDecoder.implRead([CII)I (StreamDecoder.java:393)
+  at sun.nio.cs.StreamDecoder.lockedRead([CII)I (StreamDecoder.java:217)
+  at sun.nio.cs.StreamDecoder.read([CII)I (StreamDecoder.java:177)
+  at java.io.InputStreamReader.read([CII)I (InputStreamReader.java:188)
+  at java.io.Reader.read([C)I (Reader.java:265)
+  at com.intellij.util.io.BaseOutputReader.readAvailableBlocking()Z (BaseOutputReader.java:148)
+  at com.intellij.util.io.BaseDataReader.readAvailable()Z (BaseDataReader.java:72)
+  at com.intellij.util.io.BaseDataReader.doRun()V (BaseDataReader.java:153)
+  at com.intellij.util.io.BaseDataReader$$Lambda+0x000000a0028e4ec8.run()V ()
+  at com.intellij.util.ConcurrencyUtil.runUnderThreadName(Ljava/lang/String;Ljava/lang/Runnable;)V (ConcurrencyUtil.java:249)
+  at com.intellij.util.io.BaseDataReader.lambda$start$0(Ljava/lang/String;)V (BaseDataReader.java:48)
+  at com.intellij.util.io.BaseDataReader$$Lambda+0x000000a0028e4a38.run()V ()
+  at java.util.concurrent.Executors$RunnableAdapter.call()Ljava/lang/Object; (Executors.java:572)
+  at java.util.concurrent.FutureTask.run()V (FutureTask.java:317)
+  at com.intellij.util.concurrency.ChildContext$runInChildContext$1.invoke()V (propagation.kt:167)
+  at com.intellij.util.concurrency.ChildContext$runInChildContext$1.invoke()Ljava/lang/Object; (propagation.kt:167)
+  at com.intellij.util.concurrency.ChildContext.runInChildContext(ZLkotlin/jvm/functions/Function0;)Ljava/lang/Object; (propagation.kt:173)
+  at com.intellij.util.concurrency.ChildContext.runInChildContext(Ljava/lang/Runnable;)V (propagation.kt:167)
+  at com.intellij.util.concurrency.ContextRunnable.lambda$run$0()Ljava/lang/Object; (ContextRunnable.java:26)
+  at com.intellij.util.concurrency.ContextRunnable$$Lambda+0x000000a0022bdb58.invoke()Ljava/lang/Object; ()
+  at com.intellij.concurrency.ThreadContext.resetThreadContext(Lkotlin/jvm/functions/Function0;)Ljava/lang/Object; (threadContext.kt:294)
+  at com.intellij.util.concurrency.ContextRunnable.run()V (ContextRunnable.java:25)
+  at java.util.concurrent.ThreadPoolExecutor.runWorker(Ljava/util/concurrent/ThreadPoolExecutor$Worker;)V (ThreadPoolExecutor.java:1144)
+  at java.util.concurrent.ThreadPoolExecutor$Worker.run()V (ThreadPoolExecutor.java:642)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Void; (Executors.java:735)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Object; (Executors.java:732)
+  at java.security.AccessController.executePrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;Ljava/lang/Class;)Ljava/lang/Object; (AccessController.java:778)
+  at java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (AccessController.java:400)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1.run()V (Executors.java:732)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x5443301e0, line=0
+    objectId=0x544332248, line=4
+    objectId=0x544330238, line=4
+    objectId=0x544332248, line=5
+    objectId=0x544332278, line=6
+    objectId=0x544332278, line=7
+    objectId=0x5443322c8, line=7
+    objectId=0x5443322a8, line=9
+    objectId=0x544332300, line=12
+    objectId=0x544332300, line=14
+    objectId=0x544330168, line=16
+    objectId=0x544332338, line=16
+    objectId=0x544332350, line=19
+    objectId=0x544332368, line=20
+    objectId=0x544332388, line=23
+    objectId=0x5443323a0, line=27
+    objectId=0x52f308b68, line=29
+    objectId=0x5443323b8, line=29
+    objectId=0x544330168, line=29
+    objectId=0x5443323e8, line=29
+    objectId=0x5443323b8, line=30
+    objectId=0x544332400, line=31
+    objectId=0x544332400, line=32
+    objectId=0x52f308d18, line=33
+    objectId=0x53f5cb090, line=33
+    objectId=0x544332410, line=35
+    objectId=0x53f571de0, line=36
+
+Thread 0x5305fda60
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.park()V (LockSupport.java:371)
+  at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionNode.block()Z (AbstractQueuedSynchronizer.java:519)
+  at java.util.concurrent.ForkJoinPool.unmanagedBlock(Ljava/util/concurrent/ForkJoinPool$ManagedBlocker;)V (ForkJoinPool.java:4013)
+  at java.util.concurrent.ForkJoinPool.managedBlock(Ljava/util/concurrent/ForkJoinPool$ManagedBlocker;)V (ForkJoinPool.java:3961)
+  at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await()V (AbstractQueuedSynchronizer.java:1746)
+  at java.lang.ProcessImpl.waitFor()I (ProcessImpl.java:425)
+  at com.intellij.execution.process.ProcessWaitFor.lambda$new$0(Ljava/lang/Process;)V (ProcessWaitFor.java:28)
+  at com.intellij.execution.process.ProcessWaitFor$$Lambda+0x000000a0028db6e8.run()V ()
+  at com.intellij.util.ConcurrencyUtil.runUnderThreadName(Ljava/lang/String;Ljava/lang/Runnable;)V (ConcurrencyUtil.java:249)
+  at com.intellij.execution.process.ProcessWaitFor.lambda$new$1(Ljava/lang/String;Ljava/lang/Process;)V (ProcessWaitFor.java:23)
+  at com.intellij.execution.process.ProcessWaitFor$$Lambda+0x000000a0028dade8.run()V ()
+  at java.util.concurrent.Executors$RunnableAdapter.call()Ljava/lang/Object; (Executors.java:572)
+  at java.util.concurrent.FutureTask.run()V (FutureTask.java:317)
+  at com.intellij.util.concurrency.ChildContext$runInChildContext$1.invoke()V (propagation.kt:167)
+  at com.intellij.util.concurrency.ChildContext$runInChildContext$1.invoke()Ljava/lang/Object; (propagation.kt:167)
+  at com.intellij.util.concurrency.ChildContext.runInChildContext(ZLkotlin/jvm/functions/Function0;)Ljava/lang/Object; (propagation.kt:173)
+  at com.intellij.util.concurrency.ChildContext.runInChildContext(Ljava/lang/Runnable;)V (propagation.kt:167)
+  at com.intellij.util.concurrency.ContextRunnable.lambda$run$0()Ljava/lang/Object; (ContextRunnable.java:26)
+  at com.intellij.util.concurrency.ContextRunnable$$Lambda+0x000000a0022bdb58.invoke()Ljava/lang/Object; ()
+  at com.intellij.concurrency.ThreadContext.resetThreadContext(Lkotlin/jvm/functions/Function0;)Ljava/lang/Object; (threadContext.kt:294)
+  at com.intellij.util.concurrency.ContextRunnable.run()V (ContextRunnable.java:25)
+  at java.util.concurrent.ThreadPoolExecutor.runWorker(Ljava/util/concurrent/ThreadPoolExecutor$Worker;)V (ThreadPoolExecutor.java:1144)
+  at java.util.concurrent.ThreadPoolExecutor$Worker.run()V (ThreadPoolExecutor.java:642)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Void; (Executors.java:735)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Object; (Executors.java:732)
+  at java.security.AccessController.executePrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;Ljava/lang/Class;)Ljava/lang/Object; (AccessController.java:778)
+  at java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (AccessController.java:400)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1.run()V (Executors.java:732)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x54312a688, line=2
+    objectId=0x54312a688, line=3
+    objectId=0x54312a670, line=5
+    objectId=0x54312a688, line=5
+    objectId=0x54312a6a8, line=6
+    objectId=0x54312a6f0, line=7
+    objectId=0x54312a6a8, line=7
+    objectId=0x54312a708, line=8
+    objectId=0x5305fda60, line=9
+    objectId=0x53a1519e0, line=9
+    objectId=0x54312a6f0, line=10
+    objectId=0x54312a720, line=10
+    objectId=0x54312a6a8, line=10
+    objectId=0x54312a720, line=10
+    objectId=0x54312a738, line=11
+    objectId=0x54312a750, line=12
+    objectId=0x54312a768, line=13
+    objectId=0x54312a788, line=16
+    objectId=0x54312a7a0, line=20
+    objectId=0x52f308b68, line=22
+    objectId=0x5305fdad8, line=22
+    objectId=0x5305fda60, line=22
+    objectId=0x54312a7b8, line=22
+    objectId=0x5305fdad8, line=23
+    objectId=0x5305fdb08, line=24
+    objectId=0x5305fdb08, line=25
+    objectId=0x52f308d18, line=26
+    objectId=0x53f5cb090, line=26
+    objectId=0x5305fdb18, line=28
+    objectId=0x5305fda60, line=29
+    objectId=0x53f571de0, line=29
+    objectId=0x5305fdb18, line=29
+    objectId=0x5305fda60, line=30
+    objectId=0x5305fdb18, line=30
+    objectId=0x53f571de0, line=30
+
+Thread 0x53e4e9dc0
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.parkNanos(J)V (LockSupport.java:410)
+  at java.util.concurrent.LinkedTransferQueue$DualNode.await(Ljava/lang/Object;JLjava/lang/Object;Z)Ljava/lang/Object; (LinkedTransferQueue.java:452)
+  at java.util.concurrent.SynchronousQueue$Transferer.xferLifo(Ljava/lang/Object;J)Ljava/lang/Object; (SynchronousQueue.java:194)
+  at java.util.concurrent.SynchronousQueue.xfer(Ljava/lang/Object;J)Ljava/lang/Object; (SynchronousQueue.java:235)
+  at java.util.concurrent.SynchronousQueue.poll(JLjava/util/concurrent/TimeUnit;)Ljava/lang/Object; (SynchronousQueue.java:338)
+  at java.util.concurrent.ThreadPoolExecutor.getTask()Ljava/lang/Runnable; (ThreadPoolExecutor.java:1069)
+  at java.util.concurrent.ThreadPoolExecutor.runWorker(Ljava/util/concurrent/ThreadPoolExecutor$Worker;)V (ThreadPoolExecutor.java:1130)
+  at java.util.concurrent.ThreadPoolExecutor$Worker.run()V (ThreadPoolExecutor.java:642)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Void; (Executors.java:735)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Object; (Executors.java:732)
+  at java.security.AccessController.executePrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;Ljava/lang/Class;)Ljava/lang/Object; (AccessController.java:778)
+  at java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (AccessController.java:400)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1.run()V (Executors.java:732)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x5434b54e0, line=2
+    objectId=0x52f51bf40, line=2
+    objectId=0x53e4e9dc0, line=2
+    objectId=0x52f51bf40, line=3
+    objectId=0x5434b54e0, line=3
+    objectId=0x52f51bf78, line=6
+    objectId=0x52f51bf78, line=7
+    objectId=0x53e4e9e38, line=7
+    objectId=0x53e4e9dc0, line=7
+    objectId=0x53e4e9e38, line=8
+    objectId=0x53e4e9e68, line=9
+    objectId=0x53e4e9e68, line=10
+    objectId=0x52c7148f8, line=11
+    objectId=0x53f5cb090, line=11
+    objectId=0x53e4e9e78, line=13
+    objectId=0x53f571de0, line=14
+
+Thread 0x52c6eb2d8
+  at com.sun.jna.Native.invokeInt(Lcom/sun/jna/Function;JI[Ljava/lang/Object;)I (Native.java(Native Method))
+  at com.sun.jna.Function.invoke([Ljava/lang/Object;Ljava/lang/Class;ZI)Ljava/lang/Object; (Function.java:429)
+  at com.sun.jna.Function.invoke(Ljava/lang/reflect/Method;[Ljava/lang/Class;Ljava/lang/Class;[Ljava/lang/Object;Ljava/util/Map;)Ljava/lang/Object; (Function.java:364)
+  at com.sun.jna.Library$Handler.invoke(Ljava/lang/Object;Ljava/lang/reflect/Method;[Ljava/lang/Object;)Ljava/lang/Object; (Library.java:270)
+  at com.pty4j.unix.$Proxy174.poll(Lcom/pty4j/unix/PollfdStructureByReference;II)I ()
+  at com.pty4j.unix.CLibrary.poll([Lcom/pty4j/unix/Pollfd;I)I (CLibrary.kt:75)
+  at com.pty4j.unix.Pty.poll(II)Z (Pty.java:259)
+  at com.pty4j.unix.Pty.read([BI)I (Pty.java:247)
+  at com.pty4j.unix.PTYInputStream.read([BII)I (PTYInputStream.java:47)
+  at sun.nio.cs.StreamDecoder.readBytes()I (StreamDecoder.java:350)
+  at sun.nio.cs.StreamDecoder.implRead([CII)I (StreamDecoder.java:393)
+  at sun.nio.cs.StreamDecoder.lockedRead([CII)I (StreamDecoder.java:217)
+  at sun.nio.cs.StreamDecoder.read([CII)I (StreamDecoder.java:171)
+  at java.io.InputStreamReader.read([CII)I (InputStreamReader.java:188)
+  at com.jediterm.terminal.ProcessTtyConnector.read([CII)I (ProcessTtyConnector.java:51)
+  at com.intellij.terminal.backend.ObservableTtyConnector.read([CII)I (ObservableTtyConnector.kt:26)
+  at com.jediterm.terminal.TtyBasedArrayDataStream.fillBuf()V (TtyBasedArrayDataStream.java:33)
+  at com.jediterm.terminal.TtyBasedArrayDataStream.getChar()C (TtyBasedArrayDataStream.java:43)
+  at com.jediterm.terminal.DataStreamIteratingEmulator.next()V (DataStreamIteratingEmulator.java:34)
+  at com.jediterm.terminal.TerminalStarter.doStartEmulator()V (TerminalStarter.java:79)
+  at com.jediterm.terminal.TerminalStarter$$Lambda+0x000000a003fc1660.run()V ()
+  at com.jediterm.terminal.TerminalStarter.runUnderThreadName(Ljava/lang/String;Ljava/lang/Runnable;)V (TerminalStarter.java:108)
+  at com.jediterm.terminal.TerminalStarter.start()V (TerminalStarter.java:73)
+  at com.intellij.terminal.backend.TerminalSessionStartKt.startTerminalEmulation(Lcom/jediterm/terminal/TerminalStarter;)V (TerminalSessionStart.kt:128)
+  at com.intellij.terminal.backend.TerminalSessionStartKt.createTerminalSession$lambda$0(Lcom/intellij/terminal/backend/JediTermServices;Lkotlinx/coroutines/CoroutineScope;Lkotlinx/coroutines/flow/MutableSharedFlow;)V (TerminalSessionStart.kt:75)
+  at com.intellij.terminal.backend.TerminalSessionStartKt$$Lambda+0x000000a003fb98f0.run()V ()
+  at java.util.concurrent.Executors$RunnableAdapter.call()Ljava/lang/Object; (Executors.java:572)
+  at com.intellij.util.concurrency.ContextCallable.lambda$call$1()Lcom/intellij/util/concurrency/ContextCallable$RunResult; (ContextCallable.java:86)
+  at com.intellij.util.concurrency.ContextCallable$$Lambda+0x000000a0025b1c30.invoke()Ljava/lang/Object; ()
+  at com.intellij.concurrency.ThreadContext.installThreadContext(Lkotlin/coroutines/CoroutineContext;ZLkotlin/jvm/functions/Function0;)Ljava/lang/Object; (threadContext.kt:305)
+  at com.intellij.util.concurrency.ContextCallable.lambda$call$2()Lcom/intellij/util/concurrency/ContextCallable$RunResult; (ContextCallable.java:83)
+  at com.intellij.util.concurrency.ContextCallable$$Lambda+0x000000a0025b17a0.get()Ljava/lang/Object; ()
+  at com.intellij.util.concurrency.ContextCallable.call()Ljava/lang/Object; (ContextCallable.java:96)
+  at java.util.concurrent.FutureTask.run()V (FutureTask.java:317)
+  at com.intellij.util.concurrency.ChildContext$runInChildContext$1.invoke()V (propagation.kt:167)
+  at com.intellij.util.concurrency.ChildContext$runInChildContext$1.invoke()Ljava/lang/Object; (propagation.kt:167)
+  at com.intellij.util.concurrency.ChildContext.runInChildContext(ZLkotlin/jvm/functions/Function0;)Ljava/lang/Object; (propagation.kt:173)
+  at com.intellij.util.concurrency.ChildContext.runInChildContext(Ljava/lang/Runnable;)V (propagation.kt:167)
+  at com.intellij.util.concurrency.ContextRunnable.lambda$run$0()Ljava/lang/Object; (ContextRunnable.java:26)
+  at com.intellij.util.concurrency.ContextRunnable$$Lambda+0x000000a0022bdb58.invoke()Ljava/lang/Object; ()
+  at com.intellij.concurrency.ThreadContext.resetThreadContext(Lkotlin/jvm/functions/Function0;)Ljava/lang/Object; (threadContext.kt:294)
+  at com.intellij.util.concurrency.ContextRunnable.run()V (ContextRunnable.java:25)
+  at java.util.concurrent.ThreadPoolExecutor.runWorker(Ljava/util/concurrent/ThreadPoolExecutor$Worker;)V (ThreadPoolExecutor.java:1144)
+  at java.util.concurrent.ThreadPoolExecutor$Worker.run()V (ThreadPoolExecutor.java:642)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Void; (Executors.java:735)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Object; (Executors.java:732)
+  at java.security.AccessController.executePrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;Ljava/lang/Class;)Ljava/lang/Object; (AccessController.java:778)
+  at java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (AccessController.java:400)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1.run()V (Executors.java:732)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x53a7831f8, line=0
+    objectId=0x539adb8f8, line=0
+    objectId=0x539adb8c8, line=0
+    objectId=0x53528cce0, line=2
+    objectId=0x53528cd08, line=2
+    objectId=0x53f571098, line=2
+    objectId=0x53a783240, line=2
+    objectId=0x53a783220, line=2
+    objectId=0x53528cdf8, line=4
+    objectId=0x53a783260, line=4
+    objectId=0x53a7832a8, line=5
+    objectId=0x53a783260, line=5
+    objectId=0x53a7832c0, line=5
+    objectId=0x53a7832a8, line=6
+    objectId=0x53528cf28, line=7
+    objectId=0x53a7832d8, line=7
+    objectId=0x53528cf18, line=7
+    objectId=0x53528cfc8, line=8
+    objectId=0x53528cfd8, line=8
+    objectId=0x53a7832d8, line=8
+    objectId=0x53528efe8, line=9
+    objectId=0x53528efe8, line=10
+    objectId=0x53a7852e8, line=10
+    objectId=0x53528f018, line=12
+    objectId=0x53528f098, line=14
+    objectId=0x53528f0c8, line=14
+    objectId=0x53528f948, line=15
+    objectId=0x53528f0c8, line=15
+    objectId=0x53528f9d0, line=16
+    objectId=0x53528f9d0, line=16
+    objectId=0x53528f9d0, line=17
+    objectId=0x53528fa60, line=18
+    objectId=0x53528faf0, line=19
+    objectId=0x53528fb98, line=20
+    objectId=0x53528fba8, line=21
+    objectId=0x53528fb98, line=21
+    objectId=0x52c6eb2d8, line=21
+    objectId=0x52e832290, line=21
+    objectId=0x53528faf0, line=22
+    objectId=0x53528faf0, line=23
+    objectId=0x53528fc30, line=24
+    objectId=0x53528fc58, line=24
+    objectId=0x53528fc78, line=24
+    objectId=0x53528fd30, line=25
+    objectId=0x53528fd48, line=26
+    objectId=0x53528fd60, line=27
+    objectId=0x53528fd80, line=27
+    objectId=0x53528fd98, line=27
+    objectId=0x53528fd98, line=27
+    objectId=0x53528fdb0, line=28
+    objectId=0x53528fdc0, line=29
+    objectId=0x53528fd60, line=30
+    objectId=0x53528fdd8, line=31
+    objectId=0x53528fd60, line=32
+    objectId=0x53528fdd8, line=32
+    objectId=0x53528fde8, line=33
+    objectId=0x53528fd60, line=33
+    objectId=0x53528fe08, line=36
+    objectId=0x53528fe20, line=40
+    objectId=0x52f51bf78, line=42
+    objectId=0x52c6eb350, line=42
+    objectId=0x52c6eb2d8, line=42
+    objectId=0x53528fe38, line=42
+    objectId=0x52c6eb350, line=43
+    objectId=0x52c6eb380, line=44
+    objectId=0x52c6eb380, line=45
+    objectId=0x52c7148f8, line=46
+    objectId=0x53f5cb090, line=46
+    objectId=0x52c6eb380, line=47
+    objectId=0x52c7148f8, line=47
+    objectId=0x53f5cb090, line=47
+    objectId=0x52c6eb390, line=48
+    objectId=0x52c6eb2d8, line=49
+    objectId=0x53f571de0, line=49
+    objectId=0x52c6eb390, line=49
+    objectId=0x52c6eb2d8, line=50
+    objectId=0x52c6eb390, line=50
+    objectId=0x53f571de0, line=50
+
+Thread 0x537f899a8
+  at java.lang.Object.wait0(J)V (Object.java(Native Method))
+  at java.lang.Object.wait(J)V (Object.java:366)
+  at java.lang.Object.wait()V (Object.java:339)
+  at java.util.TimerThread.mainLoop()V (Timer.java:537)
+  at java.util.TimerThread.run()V (Timer.java:516)
+
+  locals:
+    objectId=0x537f899a8, line=3
+    objectId=0x537f89a28, line=3
+    objectId=0x537f899a8, line=4
+
+Thread 0x52a807cb8
+
+  locals:
+
+Thread 0x5435f3180
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.parkNanos(J)V (LockSupport.java:410)
+  at java.util.concurrent.LinkedTransferQueue$DualNode.await(Ljava/lang/Object;JLjava/lang/Object;Z)Ljava/lang/Object; (LinkedTransferQueue.java:452)
+  at java.util.concurrent.SynchronousQueue$Transferer.xferLifo(Ljava/lang/Object;J)Ljava/lang/Object; (SynchronousQueue.java:194)
+  at java.util.concurrent.SynchronousQueue.xfer(Ljava/lang/Object;J)Ljava/lang/Object; (SynchronousQueue.java:235)
+  at java.util.concurrent.SynchronousQueue.poll(JLjava/util/concurrent/TimeUnit;)Ljava/lang/Object; (SynchronousQueue.java:338)
+  at java.util.concurrent.ThreadPoolExecutor.getTask()Ljava/lang/Runnable; (ThreadPoolExecutor.java:1069)
+  at java.util.concurrent.ThreadPoolExecutor.runWorker(Ljava/util/concurrent/ThreadPoolExecutor$Worker;)V (ThreadPoolExecutor.java:1130)
+  at java.util.concurrent.ThreadPoolExecutor$Worker.run()V (ThreadPoolExecutor.java:642)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Void; (Executors.java:735)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Object; (Executors.java:732)
+  at java.security.AccessController.executePrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;Ljava/lang/Class;)Ljava/lang/Object; (AccessController.java:778)
+  at java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (AccessController.java:400)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1.run()V (Executors.java:732)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x54457a2a8, line=2
+    objectId=0x52f51bf40, line=2
+    objectId=0x5435f3180, line=2
+    objectId=0x52f51bf40, line=3
+    objectId=0x54457a2a8, line=3
+    objectId=0x52f51bf78, line=6
+    objectId=0x52f51bf78, line=7
+    objectId=0x5435f31f8, line=7
+    objectId=0x5435f3180, line=7
+    objectId=0x5435f31f8, line=8
+    objectId=0x5435f3228, line=9
+    objectId=0x5435f3228, line=10
+    objectId=0x52c7148f8, line=11
+    objectId=0x53f5cb090, line=11
+    objectId=0x5435f3238, line=13
+    objectId=0x53f571de0, line=14
+
+Thread 0x53528fe50
+  at com.sun.jna.Native.invokeInt(Lcom/sun/jna/Function;JI[Ljava/lang/Object;)I (Native.java(Native Method))
+  at com.sun.jna.Function.invoke([Ljava/lang/Object;Ljava/lang/Class;ZI)Ljava/lang/Object; (Function.java:429)
+  at com.sun.jna.Function.invoke(Ljava/lang/reflect/Method;[Ljava/lang/Class;Ljava/lang/Class;[Ljava/lang/Object;Ljava/util/Map;)Ljava/lang/Object; (Function.java:364)
+  at com.sun.jna.Library$Handler.invoke(Ljava/lang/Object;Ljava/lang/reflect/Method;[Ljava/lang/Object;)Ljava/lang/Object; (Library.java:270)
+  at com.pty4j.unix.$Proxy170.wait_for_child_process_exit(I)I ()
+  at com.pty4j.unix.NativePtyExecutor.waitForProcessExitAndGetExitCode(I)I (NativePtyExecutor.java:31)
+  at com.pty4j.unix.UnixPtyProcess$Reaper.run()V (UnixPtyProcess.java:393)
+
+  locals:
+    objectId=0x53528fef0, line=0
+    objectId=0x53528ff00, line=2
+    objectId=0x53528ff40, line=2
+    objectId=0x53f571098, line=2
+    objectId=0x53528ff98, line=2
+    objectId=0x53528ff28, line=2
+    objectId=0x535290040, line=4
+    objectId=0x5352900c0, line=5
+    objectId=0x53528fe50, line=6
+    objectId=0x53524a2f0, line=6
+    objectId=0x53524a2f0, line=6
+
+Thread 0x53d0ba670
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.park()V (LockSupport.java:371)
+  at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionNode.block()Z (AbstractQueuedSynchronizer.java:519)
+  at java.util.concurrent.ForkJoinPool.unmanagedBlock(Ljava/util/concurrent/ForkJoinPool$ManagedBlocker;)V (ForkJoinPool.java:4013)
+  at java.util.concurrent.ForkJoinPool.managedBlock(Ljava/util/concurrent/ForkJoinPool$ManagedBlocker;)V (ForkJoinPool.java:3961)
+  at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await()V (AbstractQueuedSynchronizer.java:1746)
+  at java.util.concurrent.LinkedBlockingQueue.take()Ljava/lang/Object; (LinkedBlockingQueue.java:435)
+  at java.util.concurrent.ThreadPoolExecutor.getTask()Ljava/lang/Runnable; (ThreadPoolExecutor.java:1070)
+  at java.util.concurrent.ThreadPoolExecutor.runWorker(Ljava/util/concurrent/ThreadPoolExecutor$Worker;)V (ThreadPoolExecutor.java:1130)
+  at java.util.concurrent.ThreadPoolExecutor$Worker.run()V (ThreadPoolExecutor.java:642)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x54416d320, line=2
+    objectId=0x54416d320, line=3
+    objectId=0x52c8d1098, line=5
+    objectId=0x54416d320, line=5
+    objectId=0x52c8d1028, line=6
+    objectId=0x52c8d1058, line=6
+    objectId=0x52c8d1068, line=6
+    objectId=0x52c8d0fc8, line=7
+    objectId=0x52c8d0fc8, line=8
+    objectId=0x53d0ba6e8, line=8
+    objectId=0x53d0ba670, line=8
+    objectId=0x53d0ba6e8, line=9
+    objectId=0x53f571de0, line=10
+
+Thread 0x52b5570f8
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.park()V (LockSupport.java:371)
+  at java.util.concurrent.LinkedTransferQueue$DualNode.await(Ljava/lang/Object;JLjava/lang/Object;Z)Ljava/lang/Object; (LinkedTransferQueue.java:458)
+  at java.util.concurrent.SynchronousQueue$Transferer.xferLifo(Ljava/lang/Object;J)Ljava/lang/Object; (SynchronousQueue.java:194)
+  at java.util.concurrent.SynchronousQueue.xfer(Ljava/lang/Object;J)Ljava/lang/Object; (SynchronousQueue.java:235)
+  at java.util.concurrent.SynchronousQueue.take()Ljava/lang/Object; (SynchronousQueue.java:318)
+  at java.util.concurrent.ThreadPoolExecutor.getTask()Ljava/lang/Runnable; (ThreadPoolExecutor.java:1070)
+  at java.util.concurrent.ThreadPoolExecutor.runWorker(Ljava/util/concurrent/ThreadPoolExecutor$Worker;)V (ThreadPoolExecutor.java:1130)
+  at java.util.concurrent.ThreadPoolExecutor$Worker.run()V (ThreadPoolExecutor.java:642)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Void; (Executors.java:735)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Object; (Executors.java:732)
+  at java.security.AccessController.executePrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;Ljava/lang/Class;)Ljava/lang/Object; (AccessController.java:778)
+  at java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (AccessController.java:400)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1.run()V (Executors.java:732)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x5442c4840, line=2
+    objectId=0x52b557170, line=2
+    objectId=0x52b5570f8, line=2
+    objectId=0x52b557170, line=3
+    objectId=0x5442c4840, line=3
+    objectId=0x52b5571a8, line=6
+    objectId=0x52b5571a8, line=7
+    objectId=0x52b5572e8, line=7
+    objectId=0x52b5570f8, line=7
+    objectId=0x52b5572e8, line=8
+    objectId=0x52b557740, line=9
+    objectId=0x52b557740, line=10
+    objectId=0x52b557448, line=11
+    objectId=0x53f5cb090, line=11
+    objectId=0x52b557740, line=12
+    objectId=0x52b557448, line=12
+    objectId=0x53f5cb090, line=12
+    objectId=0x52b5574e0, line=13
+    objectId=0x52b5570f8, line=14
+    objectId=0x53f571de0, line=14
+    objectId=0x52b5574e0, line=14
+    objectId=0x52b5570f8, line=15
+    objectId=0x52b5574e0, line=15
+    objectId=0x53f571de0, line=15
+
+Thread 0x5391629b0
+
+  locals:
+
+Thread 0x542e9d070
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.ForkJoinPool.awaitWork(Ljava/util/concurrent/ForkJoinPool$WorkQueue;I)I (ForkJoinPool.java:2145)
+  at java.util.concurrent.ForkJoinPool.runWorker(Ljava/util/concurrent/ForkJoinPool$WorkQueue;)V (ForkJoinPool.java:2036)
+  at java.util.concurrent.ForkJoinWorkerThread.run()V (ForkJoinWorkerThread.java:187)
+
+  locals:
+    objectId=0x52c24cc30, line=1
+    objectId=0x542e9d130, line=1
+    objectId=0x52c24cc30, line=2
+    objectId=0x542e9d130, line=2
+    objectId=0x542e9d070, line=3
+    objectId=0x52c24cc30, line=3
+    objectId=0x542e9d130, line=3
+
+Thread 0x5321d5768
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.parkNanos(Ljava/lang/Object;J)V (LockSupport.java:269)
+  at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(J)J (AbstractQueuedSynchronizer.java:1797)
+  at java.util.concurrent.DelayQueue.take()Ljava/util/concurrent/Delayed; (DelayQueue.java:255)
+  at javax.swing.TimerQueue.run()V (TimerQueue.java:165)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x5321d5768, line=1
+    objectId=0x5321d57e0, line=2
+    objectId=0x54498e7b0, line=2
+    objectId=0x5321d57f8, line=3
+    objectId=0x5321d5818, line=3
+    objectId=0x5321d5768, line=3
+    objectId=0x5321d58b0, line=4
+    objectId=0x5321d5768, line=5
+    objectId=0x53f571de0, line=5
+    objectId=0x5321d58b0, line=5
+    objectId=0x5321d5768, line=6
+    objectId=0x5321d58b0, line=6
+    objectId=0x53f571de0, line=6
+
+Thread 0x5346d60b8
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.parkNanos(J)V (LockSupport.java:410)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.park()V (CoroutineScheduler.kt:943)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.tryPark()V (CoroutineScheduler.kt:872)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker()V (CoroutineScheduler.kt:807)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run()V (CoroutineScheduler.kt:762)
+
+  locals:
+    objectId=0x5346d60b8, line=2
+    objectId=0x5346d60b8, line=3
+    objectId=0x5346d60b8, line=4
+    objectId=0x5346d60b8, line=5
+
+Thread 0x52b1691e8
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.park()V (LockSupport.java:371)
+  at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionNode.block()Z (AbstractQueuedSynchronizer.java:519)
+  at java.util.concurrent.ForkJoinPool.unmanagedBlock(Ljava/util/concurrent/ForkJoinPool$ManagedBlocker;)V (ForkJoinPool.java:4013)
+  at java.util.concurrent.ForkJoinPool.managedBlock(Ljava/util/concurrent/ForkJoinPool$ManagedBlocker;)V (ForkJoinPool.java:3961)
+  at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await()V (AbstractQueuedSynchronizer.java:1746)
+  at java.util.concurrent.LinkedBlockingQueue.take()Ljava/lang/Object; (LinkedBlockingQueue.java:435)
+  at java.util.concurrent.ThreadPoolExecutor.getTask()Ljava/lang/Runnable; (ThreadPoolExecutor.java:1070)
+  at java.util.concurrent.ThreadPoolExecutor.runWorker(Ljava/util/concurrent/ThreadPoolExecutor$Worker;)V (ThreadPoolExecutor.java:1130)
+  at java.util.concurrent.ThreadPoolExecutor$Worker.run()V (ThreadPoolExecutor.java:642)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x5436ded80, line=2
+    objectId=0x5436ded80, line=3
+    objectId=0x52b169260, line=5
+    objectId=0x5436ded80, line=5
+    objectId=0x52b169278, line=6
+    objectId=0x52b1692a8, line=6
+    objectId=0x52b1692b8, line=6
+    objectId=0x52b1692c8, line=7
+    objectId=0x52b1692c8, line=8
+    objectId=0x52b169318, line=8
+    objectId=0x52b1691e8, line=8
+    objectId=0x52b169318, line=9
+    objectId=0x52b1691e8, line=10
+    objectId=0x53f571de0, line=10
+    objectId=0x52b169318, line=10
+    objectId=0x52b1691e8, line=11
+    objectId=0x52b169318, line=11
+    objectId=0x53f571de0, line=11
+
+Thread 0x5412ec168
+  at sun.nio.ch.KQueue.poll(IJIJ)I (KQueue.java(Native Method))
+  at sun.nio.ch.KQueuePort$EventHandlerTask.poll()Lsun/nio/ch/KQueuePort$Event; (KQueuePort.java:200)
+  at sun.nio.ch.KQueuePort$EventHandlerTask.run()V (KQueuePort.java:287)
+  at sun.nio.ch.AsynchronousChannelGroupImpl$1.run()V (AsynchronousChannelGroupImpl.java:113)
+  at java.util.concurrent.ThreadPoolExecutor.runWorker(Ljava/util/concurrent/ThreadPoolExecutor$Worker;)V (ThreadPoolExecutor.java:1144)
+  at java.util.concurrent.ThreadPoolExecutor$Worker.run()V (ThreadPoolExecutor.java:642)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x5412ec1e0, line=1
+    objectId=0x5412ec1e0, line=2
+    objectId=0x5412ec1f0, line=2
+    objectId=0x5412ec208, line=2
+    objectId=0x5412ec220, line=3
+    objectId=0x5412ec238, line=4
+    objectId=0x5412ec288, line=4
+    objectId=0x5412ec168, line=4
+    objectId=0x5412ec220, line=4
+    objectId=0x5412ec288, line=5
+    objectId=0x53f571de0, line=6
+
+Thread 0x5305fd8c0
+  at java.io.FileInputStream.readBytes([BII)I (FileInputStream.java(Native Method))
+  at java.io.FileInputStream.implRead([BII)I (FileInputStream.java:366)
+  at java.io.FileInputStream.read([BII)I (FileInputStream.java:358)
+  at java.io.BufferedInputStream.read1([BII)I (BufferedInputStream.java:345)
+  at java.io.BufferedInputStream.implRead([BII)I (BufferedInputStream.java:420)
+  at java.io.BufferedInputStream.read([BII)I (BufferedInputStream.java:405)
+  at sun.nio.cs.StreamDecoder.readBytes()I (StreamDecoder.java:350)
+  at sun.nio.cs.StreamDecoder.implRead([CII)I (StreamDecoder.java:393)
+  at sun.nio.cs.StreamDecoder.lockedRead([CII)I (StreamDecoder.java:217)
+  at sun.nio.cs.StreamDecoder.read([CII)I (StreamDecoder.java:177)
+  at java.io.InputStreamReader.read([CII)I (InputStreamReader.java:188)
+  at java.io.Reader.read([C)I (Reader.java:265)
+  at com.intellij.util.io.BaseOutputReader.readAvailableBlocking()Z (BaseOutputReader.java:148)
+  at com.intellij.util.io.BaseDataReader.readAvailable()Z (BaseDataReader.java:72)
+  at com.intellij.util.io.BaseDataReader.doRun()V (BaseDataReader.java:153)
+  at com.intellij.util.io.BaseDataReader$$Lambda+0x000000a0028e4ec8.run()V ()
+  at com.intellij.util.ConcurrencyUtil.runUnderThreadName(Ljava/lang/String;Ljava/lang/Runnable;)V (ConcurrencyUtil.java:249)
+  at com.intellij.util.io.BaseDataReader.lambda$start$0(Ljava/lang/String;)V (BaseDataReader.java:48)
+  at com.intellij.util.io.BaseDataReader$$Lambda+0x000000a0028e4a38.run()V ()
+  at java.util.concurrent.Executors$RunnableAdapter.call()Ljava/lang/Object; (Executors.java:572)
+  at java.util.concurrent.FutureTask.run()V (FutureTask.java:317)
+  at com.intellij.util.concurrency.ChildContext$runInChildContext$1.invoke()V (propagation.kt:167)
+  at com.intellij.util.concurrency.ChildContext$runInChildContext$1.invoke()Ljava/lang/Object; (propagation.kt:167)
+  at com.intellij.util.concurrency.ChildContext.runInChildContext(ZLkotlin/jvm/functions/Function0;)Ljava/lang/Object; (propagation.kt:173)
+  at com.intellij.util.concurrency.ChildContext.runInChildContext(Ljava/lang/Runnable;)V (propagation.kt:167)
+  at com.intellij.util.concurrency.ContextRunnable.lambda$run$0()Ljava/lang/Object; (ContextRunnable.java:26)
+  at com.intellij.util.concurrency.ContextRunnable$$Lambda+0x000000a0022bdb58.invoke()Ljava/lang/Object; ()
+  at com.intellij.concurrency.ThreadContext.resetThreadContext(Lkotlin/jvm/functions/Function0;)Ljava/lang/Object; (threadContext.kt:294)
+  at com.intellij.util.concurrency.ContextRunnable.run()V (ContextRunnable.java:25)
+  at java.util.concurrent.ThreadPoolExecutor.runWorker(Ljava/util/concurrent/ThreadPoolExecutor$Worker;)V (ThreadPoolExecutor.java:1144)
+  at java.util.concurrent.ThreadPoolExecutor$Worker.run()V (ThreadPoolExecutor.java:642)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Void; (Executors.java:735)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Object; (Executors.java:732)
+  at java.security.AccessController.executePrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;Ljava/lang/Class;)Ljava/lang/Object; (AccessController.java:778)
+  at java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (AccessController.java:400)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1.run()V (Executors.java:732)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x543272fc8, line=0
+    objectId=0x543275030, line=4
+    objectId=0x543273020, line=4
+    objectId=0x543275030, line=5
+    objectId=0x543275060, line=6
+    objectId=0x543275060, line=7
+    objectId=0x5432750b0, line=7
+    objectId=0x543275090, line=9
+    objectId=0x5432750e8, line=12
+    objectId=0x5432750e8, line=14
+    objectId=0x5305fd8c0, line=16
+    objectId=0x53a151ca0, line=16
+    objectId=0x543275120, line=18
+    objectId=0x543275138, line=19
+    objectId=0x543275150, line=20
+    objectId=0x543275170, line=23
+    objectId=0x543275188, line=27
+    objectId=0x52f308b68, line=29
+    objectId=0x5305fd938, line=29
+    objectId=0x5305fd8c0, line=29
+    objectId=0x5432751a0, line=29
+    objectId=0x5305fd938, line=30
+    objectId=0x5305fd968, line=31
+    objectId=0x5305fd968, line=32
+    objectId=0x52f308d18, line=33
+    objectId=0x53f5cb090, line=33
+    objectId=0x5305fd978, line=35
+    objectId=0x5305fd8c0, line=36
+    objectId=0x53f571de0, line=36
+    objectId=0x5305fd978, line=36
+    objectId=0x5305fd8c0, line=37
+    objectId=0x5305fd978, line=37
+    objectId=0x53f571de0, line=37
+
+Thread 0x5406c6bd8
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.parkNanos(J)V (LockSupport.java:410)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.park()V (CoroutineScheduler.kt:943)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.tryPark()V (CoroutineScheduler.kt:872)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker()V (CoroutineScheduler.kt:807)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run()V (CoroutineScheduler.kt:762)
+
+  locals:
+    objectId=0x5406c6bd8, line=2
+    objectId=0x5406c6bd8, line=3
+    objectId=0x5406c6bd8, line=4
+    objectId=0x5406c6bd8, line=5
+
+Thread 0x52f51ba68
+  at sun.nio.ch.KQueue.poll(IJIJ)I (KQueue.java(Native Method))
+  at sun.nio.ch.KQueueSelectorImpl.doSelect(Ljava/util/function/Consumer;J)I (KQueueSelectorImpl.java:125)
+  at sun.nio.ch.SelectorImpl.lockAndDoSelect(Ljava/util/function/Consumer;J)I (SelectorImpl.java:130)
+  at sun.nio.ch.SelectorImpl.select(J)I (SelectorImpl.java:142)
+  at io.netty.channel.nio.SelectedSelectionKeySetSelector.select(J)I (SelectedSelectionKeySetSelector.java:62)
+  at io.netty.channel.nio.NioIoHandler.select(Lio/netty/channel/IoExecutionContext;Z)V (NioIoHandler.java:646)
+  at io.netty.channel.nio.NioIoHandler.run(Lio/netty/channel/IoExecutionContext;)I (NioIoHandler.java:432)
+  at io.netty.channel.SingleThreadIoEventLoop.runIo()I (SingleThreadIoEventLoop.java:203)
+  at io.netty.channel.SingleThreadIoEventLoop.run()V (SingleThreadIoEventLoop.java:174)
+  at io.netty.util.concurrent.SingleThreadEventExecutor$5.run()V (SingleThreadEventExecutor.java:1123)
+  at io.netty.util.internal.ThreadExecutorMap$2.run()V (ThreadExecutorMap.java:74)
+  at io.netty.util.concurrent.FastThreadLocalRunnable.run()V (FastThreadLocalRunnable.java:30)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x52d1ac9c0, line=1
+    objectId=0x52d1ac9c0, line=2
+    objectId=0x52d1ac9c0, line=2
+    objectId=0x52d1ab998, line=2
+    objectId=0x52d1ab940, line=5
+    objectId=0x52d1ab930, line=5
+    objectId=0x52d1ab980, line=5
+    objectId=0x52d1ab940, line=6
+    objectId=0x52d1ab5f0, line=8
+    objectId=0x52f51bb60, line=9
+    objectId=0x52f51bbe0, line=10
+    objectId=0x52f51bc68, line=11
+    objectId=0x52f51ba68, line=12
+    objectId=0x53f571de0, line=12
+    objectId=0x52f51bc68, line=12
+    objectId=0x52f51ba68, line=13
+    objectId=0x52f51bc68, line=13
+    objectId=0x53f571de0, line=13
+
+Thread 0x53b2ba228
+  at java.lang.ProcessHandleImpl.waitForProcessExit0(JZ)I (ProcessHandleImpl.java(Native Method))
+  at java.lang.ProcessHandleImpl$1.run()V (ProcessHandleImpl.java:163)
+  at java.util.concurrent.ThreadPoolExecutor.runWorker(Ljava/util/concurrent/ThreadPoolExecutor$Worker;)V (ThreadPoolExecutor.java:1144)
+  at java.util.concurrent.ThreadPoolExecutor$Worker.run()V (ThreadPoolExecutor.java:642)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+  at jdk.internal.misc.InnocuousThread.run()V (InnocuousThread.java:186)
+
+  locals:
+    objectId=0x5433da368, line=1
+    objectId=0x53b2ba228, line=1
+    objectId=0x5aa5c8a88, line=1
+    objectId=0x52b16c698, line=2
+    objectId=0x53b2ba1f8, line=2
+    objectId=0x53b2ba228, line=2
+    objectId=0x5433da368, line=2
+    objectId=0x53b2ba1f8, line=3
+    objectId=0x53f571de0, line=4
+    objectId=0x53b2ba228, line=6
+
+Thread 0x52aebc3e0
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.parkNanos(Ljava/lang/Object;J)V (LockSupport.java:269)
+  at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(JLjava/util/concurrent/TimeUnit;)Z (AbstractQueuedSynchronizer.java:1886)
+  at java.lang.ref.ReferenceQueue.await(J)V (ReferenceQueue.java:71)
+  at java.lang.ref.ReferenceQueue.remove0(J)Ljava/lang/ref/Reference; (ReferenceQueue.java:143)
+  at java.lang.ref.ReferenceQueue.remove(J)Ljava/lang/ref/Reference; (ReferenceQueue.java:218)
+  at jdk.internal.ref.CleanerImpl.run()V (CleanerImpl.java:140)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+  at jdk.internal.misc.InnocuousThread.run()V (InnocuousThread.java:186)
+
+  locals:
+    objectId=0x52aebc3e0, line=1
+    objectId=0x52aebc458, line=2
+    objectId=0x544579e68, line=2
+    objectId=0x52aebc4e0, line=4
+    objectId=0x52aebc4e0, line=5
+    objectId=0x52aebc500, line=6
+    objectId=0x52aebc3e0, line=6
+    objectId=0x52aebc3e0, line=6
+    objectId=0x52aebc3e0, line=7
+    objectId=0x53f571de0, line=7
+    objectId=0x52aebc500, line=7
+    objectId=0x52aebc3e0, line=8
+    objectId=0x52aebc500, line=8
+    objectId=0x53f571de0, line=8
+    objectId=0x52aebc3e0, line=9
+
+Thread 0x54312a7f0
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.parkNanos(J)V (LockSupport.java:410)
+  at java.util.concurrent.LinkedTransferQueue$DualNode.await(Ljava/lang/Object;JLjava/lang/Object;Z)Ljava/lang/Object; (LinkedTransferQueue.java:452)
+  at java.util.concurrent.SynchronousQueue$Transferer.xferLifo(Ljava/lang/Object;J)Ljava/lang/Object; (SynchronousQueue.java:194)
+  at java.util.concurrent.SynchronousQueue.xfer(Ljava/lang/Object;J)Ljava/lang/Object; (SynchronousQueue.java:235)
+  at java.util.concurrent.SynchronousQueue.poll(JLjava/util/concurrent/TimeUnit;)Ljava/lang/Object; (SynchronousQueue.java:338)
+  at java.util.concurrent.ThreadPoolExecutor.getTask()Ljava/lang/Runnable; (ThreadPoolExecutor.java:1069)
+  at java.util.concurrent.ThreadPoolExecutor.runWorker(Ljava/util/concurrent/ThreadPoolExecutor$Worker;)V (ThreadPoolExecutor.java:1130)
+  at java.util.concurrent.ThreadPoolExecutor$Worker.run()V (ThreadPoolExecutor.java:642)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Void; (Executors.java:735)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Object; (Executors.java:732)
+  at java.security.AccessController.executePrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;Ljava/lang/Class;)Ljava/lang/Object; (AccessController.java:778)
+  at java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (AccessController.java:400)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1.run()V (Executors.java:732)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x5433da388, line=2
+    objectId=0x52f51bf40, line=2
+    objectId=0x54312a7f0, line=2
+    objectId=0x52f51bf40, line=3
+    objectId=0x5433da388, line=3
+    objectId=0x52f51bf78, line=6
+    objectId=0x52f51bf78, line=7
+    objectId=0x54312a880, line=7
+    objectId=0x54312a7f0, line=7
+    objectId=0x54312a880, line=8
+    objectId=0x54312a8b0, line=9
+    objectId=0x54312a8b0, line=10
+    objectId=0x52c7148f8, line=11
+    objectId=0x53f5cb090, line=11
+    objectId=0x54312a8c0, line=13
+    objectId=0x53f571de0, line=14
+
+Thread 0x533e09248
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.parkNanos(J)V (LockSupport.java:410)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.park()V (CoroutineScheduler.kt:943)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.tryPark()V (CoroutineScheduler.kt:872)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker()V (CoroutineScheduler.kt:807)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run()V (CoroutineScheduler.kt:762)
+
+  locals:
+    objectId=0x533e09248, line=2
+    objectId=0x533e09248, line=3
+    objectId=0x533e09248, line=4
+    objectId=0x533e09248, line=5
+
+Thread 0x53d0b9ff0
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.park()V (LockSupport.java:371)
+  at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionNode.block()Z (AbstractQueuedSynchronizer.java:519)
+  at java.util.concurrent.ForkJoinPool.unmanagedBlock(Ljava/util/concurrent/ForkJoinPool$ManagedBlocker;)V (ForkJoinPool.java:4013)
+  at java.util.concurrent.ForkJoinPool.managedBlock(Ljava/util/concurrent/ForkJoinPool$ManagedBlocker;)V (ForkJoinPool.java:3961)
+  at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await()V (AbstractQueuedSynchronizer.java:1746)
+  at java.util.concurrent.LinkedBlockingQueue.take()Ljava/lang/Object; (LinkedBlockingQueue.java:435)
+  at java.util.concurrent.ThreadPoolExecutor.getTask()Ljava/lang/Runnable; (ThreadPoolExecutor.java:1070)
+  at java.util.concurrent.ThreadPoolExecutor.runWorker(Ljava/util/concurrent/ThreadPoolExecutor$Worker;)V (ThreadPoolExecutor.java:1130)
+  at java.util.concurrent.ThreadPoolExecutor$Worker.run()V (ThreadPoolExecutor.java:642)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x54416da48, line=2
+    objectId=0x54416da48, line=3
+    objectId=0x52c8d1670, line=5
+    objectId=0x54416da48, line=5
+    objectId=0x52c8d1600, line=6
+    objectId=0x52c8d1630, line=6
+    objectId=0x52c8d1640, line=6
+    objectId=0x52c8d15a0, line=7
+    objectId=0x52c8d15a0, line=8
+    objectId=0x53d0ba068, line=8
+    objectId=0x53d0b9ff0, line=8
+    objectId=0x53d0ba068, line=9
+    objectId=0x53f571de0, line=10
+
+Thread 0x52b169538
+  at java.lang.Object.wait0(J)V (Object.java(Native Method))
+  at java.lang.Object.wait(J)V (Object.java:366)
+  at sun.java2d.metal.MTLRenderQueue$QueueFlusher.run()V (MTLRenderQueue.java:209)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x52b1695b0, line=2
+    objectId=0x52b169538, line=3
+    objectId=0x53f571de0, line=3
+    objectId=0x52b1695b0, line=3
+    objectId=0x52b169538, line=4
+    objectId=0x52b1695b0, line=4
+    objectId=0x53f571de0, line=4
+
+Thread 0x54498b548
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.parkNanos(J)V (LockSupport.java:410)
+  at java.util.concurrent.LinkedTransferQueue$DualNode.await(Ljava/lang/Object;JLjava/lang/Object;Z)Ljava/lang/Object; (LinkedTransferQueue.java:452)
+  at java.util.concurrent.SynchronousQueue$Transferer.xferLifo(Ljava/lang/Object;J)Ljava/lang/Object; (SynchronousQueue.java:194)
+  at java.util.concurrent.SynchronousQueue.xfer(Ljava/lang/Object;J)Ljava/lang/Object; (SynchronousQueue.java:235)
+  at java.util.concurrent.SynchronousQueue.poll(JLjava/util/concurrent/TimeUnit;)Ljava/lang/Object; (SynchronousQueue.java:338)
+  at java.util.concurrent.ThreadPoolExecutor.getTask()Ljava/lang/Runnable; (ThreadPoolExecutor.java:1069)
+  at java.util.concurrent.ThreadPoolExecutor.runWorker(Ljava/util/concurrent/ThreadPoolExecutor$Worker;)V (ThreadPoolExecutor.java:1130)
+  at java.util.concurrent.ThreadPoolExecutor$Worker.run()V (ThreadPoolExecutor.java:642)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+  at jdk.internal.misc.InnocuousThread.run()V (InnocuousThread.java:186)
+
+  locals:
+    objectId=0x54498b648, line=2
+    objectId=0x52b16c660, line=2
+    objectId=0x54498b548, line=2
+    objectId=0x52b16c660, line=3
+    objectId=0x54498b648, line=3
+    objectId=0x52b16c698, line=6
+    objectId=0x52b16c698, line=7
+    objectId=0x54498b518, line=7
+    objectId=0x54498b548, line=7
+    objectId=0x53f571de0, line=9
+    objectId=0x54498b548, line=11
+
+Thread 0x534521498
+  at sun.nio.ch.KQueue.poll(IJIJ)I (KQueue.java(Native Method))
+  at sun.nio.ch.KQueueSelectorImpl.doSelect(Ljava/util/function/Consumer;J)I (KQueueSelectorImpl.java:125)
+  at sun.nio.ch.SelectorImpl.lockAndDoSelect(Ljava/util/function/Consumer;J)I (SelectorImpl.java:130)
+  at sun.nio.ch.SelectorImpl.select(J)I (SelectorImpl.java:142)
+  at io.netty.channel.nio.SelectedSelectionKeySetSelector.select(J)I (SelectedSelectionKeySetSelector.java:62)
+  at io.netty.channel.nio.NioIoHandler.select(Lio/netty/channel/IoExecutionContext;Z)V (NioIoHandler.java:646)
+  at io.netty.channel.nio.NioIoHandler.run(Lio/netty/channel/IoExecutionContext;)I (NioIoHandler.java:432)
+  at io.netty.channel.SingleThreadIoEventLoop.runIo()I (SingleThreadIoEventLoop.java:203)
+  at io.netty.channel.SingleThreadIoEventLoop.run()V (SingleThreadIoEventLoop.java:174)
+  at io.netty.util.concurrent.SingleThreadEventExecutor$5.run()V (SingleThreadEventExecutor.java:1123)
+  at io.netty.util.internal.ThreadExecutorMap$2.run()V (ThreadExecutorMap.java:74)
+  at io.netty.util.concurrent.FastThreadLocalRunnable.run()V (FastThreadLocalRunnable.java:30)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x52f51d910, line=1
+    objectId=0x52f51d910, line=2
+    objectId=0x52f51d910, line=2
+    objectId=0x52f51c8e8, line=2
+    objectId=0x52f51c890, line=5
+    objectId=0x52f51c880, line=5
+    objectId=0x52f51c8d0, line=5
+    objectId=0x52f51c890, line=6
+    objectId=0x52f51c500, line=8
+    objectId=0x534521518, line=9
+    objectId=0x534521528, line=10
+    objectId=0x534521540, line=11
+    objectId=0x534521498, line=12
+    objectId=0x53f571de0, line=12
+    objectId=0x534521540, line=12
+    objectId=0x534521498, line=13
+    objectId=0x534521540, line=13
+    objectId=0x53f571de0, line=13
+
+Thread 0x5405e9050
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.ForkJoinPool.awaitWork(Ljava/util/concurrent/ForkJoinPool$WorkQueue;I)I (ForkJoinPool.java:2145)
+  at java.util.concurrent.ForkJoinPool.runWorker(Ljava/util/concurrent/ForkJoinPool$WorkQueue;)V (ForkJoinPool.java:2036)
+  at java.util.concurrent.ForkJoinWorkerThread.run()V (ForkJoinWorkerThread.java:187)
+
+  locals:
+    objectId=0x52c24cc30, line=1
+    objectId=0x5405e9110, line=1
+    objectId=0x52c24cc30, line=2
+    objectId=0x5405e9110, line=2
+    objectId=0x5405e9050, line=3
+    objectId=0x52c24cc30, line=3
+    objectId=0x5405e9110, line=3
+
+Thread 0x52c874e10
+  at java.io.FileInputStream.readBytes([BII)I (FileInputStream.java(Native Method))
+  at java.io.FileInputStream.implRead([BII)I (FileInputStream.java:366)
+  at java.io.FileInputStream.read([BII)I (FileInputStream.java:358)
+  at java.io.BufferedInputStream.read1([BII)I (BufferedInputStream.java:345)
+  at java.io.BufferedInputStream.implRead([BII)I (BufferedInputStream.java:420)
+  at java.io.BufferedInputStream.read([BII)I (BufferedInputStream.java:405)
+  at sun.nio.cs.StreamDecoder.readBytes()I (StreamDecoder.java:350)
+  at sun.nio.cs.StreamDecoder.implRead([CII)I (StreamDecoder.java:393)
+  at sun.nio.cs.StreamDecoder.lockedRead([CII)I (StreamDecoder.java:217)
+  at sun.nio.cs.StreamDecoder.read([CII)I (StreamDecoder.java:177)
+  at java.io.InputStreamReader.read([CII)I (InputStreamReader.java:188)
+  at java.io.Reader.read([C)I (Reader.java:265)
+  at com.intellij.util.io.BaseOutputReader.readAvailableBlocking()Z (BaseOutputReader.java:148)
+  at com.intellij.util.io.BaseDataReader.readAvailable()Z (BaseDataReader.java:72)
+  at com.intellij.util.io.BaseDataReader.doRun()V (BaseDataReader.java:153)
+  at com.intellij.util.io.BaseDataReader$$Lambda+0x000000a0028e4ec8.run()V ()
+  at com.intellij.util.ConcurrencyUtil.runUnderThreadName(Ljava/lang/String;Ljava/lang/Runnable;)V (ConcurrencyUtil.java:249)
+  at com.intellij.util.io.BaseDataReader.lambda$start$0(Ljava/lang/String;)V (BaseDataReader.java:48)
+  at com.intellij.util.io.BaseDataReader$$Lambda+0x000000a0028e4a38.run()V ()
+  at java.util.concurrent.Executors$RunnableAdapter.call()Ljava/lang/Object; (Executors.java:572)
+  at java.util.concurrent.FutureTask.run()V (FutureTask.java:317)
+  at com.intellij.util.concurrency.ChildContext$runInChildContext$1.invoke()V (propagation.kt:167)
+  at com.intellij.util.concurrency.ChildContext$runInChildContext$1.invoke()Ljava/lang/Object; (propagation.kt:167)
+  at com.intellij.util.concurrency.ChildContext.runInChildContext(ZLkotlin/jvm/functions/Function0;)Ljava/lang/Object; (propagation.kt:173)
+  at com.intellij.util.concurrency.ChildContext.runInChildContext(Ljava/lang/Runnable;)V (propagation.kt:167)
+  at com.intellij.util.concurrency.ContextRunnable.lambda$run$0()Ljava/lang/Object; (ContextRunnable.java:26)
+  at com.intellij.util.concurrency.ContextRunnable$$Lambda+0x000000a0022bdb58.invoke()Ljava/lang/Object; ()
+  at com.intellij.concurrency.ThreadContext.resetThreadContext(Lkotlin/jvm/functions/Function0;)Ljava/lang/Object; (threadContext.kt:294)
+  at com.intellij.util.concurrency.ContextRunnable.run()V (ContextRunnable.java:25)
+  at java.util.concurrent.ThreadPoolExecutor.runWorker(Ljava/util/concurrent/ThreadPoolExecutor$Worker;)V (ThreadPoolExecutor.java:1144)
+  at java.util.concurrent.ThreadPoolExecutor$Worker.run()V (ThreadPoolExecutor.java:642)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Void; (Executors.java:735)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Object; (Executors.java:732)
+  at java.security.AccessController.executePrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;Ljava/lang/Class;)Ljava/lang/Object; (AccessController.java:778)
+  at java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (AccessController.java:400)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1.run()V (Executors.java:732)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x52c874e88, line=0
+    objectId=0x52c876ef0, line=4
+    objectId=0x52c874ee0, line=4
+    objectId=0x52c876ef0, line=5
+    objectId=0x52c876f20, line=6
+    objectId=0x52c876f20, line=7
+    objectId=0x5442ceee0, line=7
+    objectId=0x52c87af60, line=9
+    objectId=0x52c87af80, line=12
+    objectId=0x52c87af80, line=13
+    objectId=0x52c87af80, line=14
+    objectId=0x52c87afb8, line=15
+    objectId=0x52c87afc8, line=16
+    objectId=0x52c87afb8, line=16
+    objectId=0x52c874e10, line=16
+    objectId=0x52c87afe0, line=16
+    objectId=0x52c87af80, line=17
+    objectId=0x52c87aff8, line=17
+    objectId=0x52c87b010, line=18
+    objectId=0x52c87b028, line=19
+    objectId=0x52c87b040, line=20
+    objectId=0x52c87b028, line=20
+    objectId=0x52c87b060, line=21
+    objectId=0x52c87b060, line=22
+    objectId=0x52c87b090, line=23
+    objectId=0x52c87b060, line=23
+    objectId=0x52c87b0b0, line=23
+    objectId=0x52c87b0b0, line=23
+    objectId=0x52c87b090, line=24
+    objectId=0x52c87b040, line=24
+    objectId=0x52c87b0c8, line=25
+    objectId=0x52c87b0e0, line=26
+    objectId=0x52c87b0e0, line=27
+    objectId=0x52c87b0f0, line=27
+    objectId=0x52c87b0f0, line=27
+    objectId=0x52c87b0c8, line=28
+    objectId=0x52f308b68, line=29
+    objectId=0x52c87b108, line=29
+    objectId=0x52c874e10, line=29
+    objectId=0x52c87b0c8, line=29
+    objectId=0x52c87b108, line=30
+    objectId=0x52c87b138, line=31
+    objectId=0x52c87b138, line=32
+    objectId=0x52f308d18, line=33
+    objectId=0x53f5cb090, line=33
+    objectId=0x52c87b138, line=34
+    objectId=0x52f308d18, line=34
+    objectId=0x53f5cb090, line=34
+    objectId=0x52c87b148, line=35
+    objectId=0x52c874e10, line=36
+    objectId=0x53f571de0, line=36
+    objectId=0x52c87b148, line=36
+    objectId=0x52c874e10, line=37
+    objectId=0x52c87b148, line=37
+    objectId=0x53f571de0, line=37
+
+Thread 0x537ba36e0
+  at com.sun.jna.Native.invokeInt(Lcom/sun/jna/Function;JI[Ljava/lang/Object;)I (Native.java(Native Method))
+  at com.sun.jna.Function.invoke([Ljava/lang/Object;Ljava/lang/Class;ZI)Ljava/lang/Object; (Function.java:429)
+  at com.sun.jna.Function.invoke(Ljava/lang/reflect/Method;[Ljava/lang/Class;Ljava/lang/Class;[Ljava/lang/Object;Ljava/util/Map;)Ljava/lang/Object; (Function.java:364)
+  at com.sun.jna.Library$Handler.invoke(Ljava/lang/Object;Ljava/lang/reflect/Method;[Ljava/lang/Object;)Ljava/lang/Object; (Library.java:270)
+  at com.pty4j.unix.$Proxy174.poll(Lcom/pty4j/unix/PollfdStructureByReference;II)I ()
+  at com.pty4j.unix.CLibrary.poll([Lcom/pty4j/unix/Pollfd;I)I (CLibrary.kt:75)
+  at com.pty4j.unix.Pty.poll(II)Z (Pty.java:259)
+  at com.pty4j.unix.Pty.read([BI)I (Pty.java:247)
+  at com.pty4j.unix.PTYInputStream.read([BII)I (PTYInputStream.java:47)
+  at sun.nio.cs.StreamDecoder.readBytes()I (StreamDecoder.java:350)
+  at sun.nio.cs.StreamDecoder.implRead([CII)I (StreamDecoder.java:393)
+  at sun.nio.cs.StreamDecoder.lockedRead([CII)I (StreamDecoder.java:217)
+  at sun.nio.cs.StreamDecoder.read([CII)I (StreamDecoder.java:171)
+  at java.io.InputStreamReader.read([CII)I (InputStreamReader.java:188)
+  at com.jediterm.terminal.ProcessTtyConnector.read([CII)I (ProcessTtyConnector.java:51)
+  at com.intellij.terminal.backend.ObservableTtyConnector.read([CII)I (ObservableTtyConnector.kt:26)
+  at com.jediterm.terminal.TtyBasedArrayDataStream.fillBuf()V (TtyBasedArrayDataStream.java:33)
+  at com.jediterm.terminal.TtyBasedArrayDataStream.getChar()C (TtyBasedArrayDataStream.java:43)
+  at com.jediterm.terminal.DataStreamIteratingEmulator.next()V (DataStreamIteratingEmulator.java:34)
+  at com.jediterm.terminal.TerminalStarter.doStartEmulator()V (TerminalStarter.java:79)
+  at com.jediterm.terminal.TerminalStarter$$Lambda+0x000000a003fc1660.run()V ()
+  at com.jediterm.terminal.TerminalStarter.runUnderThreadName(Ljava/lang/String;Ljava/lang/Runnable;)V (TerminalStarter.java:108)
+  at com.jediterm.terminal.TerminalStarter.start()V (TerminalStarter.java:73)
+  at com.intellij.terminal.backend.TerminalSessionStartKt.startTerminalEmulation(Lcom/jediterm/terminal/TerminalStarter;)V (TerminalSessionStart.kt:128)
+  at com.intellij.terminal.backend.TerminalSessionStartKt.createTerminalSession$lambda$0(Lcom/intellij/terminal/backend/JediTermServices;Lkotlinx/coroutines/CoroutineScope;Lkotlinx/coroutines/flow/MutableSharedFlow;)V (TerminalSessionStart.kt:75)
+  at com.intellij.terminal.backend.TerminalSessionStartKt$$Lambda+0x000000a003fb98f0.run()V ()
+  at java.util.concurrent.Executors$RunnableAdapter.call()Ljava/lang/Object; (Executors.java:572)
+  at com.intellij.util.concurrency.ContextCallable.lambda$call$1()Lcom/intellij/util/concurrency/ContextCallable$RunResult; (ContextCallable.java:86)
+  at com.intellij.util.concurrency.ContextCallable$$Lambda+0x000000a0025b1c30.invoke()Ljava/lang/Object; ()
+  at com.intellij.concurrency.ThreadContext.installThreadContext(Lkotlin/coroutines/CoroutineContext;ZLkotlin/jvm/functions/Function0;)Ljava/lang/Object; (threadContext.kt:305)
+  at com.intellij.util.concurrency.ContextCallable.lambda$call$2()Lcom/intellij/util/concurrency/ContextCallable$RunResult; (ContextCallable.java:83)
+  at com.intellij.util.concurrency.ContextCallable$$Lambda+0x000000a0025b17a0.get()Ljava/lang/Object; ()
+  at com.intellij.util.concurrency.ContextCallable.call()Ljava/lang/Object; (ContextCallable.java:96)
+  at java.util.concurrent.FutureTask.run()V (FutureTask.java:317)
+  at com.intellij.util.concurrency.ChildContext$runInChildContext$1.invoke()V (propagation.kt:167)
+  at com.intellij.util.concurrency.ChildContext$runInChildContext$1.invoke()Ljava/lang/Object; (propagation.kt:167)
+  at com.intellij.util.concurrency.ChildContext.runInChildContext(ZLkotlin/jvm/functions/Function0;)Ljava/lang/Object; (propagation.kt:173)
+  at com.intellij.util.concurrency.ChildContext.runInChildContext(Ljava/lang/Runnable;)V (propagation.kt:167)
+  at com.intellij.util.concurrency.ContextRunnable.lambda$run$0()Ljava/lang/Object; (ContextRunnable.java:26)
+  at com.intellij.util.concurrency.ContextRunnable$$Lambda+0x000000a0022bdb58.invoke()Ljava/lang/Object; ()
+  at com.intellij.concurrency.ThreadContext.resetThreadContext(Lkotlin/jvm/functions/Function0;)Ljava/lang/Object; (threadContext.kt:294)
+  at com.intellij.util.concurrency.ContextRunnable.run()V (ContextRunnable.java:25)
+  at java.util.concurrent.ThreadPoolExecutor.runWorker(Ljava/util/concurrent/ThreadPoolExecutor$Worker;)V (ThreadPoolExecutor.java:1144)
+  at java.util.concurrent.ThreadPoolExecutor$Worker.run()V (ThreadPoolExecutor.java:642)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Void; (Executors.java:735)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Object; (Executors.java:732)
+  at java.security.AccessController.executePrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;Ljava/lang/Class;)Ljava/lang/Object; (AccessController.java:778)
+  at java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (AccessController.java:400)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1.run()V (Executors.java:732)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x5442c9370, line=0
+    objectId=0x539adb8f8, line=0
+    objectId=0x539adb8c8, line=0
+    objectId=0x53528cce0, line=2
+    objectId=0x53528cd08, line=2
+    objectId=0x53f571098, line=2
+    objectId=0x5442c9500, line=2
+    objectId=0x5442c9520, line=2
+    objectId=0x53528cdf8, line=4
+    objectId=0x5442c9180, line=4
+    objectId=0x5442c9138, line=5
+    objectId=0x5442c9298, line=5
+    objectId=0x5442c9138, line=6
+    objectId=0x53a96c068, line=7
+    objectId=0x5442c7128, line=7
+    objectId=0x53a96c058, line=7
+    objectId=0x5346c8580, line=8
+    objectId=0x5346c8590, line=8
+    objectId=0x5442c7128, line=8
+    objectId=0x5346ca5a0, line=9
+    objectId=0x5346ca5a0, line=10
+    objectId=0x5442c70f0, line=10
+    objectId=0x5346ca5d0, line=12
+    objectId=0x5346ca5e0, line=14
+    objectId=0x5346ca610, line=14
+    objectId=0x5346cae20, line=15
+    objectId=0x5346ca610, line=15
+    objectId=0x5346cae38, line=16
+    objectId=0x5346cae38, line=16
+    objectId=0x5346cae38, line=17
+    objectId=0x5346cae58, line=18
+    objectId=0x5346cae70, line=19
+    objectId=0x5346caea8, line=20
+    objectId=0x5346caeb8, line=21
+    objectId=0x5346caea8, line=21
+    objectId=0x537ba36e0, line=21
+    objectId=0x537ba3790, line=21
+    objectId=0x5346cae70, line=22
+    objectId=0x5346cae70, line=23
+    objectId=0x5346caed0, line=24
+    objectId=0x5346caef8, line=24
+    objectId=0x5346caf18, line=24
+    objectId=0x5346caf60, line=25
+    objectId=0x5346caf78, line=26
+    objectId=0x5346caf90, line=27
+    objectId=0x5346cafa8, line=27
+    objectId=0x5346cafa8, line=27
+    objectId=0x5346caff0, line=33
+    objectId=0x5346cb010, line=36
+    objectId=0x5346cb028, line=40
+    objectId=0x52f51bf78, line=42
+    objectId=0x537ba3698, line=42
+    objectId=0x537ba36e0, line=42
+    objectId=0x5346cb040, line=42
+    objectId=0x537ba3698, line=43
+    objectId=0x53afff040, line=44
+    objectId=0x53afff040, line=45
+    objectId=0x52c7148f8, line=46
+    objectId=0x53f5cb090, line=46
+    objectId=0x537ba36c8, line=48
+    objectId=0x53f571de0, line=49
+
+Thread 0x52b168df0
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.parkNanos(J)V (LockSupport.java:410)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.park()V (CoroutineScheduler.kt:943)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.tryPark()V (CoroutineScheduler.kt:872)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker()V (CoroutineScheduler.kt:807)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run()V (CoroutineScheduler.kt:762)
+
+  locals:
+    objectId=0x52b168df0, line=2
+    objectId=0x52b168df0, line=3
+    objectId=0x52b168df0, line=4
+    objectId=0x52b168df0, line=5
+
+Thread 0x54432cad8
+  at java.io.FileInputStream.readBytes([BII)I (FileInputStream.java(Native Method))
+  at java.io.FileInputStream.implRead([BII)I (FileInputStream.java:366)
+  at java.io.FileInputStream.read([BII)I (FileInputStream.java:358)
+  at java.io.BufferedInputStream.read1([BII)I (BufferedInputStream.java:345)
+  at java.io.BufferedInputStream.implRead([BII)I (BufferedInputStream.java:420)
+  at java.io.BufferedInputStream.read([BII)I (BufferedInputStream.java:405)
+  at sun.nio.cs.StreamDecoder.readBytes()I (StreamDecoder.java:350)
+  at sun.nio.cs.StreamDecoder.implRead([CII)I (StreamDecoder.java:393)
+  at sun.nio.cs.StreamDecoder.lockedRead([CII)I (StreamDecoder.java:217)
+  at sun.nio.cs.StreamDecoder.read([CII)I (StreamDecoder.java:177)
+  at java.io.InputStreamReader.read([CII)I (InputStreamReader.java:188)
+  at java.io.Reader.read([C)I (Reader.java:265)
+  at com.intellij.util.io.BaseOutputReader.readAvailableBlocking()Z (BaseOutputReader.java:148)
+  at com.intellij.util.io.BaseDataReader.readAvailable()Z (BaseDataReader.java:72)
+  at com.intellij.util.io.BaseDataReader.doRun()V (BaseDataReader.java:153)
+  at com.intellij.util.io.BaseDataReader$$Lambda+0x000000a0028e4ec8.run()V ()
+  at com.intellij.util.ConcurrencyUtil.runUnderThreadName(Ljava/lang/String;Ljava/lang/Runnable;)V (ConcurrencyUtil.java:249)
+  at com.intellij.util.io.BaseDataReader.lambda$start$0(Ljava/lang/String;)V (BaseDataReader.java:48)
+  at com.intellij.util.io.BaseDataReader$$Lambda+0x000000a0028e4a38.run()V ()
+  at java.util.concurrent.Executors$RunnableAdapter.call()Ljava/lang/Object; (Executors.java:572)
+  at java.util.concurrent.FutureTask.run()V (FutureTask.java:317)
+  at com.intellij.util.concurrency.ChildContext$runInChildContext$1.invoke()V (propagation.kt:167)
+  at com.intellij.util.concurrency.ChildContext$runInChildContext$1.invoke()Ljava/lang/Object; (propagation.kt:167)
+  at com.intellij.util.concurrency.ChildContext.runInChildContext(ZLkotlin/jvm/functions/Function0;)Ljava/lang/Object; (propagation.kt:173)
+  at com.intellij.util.concurrency.ChildContext.runInChildContext(Ljava/lang/Runnable;)V (propagation.kt:167)
+  at com.intellij.util.concurrency.ContextRunnable.lambda$run$0()Ljava/lang/Object; (ContextRunnable.java:26)
+  at com.intellij.util.concurrency.ContextRunnable$$Lambda+0x000000a0022bdb58.invoke()Ljava/lang/Object; ()
+  at com.intellij.concurrency.ThreadContext.resetThreadContext(Lkotlin/jvm/functions/Function0;)Ljava/lang/Object; (threadContext.kt:294)
+  at com.intellij.util.concurrency.ContextRunnable.run()V (ContextRunnable.java:25)
+  at java.util.concurrent.ThreadPoolExecutor.runWorker(Ljava/util/concurrent/ThreadPoolExecutor$Worker;)V (ThreadPoolExecutor.java:1144)
+  at java.util.concurrent.ThreadPoolExecutor$Worker.run()V (ThreadPoolExecutor.java:642)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Void; (Executors.java:735)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run()Ljava/lang/Object; (Executors.java:732)
+  at java.security.AccessController.executePrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;Ljava/lang/Class;)Ljava/lang/Object; (AccessController.java:778)
+  at java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (AccessController.java:400)
+  at java.util.concurrent.Executors$PrivilegedThreadFactory$1.run()V (Executors.java:732)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x54432cb50, line=0
+    objectId=0x54432ebb8, line=4
+    objectId=0x54432cba8, line=4
+    objectId=0x54432ebb8, line=5
+    objectId=0x54432ebe8, line=6
+    objectId=0x54432ebe8, line=7
+    objectId=0x54432ec38, line=7
+    objectId=0x54432ec18, line=9
+    objectId=0x54432ec70, line=12
+    objectId=0x54432ec70, line=14
+    objectId=0x54432cad8, line=16
+    objectId=0x54432eca8, line=16
+    objectId=0x54432ecc0, line=19
+    objectId=0x54432ecd8, line=20
+    objectId=0x54432ecf8, line=23
+    objectId=0x54432ed10, line=27
+    objectId=0x52f308b68, line=29
+    objectId=0x54432ed28, line=29
+    objectId=0x54432cad8, line=29
+    objectId=0x54432ed58, line=29
+    objectId=0x54432ed28, line=30
+    objectId=0x54432ed70, line=31
+    objectId=0x54432ed70, line=32
+    objectId=0x52f308d18, line=33
+    objectId=0x53f5cb090, line=33
+    objectId=0x54432ed80, line=35
+    objectId=0x53f571de0, line=36
+
+Thread 0x53644bb78
+  at java.lang.Thread.sleep0(J)V (Thread.java(Native Method))
+  at java.lang.Thread.sleep(J)V (Thread.java:509)
+  at com.intellij.diagnostic.JVMResponsivenessMonitor.samplingLoop()V (JVMResponsivenessMonitor.java:115)
+  at com.intellij.diagnostic.JVMResponsivenessMonitor$$Lambda+0x000000a004c53da8.run()V ()
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+
+  locals:
+    objectId=0x53644bc78, line=2
+    objectId=0x537a2b6d8, line=2
+    objectId=0x537a22350, line=3
+    objectId=0x53644bb78, line=4
+    objectId=0x53f571de0, line=4
+    objectId=0x537a22350, line=4
+    objectId=0x53644bb78, line=5
+    objectId=0x537a22350, line=5
+    objectId=0x53f571de0, line=5
+
+Thread 0x53d070e88
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.parkNanos(J)V (LockSupport.java:410)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.park()V (CoroutineScheduler.kt:943)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.tryPark()V (CoroutineScheduler.kt:872)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker()V (CoroutineScheduler.kt:807)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run()V (CoroutineScheduler.kt:762)
+
+  locals:
+    objectId=0x53d070e88, line=2
+    objectId=0x53d070e88, line=3
+    objectId=0x53d070e88, line=4
+    objectId=0x53d070e88, line=5
+
+Thread 0x52d94ba18
+  at jdk.internal.misc.Unsafe.park(ZJ)V (Unsafe.java(Native Method))
+  at java.util.concurrent.locks.LockSupport.park()V (LockSupport.java:371)
+  at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionNode.block()Z (AbstractQueuedSynchronizer.java:519)
+  at java.util.concurrent.ForkJoinPool.unmanagedBlock(Ljava/util/concurrent/ForkJoinPool$ManagedBlocker;)V (ForkJoinPool.java:4013)
+  at java.util.concurrent.ForkJoinPool.managedBlock(Ljava/util/concurrent/ForkJoinPool$ManagedBlocker;)V (ForkJoinPool.java:3961)
+  at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await()V (AbstractQueuedSynchronizer.java:1746)
+  at java.lang.ref.ReferenceQueue.await()V (ReferenceQueue.java:67)
+  at java.lang.ref.ReferenceQueue.remove0()Ljava/lang/ref/Reference; (ReferenceQueue.java:158)
+  at java.lang.ref.ReferenceQueue.remove()Ljava/lang/ref/Reference; (ReferenceQueue.java:234)
+  at kotlinx.coroutines.debug.internal.ConcurrentWeakMap.runWeakRefQueueCleaningLoopUntilInterrupted()V (ConcurrentWeakMap.kt:69)
+  at kotlinx.coroutines.debug.internal.DebugProbesImpl.startWeakRefCleanerThread$lambda$2()Lkotlin/Unit; (DebugProbesImpl.kt:92)
+  at kotlinx.coroutines.debug.internal.DebugProbesImpl$$Lambda+0x000000a0023dcaf8.invoke()Ljava/lang/Object; ()
+  at kotlin.concurrent.ThreadsKt$thread$thread$1.run()V (Thread.kt:30)
+
+  locals:
+    objectId=0x54440e328, line=2
+    objectId=0x54440e328, line=3
+    objectId=0x52d94ba90, line=5
+    objectId=0x54440e328, line=5
+    objectId=0x52d94baa8, line=7
+    objectId=0x52d94baa8, line=8
+    objectId=0x52d94bb40, line=9
+    objectId=0x52d94bb40, line=9
+    objectId=0x52d94ce00, line=11
+    objectId=0x52d94ba18, line=12
+
+Thread 0x53a968040
+  at java.lang.ProcessHandleImpl.waitForProcessExit0(JZ)I (ProcessHandleImpl.java(Native Method))
+  at java.lang.ProcessHandleImpl$1.run()V (ProcessHandleImpl.java:163)
+  at java.util.concurrent.ThreadPoolExecutor.runWorker(Ljava/util/concurrent/ThreadPoolExecutor$Worker;)V (ThreadPoolExecutor.java:1144)
+  at java.util.concurrent.ThreadPoolExecutor$Worker.run()V (ThreadPoolExecutor.java:642)
+  at java.lang.Thread.runWith(Ljava/lang/Object;Ljava/lang/Runnable;)V (Thread.java:1596)
+  at java.lang.Thread.run()V (Thread.java:1583)
+  at jdk.internal.misc.InnocuousThread.run()V (InnocuousThread.java:186)
+
+  locals:
+    objectId=0x54312a7d0, line=1
+    objectId=0x53a968040, line=1
+    objectId=0x5aa5c8a88, line=1
+    objectId=0x52b16c698, line=2
+    objectId=0x53a968010, line=2
+    objectId=0x53a968040, line=2
+    objectId=0x54312a7d0, line=2
+    objectId=0x53a968010, line=3
+    objectId=0x53a968040, line=4
+    objectId=0x53f571de0, line=4
+    objectId=0x53a968010, line=4
+    objectId=0x53a968040, line=5
+    objectId=0x53a968010, line=5
+    objectId=0x53f571de0, line=5
+    objectId=0x53a968040, line=6
+

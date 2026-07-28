@@ -1,0 +1,6 @@
+[2026-07-29T01:59:24.286129+05:30[Asia/Kolkata]] [INFO] Detected compressed references, because with uncompressed 64-bit references the array at 0x52a806540 would overlap the array at 0x52a8063d0
+[2026-07-29T01:59:25.288985+05:30[Asia/Kolkata]] [INFO] Wrote threads call stacks to /Users/sameervhatkar/Study/Projects/HeapVortex/uploads/heapdump.threads
+[2026-07-29T01:59:25.552101+05:30[Asia/Kolkata]] [INFO] Heap /Users/sameervhatkar/Study/Projects/HeapVortex/uploads/heapdump.hprof contains 8,184,206 objects
+[2026-07-29T01:59:30.877804+05:30[Asia/Kolkata]] [INFO] The keep unreachable objects condition is set to false. This may come either from the preference or dump condition requirements.
+[2026-07-29T01:59:31.107633+05:30[Asia/Kolkata]] [INFO] Removed 458,959 unreachable objects using 30,101,496 bytes
+[2026-07-29T01:59:42.748335+05:30[Asia/Kolkata]] [INFO] Finished opening dump in 19.25 seconds (19.251293s) at 2026-07-29T01:59:42.729503+05:30[Asia/Kolkata]

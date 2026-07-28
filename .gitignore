@@ -32,3 +32,8 @@ out/
 
 # OS files
 .DS_Store
+
+
+*.hprof
+node_modules/
+dist/
