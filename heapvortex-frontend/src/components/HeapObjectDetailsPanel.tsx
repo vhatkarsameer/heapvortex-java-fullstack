@@ -1,285 +1,242 @@
-import React, { useState, useEffect } from "react";
-import { ChevronDown, ChevronUp, Copy, X } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import { HeapObject } from "./HeapVortexVisualizer";
+import { X, ShieldAlert, GitCommit, ArrowDownLeft, ArrowUpRight } from "lucide-react";
 
-interface HeapObject {
-  id: number;
-  className: string;
-  retainedSize: number;
-  objectId: string;
-  referenceChain?: string[];
-}
-
-interface HeapObjectDetailsPanelProps {
-  object: HeapObject | null;
+interface Props {
+  object: HeapObject;
+  fileName: string;
   onClose: () => void;
 }
 
-export const HeapObjectDetailsPanel: React.FC<HeapObjectDetailsPanelProps> = ({
-  object,
-  onClose,
-}) => {
-  const [expandedSections, setExpandedSections] = useState<Set<string>>(
-    new Set(["overview", "referenceChain"])
-  );
-  const [copied, setCopied] = useState(false);
+type TabType = "gcPath" | "incoming" | "outgoing";
 
-  const toggleSection = (section: string) => {
-    const newSet = new Set(expandedSections);
-    if (newSet.has(section)) {
-      newSet.delete(section);
-    } else {
-      newSet.add(section);
-    }
-    setExpandedSections(newSet);
-  };
+export const HeapObjectDetailsPanel: React.FC<Props> = ({ object, fileName, onClose }) => {
+  const [activeTab, setActiveTab] = useState<TabType>("gcPath");
+  const [results, setResults] = useState<HeapObject[]>([]);
+  const [loading, setLoading] = useState(false);
 
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
+  useEffect(() => {
+    const fetchReferenceData = async () => {
+      if (!fileName || !object.address) return;
+      setLoading(true);
+      setResults([]);
 
-  const formatBytes = (bytes: number) => {
-    if (bytes === 0) return "0 Bytes";
-    const k = 1024;
-    const sizes = ["Bytes", "KB", "MB", "GB"];
-    const i = Math.floor(Math.log(bytes, k));
-    return Math.round((bytes / Math.pow(k, i)) * 100) / 100 + " " + sizes[i];
-  };
+      let endpoint = "path-to-gc-roots";
+      if (activeTab === "incoming") endpoint = "incoming-references";
+      if (activeTab === "outgoing") endpoint = "outgoing-references";
 
-  const generateReferenceChain = (objectId: string): string[] => {
-    // Mock reference chain generation
-    const chains = [
-      ["GC Root", "ThreadGroup", "Thread", "ThreadLocal", objectId],
-      ["Static Reference", "Class Loader", "Class", objectId],
-      ["Heap Root", "Instance", objectId],
-      ["Array Element", "Collection", objectId],
-    ];
-    return chains[Math.floor(Math.random() * chains.length)];
-  };
+      try {
+        const url = `http://localhost:8080/api/heap/${endpoint}?fileName=${encodeURIComponent(
+          fileName
+        )}&address=${encodeURIComponent(object.address)}`;
+        const res = await fetch(url);
+        if (res.ok) {
+          const data = await res.json();
+          setResults(data);
+        }
+      } catch (err) {
+        console.error(`Failed to fetch ${activeTab} from Spring Boot:`, err);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  if (!object) return null;
-
-  const referenceChain = object.referenceChain || generateReferenceChain(object.objectId);
+    fetchReferenceData();
+  }, [object, fileName, activeTab]);
 
   return (
-    <div className="fixed right-0 top-0 h-screen w-96 bg-gray-800 border-l border-gray-700 shadow-2xl overflow-y-auto z-50">
-      {/* Header */}
-      <div className="sticky top-0 bg-gray-900 border-b border-gray-700 p-4 flex items-center justify-between">
-        <h2 className="text-lg font-bold text-white">Object Details</h2>
-        <button
-          onClick={onClose}
-          className="p-1 hover:bg-gray-800 rounded transition-colors"
-        >
-          <X size={20} className="text-gray-400" />
-        </button>
-      </div>
-
-      {/* Content */}
-      <div className="p-4 space-y-4">
-        {/* Overview Section */}
-        <div className="bg-gray-900 rounded-lg overflow-hidden">
+    <div
+      onClick={onClose}
+      style={{
+        position: "fixed",
+        inset: 0,
+        backgroundColor: "rgba(3, 7, 18, 0.75)",
+        backdropFilter: "blur(6px)",
+        zIndex: 1000,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        padding: "20px",
+        boxSizing: "border-box"
+      }}
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        style={{
+          width: "100%",
+          maxWidth: "500px",
+          maxHeight: "85vh",
+          backgroundColor: "#111827",
+          border: "1px solid #6366f1",
+          borderRadius: "16px",
+          padding: "24px",
+          boxSizing: "border-box",
+          boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.7)",
+          color: "#ffffff",
+          display: "flex",
+          flexDirection: "column",
+          gap: "16px",
+          overflowY: "auto"
+        }}
+      >
+        {/* Header */}
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid #1f2937", paddingBottom: "12px" }}>
+          <h3 style={{ margin: 0, fontSize: "16px", fontWeight: "bold", color: "#818cf8", display: "flex", alignItems: "center", gap: "8px" }}>
+            <ShieldAlert size={18} /> Object Inspector
+          </h3>
           <button
-            onClick={() => toggleSection("overview")}
-            className="w-full flex items-center justify-between p-3 hover:bg-gray-800 transition-colors"
+            onClick={onClose}
+            style={{
+              backgroundColor: "#1f2937",
+              border: "none",
+              color: "#9ca3af",
+              borderRadius: "8px",
+              padding: "6px",
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center"
+            }}
           >
-            <span className="font-semibold text-white">Overview</span>
-            {expandedSections.has("overview") ? (
-              <ChevronUp size={18} className="text-purple-400" />
-            ) : (
-              <ChevronDown size={18} className="text-gray-500" />
-            )}
+            <X size={18} />
+          </button>
+        </div>
+
+        {/* Selected Object Info */}
+        <div style={{ backgroundColor: "#1f2937", borderRadius: "12px", padding: "14px", display: "flex", flexDirection: "column", gap: "10px", fontSize: "12px" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+            <span style={{ color: "#9ca3af", fontSize: "11px" }}>Class Name:</span>
+            <code style={{ color: "#c084fc", fontFamily: "monospace", wordBreak: "break-all", fontSize: "12px", fontWeight: "600" }}>
+              {object.className}
+            </code>
+          </div>
+
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderTop: "1px solid #374151", paddingTop: "8px" }}>
+            <span style={{ color: "#9ca3af" }}>Memory Address:</span>
+            <code style={{ color: "#4ade80", fontFamily: "monospace" }}>{object.address}</code>
+          </div>
+
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <span style={{ color: "#9ca3af" }}>Retained Size:</span>
+            <span style={{ fontWeight: "bold", color: "#ffffff" }}>
+              {((object.retainedHeap || 0) / 1024).toFixed(2)} KB
+            </span>
+          </div>
+
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <span style={{ color: "#9ca3af" }}>Shallow Size:</span>
+            <span style={{ color: "#e5e7eb" }}>
+              {((object.shallowHeap || 0) / 1024).toFixed(2)} KB
+            </span>
+          </div>
+        </div>
+
+        {/* Tab Selection Controls */}
+        <div style={{ display: "flex", gap: "6px", backgroundColor: "#1f2937", padding: "4px", borderRadius: "10px" }}>
+          <button
+            onClick={() => setActiveTab("gcPath")}
+            style={{
+              flex: 1,
+              padding: "8px 6px",
+              fontSize: "11px",
+              fontWeight: "bold",
+              borderRadius: "8px",
+              border: "none",
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "4px",
+              backgroundColor: activeTab === "gcPath" ? "#4f46e5" : "transparent",
+              color: activeTab === "gcPath" ? "#ffffff" : "#9ca3af"
+            }}
+          >
+            <GitCommit size={13} /> GC Roots
           </button>
 
-          {expandedSections.has("overview") && (
-            <div className="border-t border-gray-700 p-3 space-y-3">
-              {/* Class Name */}
-              <div>
-                <p className="text-xs text-gray-500 uppercase tracking-wide">Class Name</p>
-                <div className="flex items-center justify-between mt-1">
-                  <p className="text-sm font-mono text-purple-400 break-all">
-                    {object.className}
-                  </p>
-                  <button
-                    onClick={() => copyToClipboard(object.className)}
-                    className="p-1 hover:bg-gray-700 rounded transition-colors ml-2"
-                    title="Copy class name"
-                  >
-                    <Copy size={14} className="text-gray-400" />
-                  </button>
-                </div>
-              </div>
+          <button
+            onClick={() => setActiveTab("incoming")}
+            style={{
+              flex: 1,
+              padding: "8px 6px",
+              fontSize: "11px",
+              fontWeight: "bold",
+              borderRadius: "8px",
+              border: "none",
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "4px",
+              backgroundColor: activeTab === "incoming" ? "#4f46e5" : "transparent",
+              color: activeTab === "incoming" ? "#ffffff" : "#9ca3af"
+            }}
+          >
+            <ArrowDownLeft size={13} /> Incoming
+          </button>
 
-              {/* Object ID */}
-              <div>
-                <p className="text-xs text-gray-500 uppercase tracking-wide">Object ID</p>
-                <div className="flex items-center justify-between mt-1">
-                  <p className="text-sm font-mono text-blue-400 break-all">
-                    {object.objectId}
-                  </p>
-                  <button
-                    onClick={() => copyToClipboard(object.objectId)}
-                    className="p-1 hover:bg-gray-700 rounded transition-colors ml-2"
-                    title="Copy object ID"
-                  >
-                    <Copy size={14} className="text-gray-400" />
-                  </button>
-                </div>
-              </div>
+          <button
+            onClick={() => setActiveTab("outgoing")}
+            style={{
+              flex: 1,
+              padding: "8px 6px",
+              fontSize: "11px",
+              fontWeight: "bold",
+              borderRadius: "8px",
+              border: "none",
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "4px",
+              backgroundColor: activeTab === "outgoing" ? "#4f46e5" : "transparent",
+              color: activeTab === "outgoing" ? "#ffffff" : "#9ca3af"
+            }}
+          >
+            <ArrowUpRight size={13} /> Outgoing
+          </button>
+        </div>
 
-              {/* Retained Size */}
-              <div>
-                <p className="text-xs text-gray-500 uppercase tracking-wide">Retained Size</p>
-                <div className="mt-1 flex items-baseline gap-2">
-                  <p className="text-lg font-bold text-green-400">
-                    {formatBytes(object.retainedSize)}
-                  </p>
-                  <p className="text-xs text-gray-500">
-                    ({object.retainedSize.toLocaleString()} bytes)
-                  </p>
-                </div>
-              </div>
-
-              {/* Size Percentage */}
-              <div>
-                <p className="text-xs text-gray-500 uppercase tracking-wide">Heap Impact</p>
-                <div className="mt-2 w-full bg-gray-700 rounded-full h-2 overflow-hidden">
+        {/* Tab Content Display */}
+        <div>
+          {loading ? (
+            <p style={{ margin: 0, fontSize: "12px", color: "#a5b4fc", fontStyle: "italic" }}>
+              Querying MAT Engine for {activeTab}...
+            </p>
+          ) : (
+            <div style={{ display: "flex", flexDirection: "column", gap: "8px", maxHeight: "200px", overflowY: "auto", paddingRight: "4px" }}>
+              {results.length > 0 ? (
+                results.map((node, i) => (
                   <div
-                    className="bg-gradient-to-r from-green-500 to-blue-500 h-full"
+                    key={i}
                     style={{
-                      width: `${Math.min((object.retainedSize / 100000) * 100, 100)}%`,
+                      padding: "10px",
+                      backgroundColor: "#1f2937",
+                      borderRadius: "8px",
+                      borderLeft: "3px solid #6366f1",
+                      fontSize: "11px"
                     }}
-                  />
-                </div>
-                <p className="text-xs text-gray-400 mt-1">
-                  {Math.min((object.retainedSize / 100000) * 100, 100).toFixed(1)}% of max heap
-                </p>
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* Reference Chain Section */}
-        <div className="bg-gray-900 rounded-lg overflow-hidden">
-          <button
-            onClick={() => toggleSection("referenceChain")}
-            className="w-full flex items-center justify-between p-3 hover:bg-gray-800 transition-colors"
-          >
-            <span className="font-semibold text-white">Reference Chain</span>
-            {expandedSections.has("referenceChain") ? (
-              <ChevronUp size={18} className="text-purple-400" />
-            ) : (
-              <ChevronDown size={18} className="text-gray-500" />
-            )}
-          </button>
-
-          {expandedSections.has("referenceChain") && (
-            <div className="border-t border-gray-700 p-3">
-              <div className="space-y-2">
-                {referenceChain.map((item, index) => (
-                  <div key={index} className="flex items-center gap-2">
-                    <div className="flex flex-col items-center">
-                      <div
-                        className={`w-3 h-3 rounded-full ${
-                          index === 0
-                            ? "bg-red-500"
-                            : index === referenceChain.length - 1
-                            ? "bg-green-500"
-                            : "bg-purple-500"
-                        }`}
-                      />
-                      {index < referenceChain.length - 1 && (
-                        <div className="w-0.5 h-6 bg-gray-600 my-1" />
-                      )}
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-sm font-mono text-gray-300 break-all">{item}</p>
-                      <p className="text-xs text-gray-500">
-                        {index === 0
-                          ? "Root Reference"
-                          : index === referenceChain.length - 1
-                          ? "Target Object"
-                          : `Level ${index}`}
-                      </p>
-                    </div>
+                  >
+                    <p style={{ margin: 0, color: "#c084fc", fontFamily: "monospace", wordBreak: "break-all", fontWeight: "600" }}>
+                      {node.className}
+                    </p>
+                    <p style={{ margin: "4px 0 0 0", color: "#9ca3af", fontFamily: "monospace", fontSize: "10px" }}>
+                      {node.address}
+                    </p>
                   </div>
-                ))}
-              </div>
-
-              {/* Reference Chain Stats */}
-              <div className="mt-4 pt-3 border-t border-gray-700 space-y-2">
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-400">Chain Depth:</span>
-                  <span className="text-white font-semibold">{referenceChain.length}</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-400">Reachability:</span>
-                  <span className="text-green-400 font-semibold">Reachable</span>
-                </div>
-              </div>
+                ))
+              ) : (
+                <p style={{ margin: 0, fontSize: "12px", color: "#6b7280" }}>
+                  No records found for {activeTab}.
+                </p>
+              )}
             </div>
           )}
         </div>
 
-        {/* Metrics Section */}
-        <div className="bg-gray-900 rounded-lg overflow-hidden">
-          <button
-            onClick={() => toggleSection("metrics")}
-            className="w-full flex items-center justify-between p-3 hover:bg-gray-800 transition-colors"
-          >
-            <span className="font-semibold text-white">Metrics</span>
-            {expandedSections.has("metrics") ? (
-              <ChevronUp size={18} className="text-purple-400" />
-            ) : (
-              <ChevronDown size={18} className="text-gray-500" />
-            )}
-          </button>
-
-          {expandedSections.has("metrics") && (
-            <div className="border-t border-gray-700 p-3 space-y-3">
-              <div className="grid grid-cols-2 gap-3">
-                <div className="bg-gray-800 rounded p-2">
-                  <p className="text-xs text-gray-500">Shallow Size</p>
-                  <p className="text-sm font-bold text-blue-400 mt-1">
-                    {formatBytes(Math.floor(object.retainedSize * 0.3))}
-                  </p>
-                </div>
-                <div className="bg-gray-800 rounded p-2">
-                  <p className="text-xs text-gray-500">Referenced Objects</p>
-                  <p className="text-sm font-bold text-purple-400 mt-1">
-                    {Math.floor(Math.random() * 50) + 5}
-                  </p>
-                </div>
-                <div className="bg-gray-800 rounded p-2">
-                  <p className="text-xs text-gray-500">Referencing Objects</p>
-                  <p className="text-sm font-bold text-green-400 mt-1">
-                    {Math.floor(Math.random() * 30) + 1}
-                  </p>
-                </div>
-                <div className="bg-gray-800 rounded p-2">
-                  <p className="text-xs text-gray-500">GC Root Distance</p>
-                  <p className="text-sm font-bold text-orange-400 mt-1">
-                    {Math.floor(Math.random() * 20) + 1}
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
-
-      {/* Footer */}
-      <div className="sticky bottom-0 bg-gray-900 border-t border-gray-700 p-4">
-        <button
-          onClick={onClose}
-          className="w-full bg-gray-700 hover:bg-gray-600 text-white py-2 rounded transition-colors"
-        >
-          Close Panel
-        </button>
-        {copied && (
-          <p className="text-xs text-green-400 text-center mt-2">Copied to clipboard!</p>
-        )}
       </div>
     </div>
   );
 };
+
+export default HeapObjectDetailsPanel;

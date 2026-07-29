@@ -1,84 +1,69 @@
 import React, { useState, useEffect } from "react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 
-interface MetricData {
+interface MetricPoint {
   timestamp: string;
-  cpu: number;
-  heapUsed: number;
-  heapMax: number;
+  heapUsedMB: number;
+  heapCommittedMB: number;
+  heapMaxMB: number;
 }
 
 export const HeapMetrics: React.FC = () => {
-  const [metrics, setMetrics] = useState<MetricData[]>([]);
+  const [metrics, setMetrics] = useState<MetricPoint[]>([]);
+  const [connected, setConnected] = useState<boolean>(false);
 
   useEffect(() => {
-    // Generate mock metrics data
-    const generateMetrics = () => {
-      const data: MetricData[] = [];
-      const now = Date.now();
-      for (let i = 59; i >= 0; i--) {
-        data.push({
-          timestamp: new Date(now - i * 1000).toLocaleTimeString(),
-          cpu: Math.random() * 80 + 10,
-          heapUsed: Math.random() * 800 + 200,
-          heapMax: 1024,
-        });
+    const fetchTelemetry = async () => {
+      try {
+        const response = await fetch("http://localhost:8080/api/telemetry/current");
+        if (!response.ok) {
+          setConnected(false);
+          return;
+        }
+
+        const data = await response.json();
+        setConnected(true);
+
+        const newPoint: MetricPoint = {
+          timestamp: data.timestamp ? new Date(data.timestamp).toLocaleTimeString() : new Date().toLocaleTimeString(),
+          heapUsedMB: Math.round((data.heapUsed || 0) / (1024 * 1024)),
+          heapCommittedMB: Math.round((data.heapCommitted || 0) / (1024 * 1024)),
+          heapMaxMB: Math.round((data.heapMax || 0) / (1024 * 1024)),
+        };
+
+        setMetrics((prev) => [...prev.slice(-29), newPoint]); // Keeps last 30 readings
+      } catch (err) {
+        setConnected(false);
       }
-      return data;
     };
 
-    setMetrics(generateMetrics());
-
-    // Update metrics every second
-    const interval = setInterval(() => {
-      setMetrics((prev) => {
-        const newData = [...prev.slice(1)];
-        const now = Date.now();
-        newData.push({
-          timestamp: new Date(now).toLocaleTimeString(),
-          cpu: Math.random() * 80 + 10,
-          heapUsed: Math.random() * 800 + 200,
-          heapMax: 1024,
-        });
-        return newData;
-      });
-    }, 1000);
-
+    fetchTelemetry();
+    const interval = setInterval(fetchTelemetry, 1000);
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="bg-gray-800 rounded-lg p-4 text-white">
-      <h2 className="text-lg font-bold mb-4">JVM Metrics</h2>
-      <ResponsiveContainer width="100%" height={250}>
+    <div className="bg-gray-800 rounded-lg p-4 text-white shadow-md">
+      <div className="flex justify-between items-center mb-3">
+        <h2 className="text-md font-bold text-indigo-400">Live Telemetry (Spring Boot JMX)</h2>
+        <span className={`text-xs px-2 py-0.5 rounded-full ${connected ? "bg-green-900 text-green-300" : "bg-red-900 text-red-300"}`}>
+          {connected ? "LIVE" : "DISCONNECTED"}
+        </span>
+      </div>
+
+      <ResponsiveContainer width="100%" height={220}>
         <LineChart data={metrics}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#444" />
-          <XAxis dataKey="timestamp" stroke="#888" style={{ fontSize: "12px" }} />
-          <YAxis stroke="#888" style={{ fontSize: "12px" }} />
-          <Tooltip 
-            contentStyle={{ backgroundColor: "#1a1a1a", border: "1px solid #444" }}
-            labelStyle={{ color: "#fff" }}
-          />
+          <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+          <XAxis dataKey="timestamp" stroke="#9CA3AF" style={{ fontSize: "10px" }} />
+          <YAxis stroke="#9CA3AF" style={{ fontSize: "10px" }} />
+          <Tooltip contentStyle={{ backgroundColor: "#1F2937", border: "1px solid #374151" }} />
           <Legend />
-          <Line 
-            type="monotone" 
-            dataKey="cpu" 
-            stroke="#8b5cf6" 
-            dot={false} 
-            name="CPU (%)"
-            isAnimationActive={false}
-          />
-          <Line 
-            type="monotone" 
-            dataKey="heapUsed" 
-            stroke="#3b82f6" 
-            dot={false} 
-            name="Heap Used (MB)"
-            isAnimationActive={false}
-          />
+          <Line type="monotone" dataKey="heapUsedMB" stroke="#3B82F6" dot={false} name="Heap Used (MB)" isAnimationActive={false} />
+          <Line type="monotone" dataKey="heapCommittedMB" stroke="#10B981" dot={false} name="Committed (MB)" isAnimationActive={false} />
         </LineChart>
       </ResponsiveContainer>
     </div>
   );
 };
+
 export default HeapMetrics;
