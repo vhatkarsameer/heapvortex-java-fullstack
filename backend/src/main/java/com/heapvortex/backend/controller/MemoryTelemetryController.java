@@ -5,6 +5,7 @@ import com.heapvortex.backend.jmx.MemoryTelemetryService;
 import com.heapvortex.backend.model.MemoryTelemetry;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/telemetry")
+@CrossOrigin(origins = "http://localhost:5173") // Enables CORS for React frontend
 @RequiredArgsConstructor
 public class MemoryTelemetryController {
 

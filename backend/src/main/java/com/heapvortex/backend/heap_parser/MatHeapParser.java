@@ -58,8 +58,6 @@ public class MatHeapParser implements HeapParser {
     private Path executeOql(Path heapDumpPath, String oqlQuery) throws IOException {
         System.out.println("Executing OQL = " + oqlQuery);
 
-        // Deep search reveals MAT requires the entire query string in quotes,
-        // and internal quotes MUST be explicitly escaped for its OSGi parser.
         String escapedOql = oqlQuery.replace("\"", "\\\"");
         String commandArg = "-command=oql \"" + escapedOql + "\"";
 
@@ -73,7 +71,7 @@ public class MatHeapParser implements HeapParser {
         );
 
         processBuilder.directory(heapDumpPath.getParent().toFile());
-        processBuilder.redirectErrorStream(true); // Captures both error and standard output
+        processBuilder.redirectErrorStream(true);
         Process process = processBuilder.start();
         StringBuilder output = new StringBuilder();
 
@@ -94,7 +92,6 @@ public class MatHeapParser implements HeapParser {
             throw new IOException("MAT OQL execution interrupted", e);
         }
 
-        // Pass MAT's raw terminal output into our search method
         return findLatestQueryCsv(heapDumpPath, output.toString());
     }
 
@@ -103,10 +100,9 @@ public class MatHeapParser implements HeapParser {
             return paths
                     .filter(Files::isRegularFile)
                     .filter(path -> path.getFileName().toString().endsWith(".csv"))
-                    .filter(path -> !path.getFileName().toString().contains("Histogram")) // Explicitly exclude histogram
+                    .filter(path -> !path.getFileName().toString().contains("Histogram"))
                     .filter(this::isOqlCsv)
                     .max(Comparator.comparing(this::lastModifiedTime))
-                    // If it fails, dump the entire MAT terminal output directly to Postman
                     .orElseThrow(() -> new IOException("MAT did not produce an OQL query CSV report.\n\n--- MAT CONSOLE OUTPUT ---\n" + matOutput));
         }
     }
@@ -117,7 +113,6 @@ public class MatHeapParser implements HeapParser {
             if (firstLine == null) return false;
 
             String lower = firstLine.toLowerCase();
-            // Object list CSVs have "Shallow Heap" but do NOT have the "Objects" count column
             return lower.contains("shallow") && !lower.contains("objects");
         } catch (IOException e) {
             return false;
@@ -132,7 +127,7 @@ public class MatHeapParser implements HeapParser {
             Iterator<CSVRecord> iterator = csvParser.iterator();
 
             if (iterator.hasNext()) {
-                iterator.next(); // Skip the header row
+                iterator.next(); // Skip header row
             }
 
             List<HeapObject> result = new ArrayList<>();
@@ -144,7 +139,6 @@ public class MatHeapParser implements HeapParser {
     }
 
     private HeapObject toHeapObject(CSVRecord record) {
-        // MAT outputs Object info in column 0
         String objectInfo = record.size() > 0 ? record.get(0).trim() : "";
         String className = objectInfo;
         String address = "";
@@ -155,7 +149,6 @@ public class MatHeapParser implements HeapParser {
             address = objectInfo.substring(index + 1).trim().split(" ")[0];
         }
 
-        // Safely parse Shallow (Column 1) and Retained (Column 2) if they exist
         long shallow = record.size() > 1 ? parseNumber(record.get(1)) : 0;
         long retained = record.size() > 2 ? parseNumber(record.get(2)) : 0;
 
@@ -166,7 +159,6 @@ public class MatHeapParser implements HeapParser {
                 retained
         );
     }
-
 
     private void runHistogramReport(Path heapDumpPath) throws IOException {
         ProcessBuilder processBuilder = new ProcessBuilder(
@@ -202,7 +194,6 @@ public class MatHeapParser implements HeapParser {
     }
 
     private Path findLatestHistogramCsv(Path heapDumpPath) throws IOException {
-        // Changed "_Histogram" back to "_Query" to match MAT's output directory
         String reportPrefix = removeExtension(heapDumpPath.getFileName().toString()) + "_Query";
 
         try (Stream<Path> paths = Files.walk(heapDumpPath.getParent(), 3)) {
@@ -265,8 +256,9 @@ public class MatHeapParser implements HeapParser {
 
     @Override
     public List<HeapObject> getObjectsForClass(Path heapDumpPath, String className) throws IOException {
-        // Changed to standard SELECT * so MAT can natively export it to CSV
-        String oqlQuery = "SELECT * FROM \"" + className + "\"";
+        // Safely escape square brackets [] so MAT OQL parser doesn't crash on array types like byte[]
+        String escapedClassName = className.replace("[", "\\[").replace("]", "\\]");
+        String oqlQuery = "SELECT * FROM \"" + escapedClassName + "\"";
         Path csvReport = executeOql(heapDumpPath, oqlQuery);
         return readHeapObjects(csvReport);
     }
@@ -292,26 +284,21 @@ public class MatHeapParser implements HeapParser {
 
         String currentAddress = address;
 
-        // Iterative DFS / Backtracking up the reference tree toward the GC Root
         while (currentAddress != null && !currentAddress.isBlank()) {
             if (!visited.add(currentAddress)) {
-                break; // Prevent infinite loops from circular references
+                break;
             }
 
-            // Get incoming references (parents) for the current address using our working OQL engine
             String oqlQuery = "SELECT OBJECTS inbounds(s) FROM OBJECTS " + currentAddress + " s";
             Path csvReport = executeOql(heapDumpPath, oqlQuery);
             List<HeapObject> parents = readHeapObjects(csvReport);
 
             if (parents == null || parents.isEmpty()) {
-                break; // Reached the top (GC Root has no incoming references)
+                break;
             }
 
-            // Pick the primary parent to continue tracing the chain upward
             HeapObject parent = parents.get(0);
             chain.add(parent);
-
-            // Move up to the parent's address for the next iteration
             currentAddress = parent.getAddress();
         }
 

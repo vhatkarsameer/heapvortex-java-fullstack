@@ -41,14 +41,21 @@ public class JmxConnectionService {
 
     public void connect(String host, int port) throws IOException {
 
-        if(connector != null) {
-            connector.close();
-            connector = null;
-            mBeanServerConnection = null;
+        // 1. Safely dismantle the old/dead connection
+        if (connector != null) {
+            try {
+                connector.close();
+            } catch (Exception e) {
+                // Ignore the error. The target JVM is already dead, so we don't care if close() fails.
+            } finally {
+                // ALWAYS clear these out, even if close() threw an error
+                connector = null;
+                mBeanServerConnection = null;
+            }
         }
 
+        // 2. Establish the fresh connection
         String url = "service:jmx:rmi:///jndi/rmi://" + host + ":" + port + "/jmxrmi";
-
         jmxServiceURL = new JMXServiceURL(url);
         connector = JMXConnectorFactory.connect(jmxServiceURL);
         mBeanServerConnection = connector.getMBeanServerConnection();

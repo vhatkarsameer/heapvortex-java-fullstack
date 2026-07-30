@@ -1,7 +1,6 @@
-import Home from "./pages/Home";
+import React from "react";
+import HeapVortexDashboard from "./components/HeapVortexDashboard";
 
-function App() {
-  return <Home />;
+export default function App() {
+  return <HeapVortexDashboard />;
 }
-
-export default App;

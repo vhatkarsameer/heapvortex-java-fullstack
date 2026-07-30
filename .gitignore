@@ -32,3 +32,11 @@ out/
 
 # OS files
 .DS_Store
+
+
+*.hprof
+node_modules/
+dist/
+
+# Ignore Eclipse MAT heap dump parsing files
+uploads/
