@@ -14,6 +14,4 @@ public class JvmHeapMetrics {
     private long heapUsed;
     private long heapCommited;
     private long heapMax;
-
-
 }
