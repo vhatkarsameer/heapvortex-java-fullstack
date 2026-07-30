@@ -34,15 +34,12 @@ export const HeapVortexVisualizer: React.FC<HeapVisualizerProps> = ({
     let width = container.clientWidth || 800;
     let height = container.clientHeight || 500;
 
-    // 1. Scene Setup
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x0a0e27);
 
-    // 2. Camera Setup - Pulled back to z=130 so NO spheres get cut off
     const camera = new THREE.PerspectiveCamera(55, width / height, 0.1, 1000);
-    camera.position.set(0, 0, 130);
+    camera.position.set(0, 0, 150); // Pulled back slightly to fit more objects
 
-    // 3. Renderer Setup
     const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" });
     renderer.setSize(width, height, true);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -51,15 +48,12 @@ export const HeapVortexVisualizer: React.FC<HeapVisualizerProps> = ({
     renderer.domElement.style.height = "100%";
     container.appendChild(renderer.domElement);
 
-    // 4. Orbit Controls
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
     controls.autoRotate = true;
     controls.autoRotateSpeed = 0.8;
-    controls.target.set(0, 0, 0);
 
-    // 5. Lighting
     scene.add(new THREE.AmbientLight(0xffffff, 0.7));
     const dirLight = new THREE.DirectionalLight(0xffffff, 1.0);
     dirLight.position.set(50, 100, 50);
@@ -68,12 +62,12 @@ export const HeapVortexVisualizer: React.FC<HeapVisualizerProps> = ({
     const nodeMap = new Map<string, THREE.Mesh>();
     const nodeObjectMap = new Map<THREE.Mesh, HeapObject>();
 
-    const displayObjects = objects.slice(0, 150);
+    // CHANGE: Increased from 150 to 500 so you can see all loaded items in the 3D space!
+    const displayObjects = objects.slice(0, 500);
 
     displayObjects.forEach((obj, index) => {
       const heapVal = obj.retainedHeap || obj.shallowHeap || 1000;
 
-      // Scaled down sphere radius (1.0 to 5.5 max)
       const radius = Math.max(1.0, Math.min(5.5, Math.log10(heapVal) * 0.9));
       const geometry = new THREE.SphereGeometry(radius, 24, 24);
 
@@ -86,10 +80,11 @@ export const HeapVortexVisualizer: React.FC<HeapVisualizerProps> = ({
 
       const mesh = new THREE.Mesh(geometry, material);
 
-      // Compacted cluster radius (Max distance ~32 instead of ~55)
       const phi = Math.acos(-1 + (2 * (index + 0.5)) / Math.max(displayObjects.length, 1));
       const theta = Math.sqrt(Math.max(displayObjects.length, 1) * Math.PI) * phi;
-      const distance = 16 + (index % 8) * 2.0;
+
+      // Adjusted the spacing slightly to accommodate 500 objects beautifully
+      const distance = 20 + (index % 12) * 2.5;
 
       mesh.position.set(
         distance * Math.cos(theta) * Math.sin(phi),
@@ -102,7 +97,6 @@ export const HeapVortexVisualizer: React.FC<HeapVisualizerProps> = ({
       nodeObjectMap.set(mesh, obj);
     });
 
-    // Raycaster for clicking spheres
     const raycaster = new THREE.Raycaster();
     const mouse = new THREE.Vector2();
 
@@ -124,7 +118,6 @@ export const HeapVortexVisualizer: React.FC<HeapVisualizerProps> = ({
 
     renderer.domElement.addEventListener("click", onClick);
 
-    // Auto-resize logic to adjust camera frustum on window scale/zoom
     const updateDimensions = () => {
       if (!containerRef.current) return;
       const newWidth = containerRef.current.clientWidth;

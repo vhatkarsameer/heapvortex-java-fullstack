@@ -95,6 +95,8 @@ export default function HeapVortexDashboard() {
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files || e.target.files.length === 0) return;
     const file = e.target.files[0];
+
+    setObjects([]); // <-- FIX 2: Instantly wipe the old graph
     setFileName(file.name);
     setUploadStatus("uploading");
     setStatusMessage(`Uploading ${file.name}...`);
@@ -125,6 +127,7 @@ export default function HeapVortexDashboard() {
 
   // 4. Trigger Heap Dump on the Local HeapVortex Backend itself
   const handleProfileSelfJvm = async () => {
+    setObjects([]); // <-- FIX 2: Instantly wipe the old graph
     setUploadStatus("uploading");
     setStatusMessage("Dumping local HeapVortex JVM...");
 
@@ -155,6 +158,8 @@ export default function HeapVortexDashboard() {
   // 5. Trigger Remote Heap Dump over JMX and parse with MAT
   const handleTriggerRemoteDump = async () => {
     if (!jmxHost || !jmxPort) return;
+
+    setObjects([]); // <-- FIX 2: Instantly wipe the old graph
     setUploadStatus("uploading");
     setStatusMessage(`Triggering remote dump on ${jmxHost}:${jmxPort}...`);
 
@@ -365,19 +370,39 @@ export default function HeapVortexDashboard() {
             alignItems: "center",
             justifyContent: "center"
           }}>
-            {objects.length > 0 ? (
+            {uploadStatus === "uploading" ? (
+
+              /* NEW LOADING SPINNER UI */
+              <div style={{ textAlign: "center", color: "#6b7280", padding: "20px", display: "flex", flexDirection: "column", alignItems: "center" }}>
+                <Loader2 size={50} className="animate-spin" style={{ marginBottom: "16px", color: "#6366f1" }} />
+                <h3 style={{ margin: "0 0 8px 0", fontSize: "18px", color: "#e5e7eb", fontWeight: "bold" }}>Generating Heap Dump...</h3>
+                <p style={{ margin: 0, fontSize: "13px", color: "#a5b4fc", fontFamily: "monospace" }}>
+                  {statusMessage}
+                </p>
+                <p style={{ margin: "10px 0 0 0", fontSize: "11px", color: "#6b7280" }}>
+                  This may take 20-30 seconds depending on heap size.
+                </p>
+              </div>
+
+            ) : objects.length > 0 ? (
+
+              /* ORIGINAL 3D VISUALIZER */
               <HeapVortexVisualizer
                 objects={objects}
                 onObjectSelected={setSelectedObject}
               />
+
             ) : (
+
+              /* ORIGINAL EMPTY STATE */
               <div style={{ textAlign: "center", color: "#6b7280", padding: "20px" }}>
-                <AlertCircle size={40} style={{ marginBottom: "12px", color: "#4f46e5" }} />
-                <h3 style={{ margin: "0 0 6px 0", fontSize: "16px", color: "#e5e7eb" }}>No Heap Dump Loaded</h3>
+                <AlertCircle size={40} style={{ marginBottom: "12px", color: "#4f46e5", margin: "0 auto" }} />
+                <h3 style={{ margin: "12px 0 6px 0", fontSize: "16px", color: "#e5e7eb" }}>No Heap Dump Loaded</h3>
                 <p style={{ margin: 0, fontSize: "12px", color: "#9ca3af" }}>
                   Upload an <code>.hprof</code> file, or click <strong>Profile Current JVM</strong> / <strong>Dump Remote JVM</strong> to analyze memory.
                 </p>
               </div>
+
             )}
           </div>
         </div>

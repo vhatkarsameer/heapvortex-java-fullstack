@@ -20,13 +20,25 @@ public class TelemetryBroadcaster {
     private final SimpMessagingTemplate messagingTemplate;
     private final MemoryTelemetryService memoryTelemetryService;
 
-    @Scheduled(fixedRate = 2000) // Pushes updates every 2 seconds
+    // Add the same state flag here
+    private boolean wasConnected = true;
+
+    @Scheduled(fixedRate = 2000)
     public void broadcastTelemetry() {
         try {
             MemoryTelemetryDTO dto = memoryTelemetryService.getCurrentTelemetry();
             messagingTemplate.convertAndSend("/topic/telemetry", dto);
+
+            // Silently reset the state if it reconnects
+            if (!wasConnected) {
+                wasConnected = true;
+            }
         } catch (IOException e) {
-            log.error("Failed to collect and broadcast live telemetry", e);
+            // Only log the drop once!
+            if (wasConnected) {
+                log.warn("WebSocket broadcast paused: Target JVM is disconnected.");
+                wasConnected = false;
+            }
         }
     }
 }

@@ -10,36 +10,67 @@ interface MetricPoint {
 
 export const HeapMetrics: React.FC = () => {
   const [metrics, setMetrics] = useState<MetricPoint[]>([]);
-  const [connected, setConnected] = useState<boolean>(false);
+  const [connected, setConnected] = useState<boolean>(true);
 
   useEffect(() => {
+    let isMounted = true;
+    let timer: NodeJS.Timeout;
+
     const fetchTelemetry = async () => {
+      // If the component was closed/unmounted, stop running
+      if (!isMounted) return;
+
       try {
-        const response = await fetch("http://localhost:8080/api/telemetry/current");
+        // 1. CACHE-BUSTER: Force the browser to actually hit the Spring Boot backend every time
+        const response = await fetch("http://localhost:8080/api/telemetry/current", {
+          cache: 'no-store', // Absolutely no caching
+          headers: {
+            'Pragma': 'no-cache',
+            'Cache-Control': 'no-cache'
+          }
+        });
+
         if (!response.ok) {
-          setConnected(false);
-          return;
+          if (isMounted) setConnected(false);
+        } else {
+          const data = await response.json();
+
+          // 2. Safely check if data exists and is valid
+          if (!data || (data.heapUsed === 0 && data.heapMax === 0)) {
+            if (isMounted) setConnected(false);
+          } else {
+            if (isMounted) {
+              setConnected(true);
+              const newPoint: MetricPoint = {
+                timestamp: data.timestamp ? new Date(data.timestamp).toLocaleTimeString() : new Date().toLocaleTimeString(),
+                heapUsedMB: Math.round((data.heapUsed || 0) / (1024 * 1024)),
+                heapCommittedMB: Math.round((data.heapCommitted || 0) / (1024 * 1024)),
+                heapMaxMB: Math.round((data.heapMax || 0) / (1024 * 1024)),
+              };
+              setMetrics((prev) => [...prev.slice(-29), newPoint]); // Keep last 30 readings
+            }
+          }
         }
-
-        const data = await response.json();
-        setConnected(true);
-
-        const newPoint: MetricPoint = {
-          timestamp: data.timestamp ? new Date(data.timestamp).toLocaleTimeString() : new Date().toLocaleTimeString(),
-          heapUsedMB: Math.round((data.heapUsed || 0) / (1024 * 1024)),
-          heapCommittedMB: Math.round((data.heapCommitted || 0) / (1024 * 1024)),
-          heapMaxMB: Math.round((data.heapMax || 0) / (1024 * 1024)),
-        };
-
-        setMetrics((prev) => [...prev.slice(-29), newPoint]); // Keeps last 30 readings
       } catch (err) {
-        setConnected(false);
+        // Catch network disconnections (e.g., if Spring Boot itself is turned off)
+        if (isMounted) setConnected(false);
+      } finally {
+        // 3. RECURSIVE TIMEOUT: Only start the 1-second countdown AFTER the previous request finishes!
+        // This completely prevents "Promise Pile-up" and network freezes.
+        if (isMounted) {
+          timer = setTimeout(fetchTelemetry, 1000);
+        }
       }
     };
 
+    // Start the polling loop
     fetchTelemetry();
-    const interval = setInterval(fetchTelemetry, 1000);
-    return () => clearInterval(interval);
+
+    // Cleanup phase: wipe the timer if the user leaves the page
+    return () => {
+      isMounted = false;
+      clearTimeout(timer);
+    };
   }, []);
 
   return (

@@ -37,3 +37,6 @@ out/
 *.hprof
 node_modules/
 dist/
+
+# Ignore Eclipse MAT heap dump parsing files
+uploads/
