@@ -40,8 +40,13 @@ public class JvmController {
             String serviceUrl = String.format("service:jmx:rmi:///jndi/rmi://%s:%d/jmxrmi", host, port);
             JMXServiceURL url = new JMXServiceURL(serviceUrl);
 
-            // 2. Connect to Target JVM over JMX
-            try (JMXConnector jmxConnector = JMXConnectorFactory.connect(url, null)) {
+            // --- ADDED SSL ENVIRONMENT FIX ---
+            Map<String, Object> environment = new HashMap<>();
+            javax.rmi.ssl.SslRMIClientSocketFactory csf = new javax.rmi.ssl.SslRMIClientSocketFactory();
+            environment.put("com.sun.jndi.rmi.factory.socket", csf);
+
+            // 2. Connect to Target JVM over JMX using the SSL environment map (No longer 'null'!)
+            try (JMXConnector jmxConnector = JMXConnectorFactory.connect(url, environment)) {
                 MBeanServerConnection mbeanConn = jmxConnector.getMBeanServerConnection();
 
                 HotSpotDiagnosticMXBean mxBean = ManagementFactory.newPlatformMXBeanProxy(

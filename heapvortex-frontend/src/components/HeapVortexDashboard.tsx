@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { HeapVortexVisualizer, HeapObject } from "./HeapVortexVisualizer";
 import { HeapObjectDetailsPanel } from "./HeapObjectDetailsPanel";
-import HeapMetrics from "./HeapMetrics";
-import { Upload, CheckCircle2, Loader2, HardDrive, Plug, Filter, AlertCircle, Cpu } from "lucide-react";
+import { HeapMetrics } from "./HeapMetrics";
+import { Upload, Loader2, HardDrive, Plug, Filter, AlertCircle, Cpu } from "lucide-react";
 
 export default function HeapVortexDashboard() {
   const [selectedObject, setSelectedObject] = useState<HeapObject | null>(null);
@@ -79,15 +79,21 @@ export default function HeapVortexDashboard() {
 
       if (objRes.ok) {
         const objData = await objRes.json();
-        setObjects(objData);
+        // SAFEGUARD: Ensure data is an array before setting state
+        const safeData = Array.isArray(objData) ? objData : [];
+        setObjects(safeData);
         setUploadStatus("success");
-        setStatusMessage(`Loaded ${objData.length} instances of ${classNameToQuery}`);
+        setStatusMessage(`Loaded ${safeData.length} instances of ${classNameToQuery}`);
       } else {
         setObjects([]);
+        setUploadStatus("error");
         setStatusMessage(`No instances found for class: ${classNameToQuery}`);
       }
     } catch (err) {
       console.error("Failed to fetch objects by class:", err);
+      setObjects([]);
+      setUploadStatus("error");
+      setStatusMessage("Error fetching objects for class.");
     }
   };
 
@@ -96,7 +102,7 @@ export default function HeapVortexDashboard() {
     if (!e.target.files || e.target.files.length === 0) return;
     const file = e.target.files[0];
 
-    setObjects([]); // <-- FIX 2: Instantly wipe the old graph
+    setObjects([]);
     setFileName(file.name);
     setUploadStatus("uploading");
     setStatusMessage(`Uploading ${file.name}...`);
@@ -127,7 +133,7 @@ export default function HeapVortexDashboard() {
 
   // 4. Trigger Heap Dump on the Local HeapVortex Backend itself
   const handleProfileSelfJvm = async () => {
-    setObjects([]); // <-- FIX 2: Instantly wipe the old graph
+    setObjects([]);
     setUploadStatus("uploading");
     setStatusMessage("Dumping local HeapVortex JVM...");
 
@@ -159,7 +165,7 @@ export default function HeapVortexDashboard() {
   const handleTriggerRemoteDump = async () => {
     if (!jmxHost || !jmxPort) return;
 
-    setObjects([]); // <-- FIX 2: Instantly wipe the old graph
+    setObjects([]);
     setUploadStatus("uploading");
     setStatusMessage(`Triggering remote dump on ${jmxHost}:${jmxPort}...`);
 
@@ -322,7 +328,14 @@ export default function HeapVortexDashboard() {
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "12px", flexWrap: "wrap", gap: "8px" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
               <HardDrive size={18} color="#818cf8" />
-              <h2 style={{ margin: 0, fontSize: "14px", fontWeight: "bold", color: "#e5e7eb" }}>3D Heap Memory Space</h2>
+              <h2 style={{ margin: 0, fontSize: "14px", fontWeight: "bold", color: "#e5e7eb", display: "flex", alignItems: "center" }}>
+                3D Heap Memory Space
+                {fileName && (
+                  <span style={{ marginLeft: "10px", fontSize: "11px", color: "#6ee7b7", backgroundColor: "#064e3b", padding: "2px 6px", borderRadius: "4px", border: "1px solid #059669" }}>
+                    Target: {fileName.includes("remote") ? `${jmxHost}:${jmxPort}` : fileName.includes("self") ? "Local Backend JVM" : fileName}
+                  </span>
+                )}
+              </h2>
             </div>
 
             {/* Class Dropdown Selector */}
@@ -371,8 +384,6 @@ export default function HeapVortexDashboard() {
             justifyContent: "center"
           }}>
             {uploadStatus === "uploading" ? (
-
-              /* NEW LOADING SPINNER UI */
               <div style={{ textAlign: "center", color: "#6b7280", padding: "20px", display: "flex", flexDirection: "column", alignItems: "center" }}>
                 <Loader2 size={50} className="animate-spin" style={{ marginBottom: "16px", color: "#6366f1" }} />
                 <h3 style={{ margin: "0 0 8px 0", fontSize: "18px", color: "#e5e7eb", fontWeight: "bold" }}>Generating Heap Dump...</h3>
@@ -383,18 +394,12 @@ export default function HeapVortexDashboard() {
                   This may take 20-30 seconds depending on heap size.
                 </p>
               </div>
-
             ) : objects.length > 0 ? (
-
-              /* ORIGINAL 3D VISUALIZER */
               <HeapVortexVisualizer
                 objects={objects}
                 onObjectSelected={setSelectedObject}
               />
-
             ) : (
-
-              /* ORIGINAL EMPTY STATE */
               <div style={{ textAlign: "center", color: "#6b7280", padding: "20px" }}>
                 <AlertCircle size={40} style={{ marginBottom: "12px", color: "#4f46e5", margin: "0 auto" }} />
                 <h3 style={{ margin: "12px 0 6px 0", fontSize: "16px", color: "#e5e7eb" }}>No Heap Dump Loaded</h3>
@@ -402,7 +407,6 @@ export default function HeapVortexDashboard() {
                   Upload an <code>.hprof</code> file, or click <strong>Profile Current JVM</strong> / <strong>Dump Remote JVM</strong> to analyze memory.
                 </p>
               </div>
-
             )}
           </div>
         </div>
@@ -412,12 +416,12 @@ export default function HeapVortexDashboard() {
 
           {/* Live JMX Telemetry Chart */}
           <div style={{ backgroundColor: "#111827", border: "1px solid #374151", borderRadius: "14px", padding: "16px" }}>
-            <HeapMetrics />
+            <HeapMetrics jmxTarget={`${jmxHost}:${jmxPort}`} />
           </div>
 
           {/* Loaded Heap Objects Inspector List */}
           <div style={{ backgroundColor: "#111827", border: "1px solid #374151", borderRadius: "14px", padding: "16px", flex: 1, display: "flex", flexDirection: "column", boxSizing: "border-box" }}>
-            <h3 style={{ margin: "0 0 12px 0", fontSize: "14px", fontWeight: "bold", color: "#e5e7eb", display: "flex", justifyContent: "space-between", items: "center" }}>
+            <h3 style={{ margin: "0 0 12px 0", fontSize: "14px", fontWeight: "bold", color: "#e5e7eb", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
               <span>Loaded Heap Objects</span>
               <span style={{ backgroundColor: "#1e1b4b", color: "#a5b4fc", fontSize: "10px", padding: "2px 8px", borderRadius: "12px", border: "1px solid #3730a3" }}>
                 {objects.length} Items

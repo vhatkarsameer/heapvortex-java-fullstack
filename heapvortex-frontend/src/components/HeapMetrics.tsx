@@ -8,7 +8,13 @@ interface MetricPoint {
   heapMaxMB: number;
 }
 
-export const HeapMetrics: React.FC = () => {
+// 1. ADDED: Interface to accept the JMX Target from the parent Dashboard
+interface HeapMetricsProps {
+  jmxTarget?: string;
+}
+
+// 2. UPDATED: Component now receives the jmxTarget prop
+export const HeapMetrics: React.FC<HeapMetricsProps> = ({ jmxTarget = "localhost:9010" }) => {
   const [metrics, setMetrics] = useState<MetricPoint[]>([]);
   const [connected, setConnected] = useState<boolean>(true);
 
@@ -76,7 +82,8 @@ export const HeapMetrics: React.FC = () => {
   return (
     <div className="bg-gray-800 rounded-lg p-4 text-white shadow-md">
       <div className="flex justify-between items-center mb-3">
-        <h2 className="text-md font-bold text-indigo-400">Live Telemetry (Spring Boot JMX)</h2>
+        {/* 3. UPDATED: Dynamically rendering the target instead of hardcoded text */}
+        <h2 className="text-md font-bold text-indigo-400">Live Telemetry ({jmxTarget})</h2>
         <span className={`text-xs px-2 py-0.5 rounded-full ${connected ? "bg-green-900 text-green-300" : "bg-red-900 text-red-300"}`}>
           {connected ? "LIVE" : "DISCONNECTED"}
         </span>
