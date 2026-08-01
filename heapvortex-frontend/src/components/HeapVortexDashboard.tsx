@@ -79,6 +79,8 @@ export default function HeapVortexDashboard() {
 
       if (objRes.ok) {
         const objData = await objRes.json();
+        console.log("Objects received from backend:", objData.length);
+        console.log(objData);
         // SAFEGUARD: Ensure data is an array before setting state
         const safeData = Array.isArray(objData) ? objData : [];
         setObjects(safeData);
@@ -364,7 +366,7 @@ export default function HeapVortexDashboard() {
               )}
 
               <span style={{ fontSize: "12px", color: "#9ca3af", fontFamily: "monospace", marginLeft: "8px" }}>
-                ({objects.length} Objects)
+                (Showing {Math.min(objects.length, 15000)} of {objects.length} Objects)
               </span>
             </div>
           </div>

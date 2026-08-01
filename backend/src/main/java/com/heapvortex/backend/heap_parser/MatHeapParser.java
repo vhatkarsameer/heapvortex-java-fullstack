@@ -67,6 +67,7 @@ public class MatHeapParser implements HeapParser {
                 commandArg,
                 "-format=csv",
                 "-unzip",
+                "-limit-15000",
                 "org.eclipse.mat.api:query"
         );
 
@@ -167,6 +168,7 @@ public class MatHeapParser implements HeapParser {
                 "-command=histogram",
                 "-format=csv",
                 "-unzip",
+                "-limit=15000",
                 "org.eclipse.mat.api:query"
         );
         processBuilder.directory(heapDumpPath.getParent().toFile());
