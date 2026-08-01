@@ -8,12 +8,10 @@ interface MetricPoint {
   heapMaxMB: number;
 }
 
-// 1. ADDED: Interface to accept the JMX Target from the parent Dashboard
 interface HeapMetricsProps {
   jmxTarget?: string;
 }
 
-// 2. UPDATED: Component now receives the jmxTarget prop
 export const HeapMetrics: React.FC<HeapMetricsProps> = ({ jmxTarget = "localhost:9010" }) => {
   const [metrics, setMetrics] = useState<MetricPoint[]>([]);
   const [connected, setConnected] = useState<boolean>(true);
@@ -22,12 +20,15 @@ export const HeapMetrics: React.FC<HeapMetricsProps> = ({ jmxTarget = "localhost
     let isMounted = true;
     let timer: NodeJS.Timeout;
 
+    // 1. CLEAR OLD DATA: Wipe the graph clean whenever the target JVM changes
+    setMetrics([]);
+
     const fetchTelemetry = async () => {
       // If the component was closed/unmounted, stop running
       if (!isMounted) return;
 
       try {
-        // 1. CACHE-BUSTER: Force the browser to actually hit the Spring Boot backend every time
+        // CACHE-BUSTER: Force the browser to actually hit the Spring Boot backend every time
         const response = await fetch("http://localhost:8080/api/telemetry/current", {
           cache: 'no-store', // Absolutely no caching
           headers: {
@@ -41,7 +42,7 @@ export const HeapMetrics: React.FC<HeapMetricsProps> = ({ jmxTarget = "localhost
         } else {
           const data = await response.json();
 
-          // 2. Safely check if data exists and is valid
+          // Safely check if data exists and is valid
           if (!data || (data.heapUsed === 0 && data.heapMax === 0)) {
             if (isMounted) setConnected(false);
           } else {
@@ -61,7 +62,7 @@ export const HeapMetrics: React.FC<HeapMetricsProps> = ({ jmxTarget = "localhost
         // Catch network disconnections (e.g., if Spring Boot itself is turned off)
         if (isMounted) setConnected(false);
       } finally {
-        // 3. RECURSIVE TIMEOUT: Only start the 1-second countdown AFTER the previous request finishes!
+        // RECURSIVE TIMEOUT: Only start the 1-second countdown AFTER the previous request finishes!
         // This completely prevents "Promise Pile-up" and network freezes.
         if (isMounted) {
           timer = setTimeout(fetchTelemetry, 1000);
@@ -72,17 +73,16 @@ export const HeapMetrics: React.FC<HeapMetricsProps> = ({ jmxTarget = "localhost
     // Start the polling loop
     fetchTelemetry();
 
-    // Cleanup phase: wipe the timer if the user leaves the page
+    // Cleanup phase: wipe the timer if the user leaves the page or target changes
     return () => {
       isMounted = false;
       clearTimeout(timer);
     };
-  }, []);
+  }, [jmxTarget]); // 2. DEPENDENCY ARRAY BUG FIX: Restarts the engine when the target changes
 
   return (
     <div className="bg-gray-800 rounded-lg p-4 text-white shadow-md">
       <div className="flex justify-between items-center mb-3">
-        {/* 3. UPDATED: Dynamically rendering the target instead of hardcoded text */}
         <h2 className="text-md font-bold text-indigo-400">Live Telemetry ({jmxTarget})</h2>
         <span className={`text-xs px-2 py-0.5 rounded-full ${connected ? "bg-green-900 text-green-300" : "bg-red-900 text-red-300"}`}>
           {connected ? "LIVE" : "DISCONNECTED"}

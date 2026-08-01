@@ -418,7 +418,15 @@ export default function HeapVortexDashboard() {
 
           {/* Live JMX Telemetry Chart */}
           <div style={{ backgroundColor: "#111827", border: "1px solid #374151", borderRadius: "14px", padding: "16px" }}>
-            <HeapMetrics jmxTarget={`${jmxHost}:${jmxPort}`} />
+            <HeapMetrics
+              jmxTarget={
+                fileName?.includes("remote")
+                  ? `${jmxHost}:${jmxPort}`
+                  : fileName?.includes("self")
+                    ? "Local Backend JVM"
+                    : fileName ? fileName : "localhost:9010"
+              }
+            />
           </div>
 
           {/* Loaded Heap Objects Inspector List */}
