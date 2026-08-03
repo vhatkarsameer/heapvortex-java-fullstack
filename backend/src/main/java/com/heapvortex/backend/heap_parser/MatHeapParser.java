@@ -42,7 +42,11 @@ public class MatHeapParser implements HeapParser {
         String escapedOql = oqlQuery.replace("\"", "\\\"");
         ProcessBuilder processBuilder = new ProcessBuilder(
                 matCommand, heapDumpPath.toAbsolutePath().toString(),
-                "-command=oql \"" + escapedOql + "\"", "-format=csv", "-unzip", "org.eclipse.mat.api:query"
+                "-command=oql \"" + escapedOql + "\"",
+                "-format=csv",
+                "-unzip",
+                "-limit=25000",
+                "org.eclipse.mat.api:query"
         );
 
         processBuilder.directory(heapDumpPath.getParent().toFile());
@@ -69,50 +73,58 @@ public class MatHeapParser implements HeapParser {
                 CSVParser csvParser = CSVFormat.DEFAULT.builder().get().parse(fileReader)
         ) {
             Iterator<CSVRecord> iterator = csvParser.iterator();
-            if (iterator.hasNext()) iterator.next(); // Skip header
+            if (iterator.hasNext())
+                iterator.next(); // Skip header
             while (iterator.hasNext())
                 realObjects.add(toHeapObject(iterator.next()));
         }
 
+        System.out.println("SUCCESS: Parsed " + realObjects.size() + " REAL JVM Object from the Heap Dump!");
+
+        if(realObjects.size() > 15000)
+            return realObjects.subList(0, 15000);
+
+        return realObjects;
+
         // ==============================================================================
         // AUDIT SCALER ENGINE: Scales the MAT 500-limit up to 10,000 mathematically accurate objects
         // ==============================================================================
-        int TARGET_COUNT = 10000;
-        if (realObjects.isEmpty()) return realObjects;
-        if (realObjects.size() >= TARGET_COUNT) return realObjects.subList(0, TARGET_COUNT);
-
-        List<HeapObject> finalObjects = new ArrayList<>(TARGET_COUNT);
-        finalObjects.addAll(realObjects);
-
-        int needed = TARGET_COUNT - realObjects.size();
-        Random rand = new Random(42); // Deterministic seed stops UI flickering
-
-        // Base memory address off the first real object
-        long currentAddress;
-        try {
-            currentAddress = Long.parseLong(realObjects.get(0).getAddress().replace("0x", ""), 16);
-        } catch (Exception e) {
-            currentAddress = 0x700000000L; // Safe JVM heap fallback
-        }
-
-        for (int i = 0; i < needed; i++) {
-            HeapObject source = realObjects.get(i % realObjects.size());
-
-            // Advance memory pointer sequentially like a real JVM heap allocator
-            long size = source.getShallowHeap() > 0 ? source.getShallowHeap() : 24;
-            currentAddress += size;
-
-            // Add slight organic variance to size for WebGL visual density
-            long newShallow = source.getShallowHeap() + (rand.nextBoolean() ? rand.nextInt(16) : 0);
-
-            finalObjects.add(new HeapObject(
-                    source.getClassName(),
-                    "0x" + Long.toHexString(currentAddress),
-                    newShallow,
-                    source.getRetainedHeap()
-            ));
-        }
-        return finalObjects;
+//        int TARGET_COUNT = 10000;
+//        if (realObjects.isEmpty()) return realObjects;
+//        if (realObjects.size() >= TARGET_COUNT) return realObjects.subList(0, TARGET_COUNT);
+//
+//        List<HeapObject> finalObjects = new ArrayList<>(TARGET_COUNT);
+//        finalObjects.addAll(realObjects);
+//
+//        int needed = TARGET_COUNT - realObjects.size();
+//        Random rand = new Random(42); // Deterministic seed stops UI flickering
+//
+//        // Base memory address off the first real object
+//        long currentAddress;
+//        try {
+//            currentAddress = Long.parseLong(realObjects.get(0).getAddress().replace("0x", ""), 16);
+//        } catch (Exception e) {
+//            currentAddress = 0x700000000L; // Safe JVM heap fallback
+//        }
+//
+//        for (int i = 0; i < needed; i++) {
+//            HeapObject source = realObjects.get(i % realObjects.size());
+//
+//            // Advance memory pointer sequentially like a real JVM heap allocator
+//            long size = source.getShallowHeap() > 0 ? source.getShallowHeap() : 24;
+//            currentAddress += size;
+//
+//            // Add slight organic variance to size for WebGL visual density
+//            long newShallow = source.getShallowHeap() + (rand.nextBoolean() ? rand.nextInt(16) : 0);
+//
+//            finalObjects.add(new HeapObject(
+//                    source.getClassName(),
+//                    "0x" + Long.toHexString(currentAddress),
+//                    newShallow,
+//                    source.getRetainedHeap()
+//            ));
+//        }
+//        return finalObjects;
     }
 
     private HeapObject toHeapObject(CSVRecord record) {
@@ -132,7 +144,11 @@ public class MatHeapParser implements HeapParser {
     private void runHistogramReport(Path heapDumpPath) throws IOException {
         ProcessBuilder processBuilder = new ProcessBuilder(
                 matCommand, heapDumpPath.toAbsolutePath().toString(),
-                "-command=histogram", "-format=csv", "-unzip", "org.eclipse.mat.api:query"
+                "-command=histogram",
+                "-format=csv",
+                "-unzip",
+                "-limit=25000",
+                "org.eclipse.mat.api:query"
         );
         processBuilder.directory(heapDumpPath.getParent().toFile());
         Process process = processBuilder.start();
