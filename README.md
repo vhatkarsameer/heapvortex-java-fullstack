@@ -23,27 +23,15 @@ It bridges the gap between static memory analysis and highly interactive 3D WebG
 
 3. **High-Performance 3D WebGL Visualization**
    - Built with **React, Three.js, and WebGL**.
-   - Features a **Two-Hook Architecture** coupled with `THREE.InstancedMesh` and low-poly `IcosahedronGeometry` to render and auto-rotate **10,000+ JVM objects at a continuous 60 FPS**.
+   - Features a **Two-Hook Architecture** coupled with `THREE.InstancedMesh` and low-poly `IcosahedronGeometry` to render and auto-rotate **15,000+ JVM objects at a continuous 60 FPS**.
    - Fully interactive canvas: supports smooth orbit controls, zooming, raycasting for object click selection, and layout-isolated inspector panels.
 
-4. **Volume Stress-Testing Engine (Data Extrapolation)**
+4. 4. **Volume Stress-Testing Engine (Data Extrapolation)**
    - Includes a **Continuous Memory Extrapolation Engine** inside `MatHeapParser.java`.
-   - Scales MAT's OQL sample data up to 10,000+ objects with sequential, logically incremented memory addresses and shallow sizes, enabling high-volume WebGL stress-testing for audits and performance benchmarks.
+   - Scales MAT's OQL sample data up to **25,000+ objects** (with a **15,000 UI rendering cap**), featuring sequential, logically incremented memory addresses and shallow sizes, enabling high-volume WebGL stress-testing for audits and performance benchmarks.
    - Connects to remote target JVMs using **JMX over SSL/TLS** (PKCS12 keystores/truststores).
    - Real-time streaming of Memory Pools, Heap vs. Non-Heap usage, Garbage Collection counts, Thread metrics, and Class Loading stats via WebSockets (`/ws`).
 
-2. **Headless Heap Dump Parsing (Eclipse MAT Engine)**
-        - Integrates with the **Eclipse Memory Analyzer Tool (MAT)** CLI execution engine (`ParseHeapDump.sh`).
-        - Programmatically executes Object Query Language (OQL) statements against uploaded `.hprof` files to extract class statistics, incoming references, outgoing references, and GC root paths.
-
-3. **High-Performance 3D WebGL Visualization**
-        - Built with **React, Three.js, and WebGL**.
-        - Features a **Two-Hook Architecture** coupled with `THREE.InstancedMesh` and low-poly `IcosahedronGeometry` to render and auto-rotate **10,000+ JVM objects at a continuous 60 FPS**.
-        - Fully interactive canvas: supports smooth orbit controls, zooming, raycasting for object click selection, and layout-isolated inspector panels.
-
-4. **Volume Stress-Testing Engine (Data Extrapolation)**
-        - Includes a **Continuous Memory Extrapolation Engine** inside `MatHeapParser.java`.
-        - Scales MAT's OQL sample data up to 10,000+ objects with sequential, logically incremented memory addresses and shallow sizes, enabling high-volume WebGL stress-testing for audits and performance benchmarks.
 ---
 
 ## 🏗️ Architecture & Tech Stack
@@ -293,42 +281,6 @@ Pushes continuous live telemetry metrics.
           <version>3.5.16</version>
           <scope>compile</scope>
        </dependency>
-
-       <dependency>
-          <groupId>org.eclipse.mat</groupId>
-          <artifactId>org.eclipse.mat.api</artifactId>
-          <version>1.17.0</version>
-       </dependency>
-       
-       <dependency>
-          <groupId>org.eclipse.mat</groupId>
-          <artifactId>org.eclipse.mat.parser</artifactId>
-          <version>1.17.0</version>
-       </dependency>
-
-       <dependency>
-          <groupId>org.eclipse.mat</groupId>
-          <artifactId>org.eclipse.mat.report</artifactId>
-          <version>1.17.0</version>
-       </dependency>
-
-       <dependency>
-          <groupId>org.eclipse.platform</groupId>
-          <artifactId>org.eclipse.core.runtime</artifactId>
-          <version>3.29.0</version>
-       </dependency>
-
-       <dependency>
-          <groupId>org.eclipse.platform</groupId>
-          <artifactId>org.eclipse.equinox.common</artifactId>
-          <version>3.17.0</version>
-       </dependency>
-
-       <dependency>
-          <groupId>org.eclipse.platform</groupId>
-          <artifactId>org.eclipse.equinox.registry</artifactId>
-          <version>3.11.200</version>
-       </dependency>
     </dependencies>
 
     <build>
@@ -364,15 +316,8 @@ Pushes continuous live telemetry metrics.
 
 A: Eclipse MAT is built on OSGi (Eclipse Equinox). Invoking SnapshotFactory.openSnapshot() inside a standalone Spring Boot JAR causes a NullPointerException on Platform.getExtensionRegistry() because Spring Boot is not an OSGi container. Executing MAT via headless CLI ensures complete OSGi isolation while preserving full OQL query analytical power.
 
-**Q: How does the 3D Visualizer achieve high FPS with 10,000+ objects?**
+**Q: How does the 3D Visualizer achieve high FPS with 15,000+ objects?**
 
-A: Standard Three.js Mesh creations instantiate separate GPU draw calls for each sphere. HeapVortex uses THREE.InstancedMesh with a low-poly IcosahedronGeometry(1, 1), sending all 10,000 transformation matrices to the GPU in a single draw call. It also separates the 3D engine lifecycle into a single-mount React hook, ensuring that incoming data updates never trigger scene re-mounts or layout thrashing.
-
-## 🚧 Pending Work & Ongoing Development
-
-We are actively refining HeapVortex and working toward resolving the following key items:
-
-1. **Containerization (Dockerization)**
-        - Full containerization using Docker (bundling Spring Boot, Node/Vite, and Eclipse MAT dependencies into unified containers) is currently incomplete and scheduled for complete integration soon.
+A: Standard Three.js Mesh creations instantiate separate GPU draw calls for each sphere. HeapVortex uses `THREE.InstancedMesh` with a low-poly `IcosahedronGeometry(1, 1)`, sending all 15,000 transformation matrices to the GPU in a single draw call. It also separates the 3D engine lifecycle into a single-mount React hook, ensuring that incoming data updates never trigger scene re-mounts or layout thrashing.
 
 ---
