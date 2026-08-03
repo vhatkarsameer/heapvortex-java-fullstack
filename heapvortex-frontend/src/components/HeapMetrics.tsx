@@ -27,6 +27,11 @@ export const HeapMetrics: React.FC<HeapMetricsProps> = ({ jmxTarget = "localhost
       // If the component was closed/unmounted, stop running
       if (!isMounted) return;
 
+      if(jmxTarget === "Not Connected") {
+          setConnected(false);
+          return;
+      }
+
       try {
         // CACHE-BUSTER: Force the browser to actually hit the Spring Boot backend every time
         const response = await fetch("http://localhost:8080/api/telemetry/current", {

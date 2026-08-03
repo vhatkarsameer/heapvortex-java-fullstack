@@ -79,7 +79,6 @@ public class MatHeapParser implements HeapParser {
                 realObjects.add(toHeapObject(iterator.next()));
         }
 
-        System.out.println("SUCCESS: Parsed " + realObjects.size() + " REAL JVM Object from the Heap Dump!");
 
         if(realObjects.size() > 15000)
             return realObjects.subList(0, 15000);
@@ -216,12 +215,30 @@ public class MatHeapParser implements HeapParser {
         String currentAddress = address;
 
         while (currentAddress != null && !currentAddress.isBlank()) {
-            if (!visited.add(currentAddress)) break;
-            List<HeapObject> parents = readHeapObjects(executeOql(heapDumpPath, "SELECT OBJECTS inbounds(s) FROM OBJECTS " + currentAddress + " s"));
-            if (parents == null || parents.isEmpty()) break;
-            chain.add(parents.get(0));
-            currentAddress = parents.get(0).getAddress();
+            if (!visited.add(currentAddress))
+                break;
+
+            List<HeapObject> parents = readHeapObjects(executeOql(heapDumpPath,
+                    "SELECT OBJECTS inbounds(s) FROM OBJECTS " + currentAddress + " s"));
+
+            if (parents == null || parents.isEmpty()) {
+                break;
+            }
+
+            HeapObject heaviestParent = parents.stream()
+                    .max((p1, p2) -> {
+                        // Compare by Retained Heap first. If not available, fall back to Shallow Heap.
+                        long size1 = p1.getRetainedHeap() > 0 ? p1.getRetainedHeap() : p1.getShallowHeap();
+                        long size2 = p2.getRetainedHeap() > 0 ? p2.getRetainedHeap() : p2.getShallowHeap();
+                        return Long.compare(size1, size2);
+                    })
+                    .orElse(parents.get(0)); // Safe fallback
+
+            // Add the heaviest parent to the chain and move up the tree
+            chain.add(heaviestParent);
+            currentAddress = heaviestParent.getAddress();
         }
+
         return chain;
     }
 }
