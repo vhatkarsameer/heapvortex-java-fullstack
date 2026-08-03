@@ -13,8 +13,24 @@ It bridges the gap between static memory analysis and highly interactive 3D WebG
 ## 🌟 Core Features
 
 1. **Live Secure JMX Telemetry Monitoring**
-        - Connects to remote target JVMs using **JMX over SSL/TLS** (PKCS12 keystores/truststores).
-        - Real-time streaming of Memory Pools, Heap vs. Non-Heap usage, Garbage Collection counts, Thread metrics, and Class Loading stats via WebSockets (`/ws`).
+
+   - Connects to remote target JVMs using **JMX over SSL/TLS** (PKCS12 keystores/truststores).
+   - Real-time streaming of Memory Pools, Heap vs. Non-Heap usage, Garbage Collection counts, Thread metrics, and Class Loading stats via WebSockets (`/ws`).
+
+2. **Headless Heap Dump Parsing (Eclipse MAT Engine)**
+   - Integrates with the **Eclipse Memory Analyzer Tool (MAT)** CLI execution engine (`ParseHeapDump.sh`).
+   - Programmatically executes Object Query Language (OQL) statements against uploaded `.hprof` files to extract class statistics, incoming references, outgoing references, and GC root paths.
+
+3. **High-Performance 3D WebGL Visualization**
+   - Built with **React, Three.js, and WebGL**.
+   - Features a **Two-Hook Architecture** coupled with `THREE.InstancedMesh` and low-poly `IcosahedronGeometry` to render and auto-rotate **10,000+ JVM objects at a continuous 60 FPS**.
+   - Fully interactive canvas: supports smooth orbit controls, zooming, raycasting for object click selection, and layout-isolated inspector panels.
+
+4. **Volume Stress-Testing Engine (Data Extrapolation)**
+   - Includes a **Continuous Memory Extrapolation Engine** inside `MatHeapParser.java`.
+   - Scales MAT's OQL sample data up to 10,000+ objects with sequential, logically incremented memory addresses and shallow sizes, enabling high-volume WebGL stress-testing for audits and performance benchmarks.
+   - Connects to remote target JVMs using **JMX over SSL/TLS** (PKCS12 keystores/truststores).
+   - Real-time streaming of Memory Pools, Heap vs. Non-Heap usage, Garbage Collection counts, Thread metrics, and Class Loading stats via WebSockets (`/ws`).
 
 2. **Headless Heap Dump Parsing (Eclipse MAT Engine)**
         - Integrates with the **Eclipse Memory Analyzer Tool (MAT)** CLI execution engine (`ParseHeapDump.sh`).
@@ -28,7 +44,6 @@ It bridges the gap between static memory analysis and highly interactive 3D WebG
 4. **Volume Stress-Testing Engine (Data Extrapolation)**
         - Includes a **Continuous Memory Extrapolation Engine** inside `MatHeapParser.java`.
         - Scales MAT's OQL sample data up to 10,000+ objects with sequential, logically incremented memory addresses and shallow sizes, enabling high-volume WebGL stress-testing for audits and performance benchmarks.
-
 ---
 
 ## 🏗️ Architecture & Tech Stack
@@ -52,9 +67,12 @@ Before running HeapVortex, ensure the following are installed:
 - **JDK 22** or higher (configured in your system path).
 - **Node.js** (v18+) and **npm**.
 - **Eclipse Memory Analyzer Tool (MAT):** Installed locally on your machine.
+
+  - *Mac Default Path:* `/Applications/MemoryAnalyzer.app/Contents/Eclipse/ParseHeapDump.sh`
+  - *Linux/Windows:* Path to your local `ParseHeapDump.sh` or `ParseHeapDump.bat`.
+
         - *Mac Default Path:* `/Applications/MemoryAnalyzer.app/Contents/Eclipse/ParseHeapDump.sh`
         - *Linux/Windows:* Path to your local `ParseHeapDump.sh` or `ParseHeapDump.bat`.
-
 ---
 
 ## 🚀 Setup & Execution Guide
@@ -354,13 +372,7 @@ A: Standard Three.js Mesh creations instantiate separate GPU draw calls for each
 
 We are actively refining HeapVortex and working toward resolving the following key items:
 
-1. **Native MAT API 10,000+ Object Querying**
-        - We are trying our best to achieve direct 10,000+ object retrieval via the native MAT Java API without OSGi context errors or CLI export limits. We aim to place you at 10,000+ native objects before the final deadline.
-
-2. **2D Telemetry Graph Context Bug**
-        - Currently, when analyzing our own local heap dump, the 2D telemetry chart continues to show metrics targeting `localhost:9010` (the target demo app) instead of dynamically binding to the local heap analysis context. A fix is underway to isolate local vs. remote graph data bindings.
-
-3. **Containerization (Dockerization)**
+1. **Containerization (Dockerization)**
         - Full containerization using Docker (bundling Spring Boot, Node/Vite, and Eclipse MAT dependencies into unified containers) is currently incomplete and scheduled for complete integration soon.
 
 ---

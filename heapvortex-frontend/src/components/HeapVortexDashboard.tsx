@@ -16,8 +16,8 @@ export default function HeapVortexDashboard() {
   const [statusMessage, setStatusMessage] = useState<string>("");
 
   // JMX Remote Connection State
-  const [jmxHost, setJmxHost] = useState<string>("localhost");
-  const [jmxPort, setJmxPort] = useState<string>("9010");
+  const [jmxHost, setJmxHost] = useState<string>("");
+  const [jmxPort, setJmxPort] = useState<string>("");
   const [jmxConnecting, setJmxConnecting] = useState<boolean>(false);
   const [jmxConnected, setJmxConnected] = useState<boolean>(false);
   const [jmxMessage, setJmxMessage] = useState<string>("");
@@ -35,9 +35,11 @@ export default function HeapVortexDashboard() {
   // 1. Connect to JVM JMX Port (Sends JSON Body)
   const handleJmxConnect = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!jmxHost || !jmxPort) return;
     setJmxConnecting(true);
     setJmxMessage("Connecting to JVM...");
+
+    const targetHost = jmxHost || "localhost";
+    const targetPort = jmxPort || "9999";
 
     try {
       const res = await fetch("http://localhost:8080/api/jvm/connect", {
@@ -133,35 +135,46 @@ export default function HeapVortexDashboard() {
     }
   };
 
-  // 4. Trigger Heap Dump on the Local HeapVortex Backend itself
-  const handleProfileSelfJvm = async () => {
-    setObjects([]);
-    setUploadStatus("uploading");
-    setStatusMessage("Dumping local HeapVortex JVM...");
+    // 4. Trigger Heap Dump on the Local HeapVortex Backend itself
+      const handleProfileSelfJvm = async () => {
+        setObjects([]);
+        setUploadStatus("uploading");
+        setStatusMessage("Dumping local HeapVortex JVM...");
 
-    try {
-      const res = await fetch("http://localhost:8080/api/jvm/dump-self", {
-        method: "POST",
-      });
+        try {
+          // 1. Tell backend to connect to itself (Silent background connection)
+          await fetch("http://localhost:8080/api/jvm/connect", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              host: "localhost",
+              port: 9999 // Hardcoded here, not changing the UI state!
+            }),
+          });
 
-      if (res.ok) {
-        const data = await res.json();
-        const generatedFileName = data.fileName;
-        setFileName(generatedFileName);
-        setStatusMessage(`Self-dump complete! Parsing ${generatedFileName}...`);
+          // 2. Trigger the actual heap dump
+          const res = await fetch("http://localhost:8080/api/jvm/dump-self", {
+            method: "POST",
+          });
 
-        const activeClass = selectedClass === "Custom..." ? customClass : selectedClass;
-        await fetchObjectsForClass(generatedFileName, activeClass || "byte[]");
-      } else {
-        setUploadStatus("error");
-        setStatusMessage("Failed to dump local JVM.");
-      }
-    } catch (err) {
-      console.error("Error dumping self JVM:", err);
-      setUploadStatus("error");
-      setStatusMessage("Connection error to Spring Boot.");
-    }
-  };
+          if (res.ok) {
+            const data = await res.json();
+            const generatedFileName = data.fileName;
+            setFileName(generatedFileName);
+            setStatusMessage(`Self-dump complete! Parsing ${generatedFileName}...`);
+
+            const activeClass = selectedClass === "Custom..." ? customClass : selectedClass;
+            await fetchObjectsForClass(generatedFileName, activeClass || "byte[]");
+          } else {
+            setUploadStatus("error");
+            setStatusMessage("Failed to dump local JVM.");
+          }
+        } catch (err) {
+          console.error("Error dumping self JVM:", err);
+          setUploadStatus("error");
+          setStatusMessage("Connection error to Spring Boot.");
+        }
+      };
 
   // 5. Trigger Remote Heap Dump over JMX and parse with MAT
   const handleTriggerRemoteDump = async () => {
@@ -228,14 +241,14 @@ export default function HeapVortexDashboard() {
             <Plug size={16} color={jmxConnected ? "#4ade80" : "#9ca3af"} />
             <input
               type="text"
-              placeholder="Host (localhost)"
+              placeholder= "localhost"
               value={jmxHost}
               onChange={(e) => setJmxHost(e.target.value)}
               style={{ backgroundColor: "#111827", border: "1px solid #4b5563", color: "#ffffff", padding: "4px 8px", borderRadius: "6px", fontSize: "11px", width: "100px" }}
             />
             <input
               type="text"
-              placeholder="Port (9010)"
+              placeholder="9999"
               value={jmxPort}
               onChange={(e) => setJmxPort(e.target.value)}
               style={{ backgroundColor: "#111827", border: "1px solid #4b5563", color: "#ffffff", padding: "4px 8px", borderRadius: "6px", fontSize: "11px", width: "65px" }}
@@ -418,16 +431,21 @@ export default function HeapVortexDashboard() {
 
           {/* Live JMX Telemetry Chart */}
           <div style={{ backgroundColor: "#111827", border: "1px solid #374151", borderRadius: "14px", padding: "16px" }}>
-            <HeapMetrics
-              jmxTarget={
-                fileName?.includes("remote")
-                  ? `${jmxHost}:${jmxPort}`
-                  : fileName?.includes("self")
-                    ? "Local Backend JVM"
-                    : fileName ? fileName : "localhost:9010"
-              }
-            />
-          </div>
+                      <HeapMetrics
+                        jmxTarget={
+                          // 1. If we profiled the self JVM, explicitly say so
+                          fileName?.includes("self")
+                            ? "Local Backend JVM"
+
+                          // 2. Otherwise, if the user typed an IP/Port and clicked connect, use that
+                          : (jmxHost && jmxPort)
+                            ? `${jmxHost}:${jmxPort}`
+
+                          // 3. Fallback to the default string if nothing is connected yet
+                          : "Not Connected"
+                        }
+                      />
+                    </div>
 
           {/* Loaded Heap Objects Inspector List */}
           <div style={{ backgroundColor: "#111827", border: "1px solid #374151", borderRadius: "14px", padding: "16px", flex: 1, display: "flex", flexDirection: "column", boxSizing: "border-box" }}>
