@@ -77,49 +77,6 @@
 			<version>3.5.16</version>
 			<scope>compile</scope>
 		</dependency>
-
-			<!-- Eclipse MAT Core API -->
-			<dependency>
-				<groupId>org.eclipse.mat</groupId>
-				<artifactId>org.eclipse.mat.api</artifactId>
-				<version>1.17.0</version>
-			</dependency>
-			<!-- Eclipse MAT Parser -->
-			<dependency>
-				<groupId>org.eclipse.mat</groupId>
-				<artifactId>org.eclipse.mat.parser</artifactId>
-				<version>1.17.0</version>
-			</dependency>
-
-		<!-- Eclipse MAT Report (Contains the util package and ProgressListeners) -->
-		<dependency>
-			<groupId>org.eclipse.mat</groupId>
-			<artifactId>org.eclipse.mat.report</artifactId>
-			<version>1.17.0</version>
-		</dependency>
-
-		<!-- Eclipse Core Runtime (fixes InvalidRegistryObjectException) -->
-		<dependency>
-			<groupId>org.eclipse.platform</groupId>
-			<artifactId>org.eclipse.core.runtime</artifactId>
-			<version>3.29.0</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.eclipse.platform</groupId>
-			<artifactId>org.eclipse.equinox.common</artifactId>
-			<version>3.17.0</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.eclipse.platform</groupId>
-			<artifactId>org.eclipse.equinox.registry</artifactId>
-			<version>3.11.200</version>
-		</dependency>
-
-
-
-
 	</dependencies>
 
 	<build>

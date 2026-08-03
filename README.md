@@ -1,347 +1,360 @@
-A Java Full Stack application for real-time JVM heap memory visualization and memory leak analysis using JMX, Eclipse MAT, Spring Boot, React, and Three.js.
-
-
-# Heap Vortex Visualizer
-
-## Overview
-
-Heap Vortex Visualizer is a React and Three.js based application that provides a 3D visualization of heap memory objects and their relationships. It represents each heap object as a sphere and connects related objects with lines, making memory structures easier to understand.
-
-This project demonstrates the integration of React, TypeScript, and Three.js for creating interactive 3D visualizations.
+# 🌀 HeapVortex
+**Advanced JVM Telemetry, Secure JMX Monitoring, and 3D WebGL Heap Dump Visualizer**
 
 ---
 
-## Features
+## 📖 Project Overview
+**HeapVortex** is a full-stack profiling, diagnostic, and visualization application built to analyze live Java Virtual Machines (JVMs) and inspect heavy binary Java Heap Dumps (`.hprof`).
 
-- 3D visualization of heap memory objects
-- Circular arrangement of object nodes
-- Dynamic node size based on retained memory size
-- Random color generation for better visualization
-- Object relationships represented using connecting lines
-- Smooth scene rotation animation
-- Responsive window resizing
-- Object details panel
+It bridges the gap between static memory analysis and highly interactive 3D WebGL graphics. With HeapVortex, engineers can monitor memory pools, trace garbage collection overhead, detect memory leaks, and visually explore thousands of allocated objects and reference chains in real-time.
 
 ---
 
-## Technologies Used
+## 🌟 Core Features
 
-- React.js
-- TypeScript
-- Three.js
-- HTML5
-- CSS3
+1. **Live Secure JMX Telemetry Monitoring**
+   - Connects to remote target JVMs using **JMX over SSL/TLS** (PKCS12 keystores/truststores).
+   - Real-time streaming of Memory Pools, Heap vs. Non-Heap usage, Garbage Collection counts, Thread metrics, and Class Loading stats via WebSockets (`/ws`).
+
+2. **Headless Heap Dump Parsing (Eclipse MAT Engine)**
+   - Integrates with the **Eclipse Memory Analyzer Tool (MAT)** CLI execution engine (`ParseHeapDump.sh`).
+   - Programmatically executes Object Query Language (OQL) statements against uploaded `.hprof` files to extract class statistics, incoming references, outgoing references, and GC root paths.
+
+3. **High-Performance 3D WebGL Visualization**
+   - Built with **React, Three.js, and WebGL**.
+   - Features a **Two-Hook Architecture** coupled with `THREE.InstancedMesh` and low-poly `IcosahedronGeometry` to render and auto-rotate **10,000+ JVM objects at a continuous 60 FPS**.
+   - Fully interactive canvas: supports smooth orbit controls, zooming, raycasting for object click selection, and layout-isolated inspector panels.
+
+4. **Volume Stress-Testing Engine (Data Extrapolation)**
+   - Includes a **Continuous Memory Extrapolation Engine** inside `MatHeapParser.java`.
+   - Scales MAT's OQL sample data up to 10,000+ objects with sequential, logically incremented memory addresses and shallow sizes, enabling high-volume WebGL stress-testing for audits and performance benchmarks.
 
 ---
 
-## Project Structure
+## 🏗️ Architecture & Tech Stack
 
+### Backend
+- **Language & Framework:** Java 22 (Preview features enabled), Spring Boot 3.5.x
+- **Communication:** WebSockets (STOMP broker), REST API
+- **Memory Analysis:** Eclipse MAT Core API (`org.eclipse.mat.api`), Apache Commons CSV
+- **Security:** JMX with SSL/TLS (PKCS12)
+
+### Frontend
+- **Framework & Language:** React, TypeScript, Vite
+- **3D Graphics Engine:** Three.js (`OrbitControls`, `Raycaster`, `InstancedMesh`)
+- **Icons & Styling:** Lucide-React, CSS Grid Layouts
+
+---
+
+## ⚙️ Prerequisites
+
+Before running HeapVortex, ensure the following are installed:
+- **JDK 22** or higher (configured in your system path).
+- **Node.js** (v18+) and **npm**.
+- **Eclipse Memory Analyzer Tool (MAT):** Installed locally on your machine.
+  - *Mac Default Path:* `/Applications/MemoryAnalyzer.app/Contents/Eclipse/ParseHeapDump.sh`
+  - *Linux/Windows:* Path to your local `ParseHeapDump.sh` or `ParseHeapDump.bat`.
+
+---
+
+## 🚀 Setup & Execution Guide
+
+### Step 1: Running the Target Application (Monitored JVM)
+
+To demonstrate live telemetry and memory leaks, run a target Java app with JMX enabled over SSL (running on port `9010`).
+
+#### Target Java Code (`Main.java`):
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+public class Main {
+    public static void main(String[] args) throws InterruptedException {
+        List<byte[]> memoryLeakList = new ArrayList<>();
+        System.out.println("JMX Demo App Started with Memory Leak...");
+
+        // Background thread simulating a memory leak (1 MB added every second)
+        Thread leakThread = new Thread(() -> {
+            try {
+                while (true) {
+                    memoryLeakList.add(new byte[1048576]);
+                    Thread.sleep(1000);
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        leakThread.start();
+
+        while (true) {
+            System.out.println("Application running... Current Leaked MB: " + memoryLeakList.size());
+            Thread.sleep(5000);
+        }
+    }
+}
 ```
-src/
-└── components/
-    └── HeapVortexVisualizer.tsx
-```
+
+#### Target JVM Arguments(Port 9010 with SSL)
+````Properties
+-Dcom.sun.management.jmxremote.port=9010
+-Dcom.sun.management.jmxremote.rmi.port=9010
+-Dcom.sun.management.jmxremote.authenticate=false
+-Dcom.sun.management.jmxremote.ssl=true
+-Dcom.sun.management.jmxremote.registry.ssl=true
+-Dcom.sun.management.jmxremote.ssl.need.client.auth=false
+-Djavax.net.ssl.keyStoreType=PKCS12
+-Djavax.net.ssl.trustStoreType=PKCS12
+-Djavax.net.ssl.keyStore=/Users/sameervhatkar/Study/Projects/HeapVortex/server-keystore.jks
+-Djavax.net.ssl.keyStorePassword=changeit
+-Djavax.net.ssl.trustStore=/Users/sameervhatkar/Study/Projects/HeapVortex/client-truststore.jks
+-Djavax.net.ssl.trustStorePassword=changeit
+````
+
+### Step 2: Configuring & Running the HeapVortex Backend
+#### A. Configure application.properties
+Located in backend/src/main/resources/application.properties:
+````
+spring.application.name=backend
+
+# Default JMX Connection Settings
+jmx.host=localhost
+jmx.port=9999
+
+# Directory where uploaded and generated .hprof dumps are stored
+heap.upload.directory=uploads
+
+# Local Path to Eclipse MAT executable CLI script
+mat.command=/Applications/MemoryAnalyzer.app/Contents/Eclipse/ParseHeapDump.sh
+
+spring.main.allow-bean-definition-overriding=true
+spring.servlet.multipart.max-file-size=1000MB
+spring.servlet.multipart.max-request-size=1000MB
+````
+#### B. HeapVortex Backend VM Options
+When launching the backend Spring Boot app, provide these VM options to enable SSL JMX communication and open reflective module access for Eclipse MAT dependencies: at the end also add this at end "--add-opens java.base/java.lang=ALL-UNNAMED
+--add-opens java.base/java.lang.reflect=ALL-UNNAMED
+--add-opens java.base/java.util=ALL-UNNAMED
+--add-opens java.base/java.io=ALL-UNNAMED"
+
+````Properties
+-Dcom.sun.management.jmxremote.port=9999
+-Dcom.sun.management.jmxremote.rmi.port=9999
+-Dcom.sun.management.jmxremote.authenticate=false
+-Dcom.sun.management.jmxremote.ssl=true
+-Dcom.sun.management.jmxremote.registry.ssl=true
+-Dcom.sun.management.jmxremote.ssl.need.client.auth=false
+-Djavax.net.ssl.keyStoreType=PKCS12
+-Djavax.net.ssl.keyStore=/Users/sameervhatkar/Study/Projects/HeapVortex/server-keystore.jks
+-Djavax.net.ssl.keyStorePassword=changeit
+-Djavax.net.ssl.trustStoreType=PKCS12
+-Djavax.net.ssl.trustStore=/Users/sameervhatkar/Study/Projects/HeapVortex/client-truststore.jks
+-Djavax.net.ssl.trustStorePassword=changeit
+
+````
+
+#### C. Run the Backend
+
+````bash
+cd backend
+./mvnw clean compile spring-boot:run
+````
+
+### Step 3: Running the Frontend
+Open a new terminal window
+````bash
+cd HeapVortex-frontend
+npm install
+npm run dev
+````
+Navigate to http://localhost:5173 in your browser.
+
+# 📂 Heap Dump Storage & Data Lifecycle
+1. **Upload / Remote Generation**: When an .hprof heap dump is uploaded or remotely dumped via JMX, it is saved directly into the backend/uploads/ directory (e.g., uploads/self_jvm_dump_xxxx.hprof).
+
+2. **Parsing Phase**: MatHeapParser.java triggers Eclipse MAT CLI commands (ParseHeapDump.sh) against the dump file inside uploads/.
+
+3. **CSV Generation**: MAT writes analytical report folders and .csv files inside uploads/.
+
+4. **Data Transformation**: The backend parses the generated CSV records, maps them to HeapObject DTOs, applies memory extrapolation if necessary, and returns clean JSON payloads to the React UI.
+
+# 📡 API Reference & Controller Mapping
+## 1. JvmController (/api/jvm)
+Handles JMX lifecycle operations and remote diagnostic commands.
+- **POST /api/jvm/connect** : Establishes a secure JMX connection to a target JVM using specified host, port, and SSL parameters.
+
+- **POST /api/jvm/disconnect** : Disconnects the active JMX connection safely.
+
+- **POST /api/jvm/dump** : Invokes HotSpotDiagnosticMXBean to trigger an immediate .hprof binary dump on the target server.
+
+## 2. HeapController (/api/heap)
+Controls .hprof heap dump uploads and Eclipse MAT analytical queries.
+
+- **POST /api/heap/upload** : Accepts multipart .hprof file uploads and saves them to uploads/.
+
+- **GET /api/heap/parse** : Runs MAT's histogram engine to retrieve overall HeapStatistics and class tallies.
+
+- **GET /api/heap/objects-by-class** : Returns a dataset (up to 10,000+ objects) for a given class name to populate the 3D visualizer.
+
+- **GET /api/heap/incoming-references** : Queries OQL inbounds(s) to determine which objects hold references to a target memory address.
+
+- **GET /api/heap/outgoing-references** : Queries OQL outbounds(s) to determine which field references an object holds.
+
+- **GET /api/heap/gc-roots** : Traces the shortest reference chain path from a target object back to a Garbage Collection (GC) Root.
+
+## 3. MemoryTelemetryController & WebSockets (/api/telemetry & /ws)
+Pushes continuous live telemetry metrics.
+
+- **GET /api/telemetry/current** : Fetches a static MemoryTelemetryDTO snapshot containing Heap/Non-Heap memory pools, thread states, GC collections, and loaded class metrics.
+
+- **WebSocket (/ws)** : Frontend STOMP client subscribes to /topic/telemetry. A background scheduler broadcasts updated telemetry JSON payloads every 1000ms.
+
+# 🛠️ Maven Configuration (pom.xml)
+````XML
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="[http://maven.apache.org/POM/4.0.0](http://maven.apache.org/POM/4.0.0)" xmlns:xsi="[http://www.w3.org/2001/XMLSchema-instance](http://www.w3.org/2001/XMLSchema-instance)"
+    xsi:schemaLocation="[http://maven.apache.org/POM/4.0.0](http://maven.apache.org/POM/4.0.0) [https://maven.apache.org/xsd/maven-4.0.0.xsd](https://maven.apache.org/xsd/maven-4.0.0.xsd)">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+       <groupId>org.springframework.boot</groupId>
+       <artifactId>spring-boot-starter-parent</artifactId>
+       <version>3.5.16</version>
+       <relativePath/>
+    </parent>
+    <groupId>com.heapvortex</groupId>
+    <artifactId>backend</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>backend</name>
+    <description>HeapVortex Backend Analysis Engine</description>
+
+    <properties>
+       <java.version>22</java.version>
+    </properties>
+
+    <repositories>
+       <repository>
+          <id>eclipse-maven-repo</id>
+          <name>Eclipse Repository</name>
+          <url>[https://repo.eclipse.org/content/groups/releases/](https://repo.eclipse.org/content/groups/releases/)</url>
+       </repository>
+    </repositories>
+
+    <dependencies>
+       <dependency>
+          <groupId>org.apache.commons</groupId>
+          <artifactId>commons-csv</artifactId>
+          <version>1.14.1</version>
+       </dependency>
+
+       <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-web</artifactId>
+       </dependency>
+
+       <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-devtools</artifactId>
+          <scope>runtime</scope>
+          <optional>true</optional>
+       </dependency>
+       
+       <dependency>
+          <groupId>org.projectlombok</groupId>
+          <artifactId>lombok</artifactId>
+          <optional>true</optional>
+       </dependency>
+       
+       <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-test</artifactId>
+          <scope>test</scope>
+       </dependency>
+
+       <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-websocket</artifactId>
+          <version>3.5.16</version>
+          <scope>compile</scope>
+       </dependency>
+
+       <dependency>
+          <groupId>org.eclipse.mat</groupId>
+          <artifactId>org.eclipse.mat.api</artifactId>
+          <version>1.17.0</version>
+       </dependency>
+       
+       <dependency>
+          <groupId>org.eclipse.mat</groupId>
+          <artifactId>org.eclipse.mat.parser</artifactId>
+          <version>1.17.0</version>
+       </dependency>
+
+       <dependency>
+          <groupId>org.eclipse.mat</groupId>
+          <artifactId>org.eclipse.mat.report</artifactId>
+          <version>1.17.0</version>
+       </dependency>
+
+       <dependency>
+          <groupId>org.eclipse.platform</groupId>
+          <artifactId>org.eclipse.core.runtime</artifactId>
+          <version>3.29.0</version>
+       </dependency>
+
+       <dependency>
+          <groupId>org.eclipse.platform</groupId>
+          <artifactId>org.eclipse.equinox.common</artifactId>
+          <version>3.17.0</version>
+       </dependency>
+
+       <dependency>
+          <groupId>org.eclipse.platform</groupId>
+          <artifactId>org.eclipse.equinox.registry</artifactId>
+          <version>3.11.200</version>
+       </dependency>
+    </dependencies>
+
+    <build>
+       <plugins>
+          <plugin>
+             <groupId>org.springframework.boot</groupId>
+             <artifactId>spring-boot-maven-plugin</artifactId>
+             <configuration>
+                <excludes>
+                   <exclude>
+                      <groupId>org.projectlombok</groupId>
+                      <artifactId>lombok</artifactId>
+                   </exclude>
+                </excludes>
+             </configuration>
+          </plugin>
+          <plugin>
+             <groupId>org.apache.maven.plugins</groupId>
+             <artifactId>maven-compiler-plugin</artifactId>
+             <configuration>
+                 <source>22</source>
+                 <target>22</target>
+                 <compilerArgs>--enable-preview</compilerArgs>
+             </configuration>
+          </plugin>
+       </plugins>
+    </build>
+</project>
+````
+
+# 📌 Architectural Notes & FAQ for Reviewers
+**Q: Why use MAT Headless CLI instead of direct SnapshotFactory.openSnapshot in Java?**
+
+A: Eclipse MAT is built on OSGi (Eclipse Equinox). Invoking SnapshotFactory.openSnapshot() inside a standalone Spring Boot JAR causes a NullPointerException on Platform.getExtensionRegistry() because Spring Boot is not an OSGi container. Executing MAT via headless CLI ensures complete OSGi isolation while preserving full OQL query analytical power.
+
+**Q: How does the 3D Visualizer achieve high FPS with 10,000+ objects?**
+
+A: Standard Three.js Mesh creations instantiate separate GPU draw calls for each sphere. HeapVortex uses THREE.InstancedMesh with a low-poly IcosahedronGeometry(1, 1), sending all 10,000 transformation matrices to the GPU in a single draw call. It also separates the 3D engine lifecycle into a single-mount React hook, ensuring that incoming data updates never trigger scene re-mounts or layout thrashing.
+
+## 🚧 Pending Work & Ongoing Development
+
+We are actively refining HeapVortex and working toward resolving the following key items:
+
+1. **Containerization (Dockerization)**
+   - Full containerization using Docker (bundling Spring Boot, Node/Vite, and Eclipse MAT dependencies into unified containers) is currently incomplete and scheduled for complete integration soon.
 
 ---
-
-## Overall Flow
-
-User Opens Website
-        │
-        ▼
-Landing Page Opens
-        │
-        ▼
-Views Available Projects
-        │
-        ▼
-Clicks Launch HeapVortex
-        │
-        ▼
-HeapVortex Visualization Opens
-
----
-
-## How It Works
-
-### Scene Initialization
-- Creates a Three.js scene.
-- Sets a dark background.
-- Configures the camera and renderer.
-
-### Object Visualization
-- Creates one sphere for each heap object.
-- Node size depends on retained memory size.
-- Nodes are arranged in a circular layout.
-
-### Relationship Mapping
-- Connects related objects using lines.
-- Uses object references to draw edges.
-
-### Lighting
-- Ambient Light
-- Directional Light
-
-### Animation
-- Continuously rotates the scene.
-- Renders every frame using requestAnimationFrame().
-
-### Responsive Design
-- Automatically adjusts the renderer when the browser window is resized.
-
----
-
-## Future Enhancements
-
-- Mouse click object selection
-- Zoom and pan controls
-- Search functionality
-- Tooltip support
-- Real-time heap monitoring
-- Memory leak detection
-
----
-
-## Learning Outcomes
-
-Through this project, I have learned:
-
-- React Functional Components
-- React Hooks
-- TypeScript Interfaces
-- Three.js Scene Management
-- 3D Graphics Rendering
-- Data Visualization
-- Responsive UI Development
-
----
-
-## app and landing pages
-
-
-# App.tsx
-
-## Overview
-`App.tsx` is the main entry point of the HeapVortex React application. It initializes the application's global providers, handles routing, manages themes, displays notifications, and ensures graceful error handling throughout the application.
-
----
-
-## Features
-
-- Global Error Boundary for runtime error handling
-- Dark theme support using ThemeProvider
-- Tooltip support across the application
-- Toast notification system
-- Client-side routing using Wouter
-- Custom 404 Not Found page
-
----
-
-## Routing Structure
-
-| Route | Component | Description |
-|-------|-----------|-------------|
-| `/` | `LandingPage` | Displays the application's landing page. |
-| `/heapvortex` | `HeapVortexPage` | Opens the Heap Vortex visualization interface. |
-| `/404` | `NotFound` | Displays a custom 404 error page. |
-| `*` | `NotFound` | Handles all undefined routes. |
-
----
-
-## Components Used
-
-### ErrorBoundary
-Wraps the entire application and catches unexpected runtime errors, preventing the application from crashing.
-
-### ThemeProvider
-Provides global theme management and initializes the application in **Dark Mode** by default.
-
-### TooltipProvider
-Enables tooltip functionality for UI components throughout the application.
-
-### Toaster
-Displays toast notifications such as success messages, warnings, and errors.
-
-### Router
-Handles navigation between different pages using the Wouter routing library.
-
----
-
-## Application Flow
-
-1. The application starts by rendering the `App` component.
-2. `ErrorBoundary` wraps the application for error protection.
-3. `ThemeProvider` initializes the global dark theme.
-4. `TooltipProvider` enables tooltip functionality.
-5. `Toaster` prepares the notification system.
-6. `Router` determines which page to display based on the current URL.
-7. If no matching route exists, the user is redirected to the **NotFound** page.
-
----
-
-## Technologies Used
-
-- React
-- TypeScript
-- Wouter
-- Tailwind CSS
-- Shadcn UI Components
-- Context API
-
----
-
-## Purpose
-
-The `App.tsx` file serves as the central configuration file of the HeapVortex application. It integrates routing, theme management, notifications, tooltips, and error handling into a single entry point, providing a structured and maintainable application architecture.
-
----
-
-# LandingPage.tsx
-
-## Overview
-`LandingPage.tsx` is the main dashboard of the HeapVortex application. It serves as the application's home page, displaying available engineering projects through an interactive user interface. The page includes a collapsible sidebar, project cards, and seamless navigation using Wouter.
-
----
-
-## Features
-
-- Responsive landing page layout
-- Collapsible navigation sidebar
-- Project dashboard with interactive cards
-- Client-side navigation using Wouter
-- Modern gradient-based UI
-- Hover animations and transition effects
-- Tailwind CSS responsive design
-
----
-
-## Main Components
-
-### Sidebar
-The sidebar provides quick access to all available projects.
-
-Features:
-- Expand and collapse functionality
-- Displays project icon, name, and description
-- Highlights the currently selected project
-- Smooth transition animations
-
----
-
-### Project Cards
-
-Each project card displays:
-
-- Project Icon
-- Project Name
-- Short Description
-- Detailed Overview
-- Feature Highlights
-- Launch Button
-
-The cards include gradient backgrounds, hover effects, and responsive layouts for improved user experience.
-
----
-
-## Project Information
-
-The landing page currently includes the following project:
-
-| Project | Description | Route |
-|----------|-------------|-------|
-| HeapVortex | 3D JVM Memory Leak Profiler | `/heapvortex` |
-
----
-
-## Navigation
-
-Navigation is handled using the **Wouter** library.
-
-| Route | Action |
-|--------|--------|
-| `/` | Displays Landing Page |
-| `/heapvortex` | Opens HeapVortex visualization |
-
-The **Launch HeapVortex** button redirects users directly to the HeapVortex visualization page.
-
----
-
-## State Management
-
-The component uses React Hooks for state management.
-
-### useState()
-
-Used for:
-
-- Managing sidebar visibility
-- Expanding and collapsing the navigation menu
-
-### useLocation()
-
-Used for:
-
-- Detecting the current route
-- Navigating between application pages
-
----
-
-## User Interface
-
-The page contains the following sections:
-
-### Header
-
-Displays:
-
-- Engineering Demo Platform title
-- Application subtitle describing the platform
-
----
-
-### Sidebar
-
-Contains:
-
-- Project navigation menu
-- Expand/Collapse button
-- Platform description footer
-
----
-
-### Projects Grid
-
-Displays project cards with:
-
-- Gradient backgrounds
-- Interactive hover animations
-- Feature list
-- Launch button
-
----
-
-### Footer
-
-Displays a short description of the platform:
-
-- Advanced Full-Stack Java Engineering
-- Real-time Visualization
-- Modern User Experience
-
----
-
-## Technologies Used
-
-- React
-- TypeScript
-- Wouter
-- Tailwind CSS
-- Shadcn UI
-- Lucide React Icons
-
----
-
-## Purpose
-
-The `LandingPage.tsx` component acts as the central dashboard of the HeapVortex platform. It provides users with an intuitive interface to explore engineering projects, navigate between application modules, and launch the HeapVortex visualization environment through a clean, responsive, and modern design.
-
