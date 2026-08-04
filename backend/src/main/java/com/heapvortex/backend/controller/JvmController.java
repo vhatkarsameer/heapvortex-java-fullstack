@@ -22,7 +22,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/jvm")
-@CrossOrigin(origins = "http://localhost:5173") // Enables CORS for React frontend
+@CrossOrigin(origins = "http://localhost") // Enables CORS for React frontend
 public class JvmController {
 
     private JmxConnectionService jmxConnectionService;

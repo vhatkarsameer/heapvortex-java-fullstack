@@ -15,7 +15,6 @@
     "@trpc/react-query": "^11.18.0",
     "@trpc/server": "^11.18.0",
     "lucide-react": "^1.27.0",
-    "@rolldown/binding-darwin-arm64": "1.1.5",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "react-icons": "^5.7.0",

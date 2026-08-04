@@ -9,6 +9,7 @@ import org.apache.commons.csv.CSVRecord;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
@@ -39,31 +40,30 @@ public class MatHeapParser implements HeapParser {
     }
 
     private Path executeOql(Path heapDumpPath, String oqlQuery) throws IOException {
-        String escapedOql = oqlQuery.replace("\"", "\\\"");
+        System.out.println("[MAT DEBUG] Executing OQL: " + oqlQuery);
+
         ProcessBuilder processBuilder = new ProcessBuilder(
-                matCommand, heapDumpPath.toAbsolutePath().toString(),
-                "-command=oql \"" + escapedOql + "\"",
-                "-format=csv",
+                matCommand,
+                heapDumpPath.toAbsolutePath().toString(),
+                "-command=oql \"" + oqlQuery + "\"", // Back to your original correct syntax
+                "-format=csv",                        // Back to your original correct syntax
                 "-unzip",
                 "-limit=25000",
-                "org.eclipse.mat.api:query"
+                "org.eclipse.mat.api:query"           // MUST BE THE LAST ARGUMENT
         );
 
         processBuilder.directory(heapDumpPath.getParent().toFile());
+        processBuilder.inheritIO();
+
         Process process = processBuilder.start();
-        try { process.waitFor(); } catch (InterruptedException e) { Thread.currentThread().interrupt(); }
+        try {
+            int exitCode = process.waitFor();
+            System.out.println("[MAT DEBUG] OQL Process finished with exit code: " + exitCode);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
 
         return findLatestQueryCsv(heapDumpPath);
-    }
-
-    private Path findLatestQueryCsv(Path heapDumpPath) throws IOException {
-        try (Stream<Path> paths = Files.walk(heapDumpPath.getParent(), 3)) {
-            return paths.filter(Files::isRegularFile)
-                    .filter(path -> path.getFileName().toString().endsWith(".csv"))
-                    .filter(path -> !path.getFileName().toString().contains("Histogram"))
-                    .max(Comparator.comparing(this::lastModifiedTime))
-                    .orElseThrow(() -> new IOException("MAT did not produce an OQL CSV"));
-        }
     }
 
     public List<HeapObject> readHeapObjects(Path csvReport) throws IOException {
@@ -141,25 +141,59 @@ public class MatHeapParser implements HeapParser {
     }
 
     private void runHistogramReport(Path heapDumpPath) throws IOException {
+        System.out.println("[MAT DEBUG] Starting Histogram report...");
+
         ProcessBuilder processBuilder = new ProcessBuilder(
-                matCommand, heapDumpPath.toAbsolutePath().toString(),
-                "-command=histogram",
-                "-format=csv",
+                matCommand,
+                heapDumpPath.toAbsolutePath().toString(),
+                "-command=histogram",       // Back to your original correct syntax
+                "-format=csv",              // Back to your original correct syntax
                 "-unzip",
                 "-limit=25000",
-                "org.eclipse.mat.api:query"
+                "org.eclipse.mat.api:query" // MUST BE THE LAST ARGUMENT
         );
+
         processBuilder.directory(heapDumpPath.getParent().toFile());
+        processBuilder.inheritIO();
+
         Process process = processBuilder.start();
-        try { process.waitFor(); } catch (InterruptedException e) { Thread.currentThread().interrupt(); }
+        try {
+            int exitCode = process.waitFor();
+            System.out.println("[MAT DEBUG] Histogram Process finished with exit code: " + exitCode);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
+    private Path findLatestQueryCsv(Path heapDumpPath) throws IOException {
+        Path uploadDir = heapDumpPath.getParent();
+        System.out.println("[MAT DEBUG] Searching for CSV recursively in: " + uploadDir);
+
+        // This will hunt down the CSV no matter how deep MAT buries it in the subfolders
+        try (Stream<Path> stream = Files.walk(uploadDir)) {
+            Path csvPath = stream
+                    .filter(p -> p.toString().endsWith(".csv"))
+                    .max(Comparator.comparingLong(p -> p.toFile().lastModified()))
+                    .orElse(null);
+
+            if (csvPath == null) {
+                System.err.println("[MAT ERROR] No CSV found! MAT process failed to generate it.");
+                throw new FileNotFoundException("MAT successfully ran, but no CSV was found in the output directories!");
+            }
+
+            System.out.println("[MAT DEBUG] Successfully found CSV: " + csvPath);
+            return csvPath;
+        }
     }
 
     private Path findLatestHistogramCsv(Path heapDumpPath) throws IOException {
-        String reportPrefix = removeExtension(heapDumpPath.getFileName().toString()) + "_Query";
-        try (Stream<Path> paths = Files.walk(heapDumpPath.getParent(), 3)) {
-            return paths.filter(Files::isRegularFile)
+
+        try (Stream<Path> paths = Files.walk(heapDumpPath.getParent(), 5)) {
+
+            return paths
+                    .filter(Files::isRegularFile)
                     .filter(path -> path.getFileName().toString().endsWith(".csv"))
-                    .filter(path -> path.getParent() != null && path.getParent().getFileName().toString().startsWith(reportPrefix))
+                    .filter(path -> path.toString().contains(removeExtension(heapDumpPath.getFileName().toString()) + "_Query"))
                     .max(Comparator.comparing(this::lastModifiedTime))
                     .orElseThrow(() -> new IOException("MAT did not produce a histogram"));
         }

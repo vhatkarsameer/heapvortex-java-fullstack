@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  backend:
+    platform: linux/amd64
+    build:
+      context: ./backend
+    container_name: heapvortex-backend
+    ports:
+      - "8080:8080"
+      - "9999:9999"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    volumes:
+      - heap_data:/app/uploads
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: heapvortex-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  heap_data:

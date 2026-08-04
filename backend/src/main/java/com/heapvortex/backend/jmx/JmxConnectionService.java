@@ -69,15 +69,7 @@ public class JmxConnectionService {
             String url = "service:jmx:rmi:///jndi/rmi://" + host + ":" + port + "/jmxrmi";
             jmxServiceURL = new JMXServiceURL(url);
 
-            // --- THIS IS THE MAGIC FIX FOR SSL ---
-            Map<String, Object> environment = new HashMap<>();
-
-            // We tell JMX to explicitly use SSL sockets for the connection
-            SslRMIClientSocketFactory csf = new SslRMIClientSocketFactory();
-            environment.put("com.sun.jndi.rmi.factory.socket", csf);
-
-            // Connect using the SSL environment
-            connector = JMXConnectorFactory.connect(jmxServiceURL, environment);
+            connector = JMXConnectorFactory.connect(jmxServiceURL, null);
             mBeanServerConnection = connector.getMBeanServerConnection();
 
             this.host = host;

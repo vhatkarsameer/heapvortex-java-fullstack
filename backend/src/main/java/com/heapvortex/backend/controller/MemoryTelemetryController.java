@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/telemetry")
-@CrossOrigin(origins = "http://localhost:5173") // Enables CORS for React frontend
+@CrossOrigin(origins = "http://localhost") // Enables CORS for React frontend
 @RequiredArgsConstructor
 public class MemoryTelemetryController {
 
