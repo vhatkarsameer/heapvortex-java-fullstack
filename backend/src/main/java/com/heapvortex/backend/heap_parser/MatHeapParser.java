@@ -45,7 +45,7 @@ public class MatHeapParser implements HeapParser {
         ProcessBuilder processBuilder = new ProcessBuilder(
                 matCommand,
                 heapDumpPath.toAbsolutePath().toString(),
-                "-command=oql \"" + oqlQuery + "\"", // Back to your original correct syntax
+                "-command=oql " + oqlQuery, // Back to your original correct syntax
                 "-format=csv",                        // Back to your original correct syntax
                 "-unzip",
                 "-limit=25000",

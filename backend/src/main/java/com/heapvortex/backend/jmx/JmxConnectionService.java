@@ -32,6 +32,9 @@ public class JmxConnectionService {
     @Value("${jmx.port}")
     private int port;
 
+    @Value("${RUNNING_IN_DOCKER:false}")
+    private boolean isRunningInDocker;
+
     // We add stateful logging so we don't spam the terminal when it drops
     private boolean wasConnected = true;
 
@@ -50,40 +53,47 @@ public class JmxConnectionService {
     }
 
     public void connect(String host, int port) throws IOException {
+        // --- SMART INTERCEPTOR ---
+        if (isRunningInDocker && port != 9999 && ("localhost".equals(host) || "127.0.0.1".equals(host))) {
+            host = "host.docker.internal";
+        }
 
-        // 1. Safely dismantle the old/dead connection
         if (connector != null) {
-            try {
-                connector.close();
-            } catch (Exception e) {
-                // Ignore the error. The target JVM is already dead.
-            } finally {
-                // ALWAYS clear these out, even if close() threw an error
-                connector = null;
-                mBeanServerConnection = null;
-            }
+            try { connector.close(); } catch (Exception e) {}
+            connector = null;
+            mBeanServerConnection = null;
         }
 
         try {
-            // 2. Establish the fresh connection
             String url = "service:jmx:rmi:///jndi/rmi://" + host + ":" + port + "/jmxrmi";
             jmxServiceURL = new JMXServiceURL(url);
 
-            connector = JMXConnectorFactory.connect(jmxServiceURL, null);
+            // --- CONDITIONAL SSL FIX ---
+            Map<String, Object> environment = null;
+
+            // Only attach SSL if we are connecting OUTSIDE to the secure Target JVM
+            if (port != 9999) {
+                environment = new HashMap<>();
+                javax.rmi.ssl.SslRMIClientSocketFactory csf = new javax.rmi.ssl.SslRMIClientSocketFactory();
+                environment.put("com.sun.jndi.rmi.factory.socket", csf);
+            }
+
+            // If port is 9999, environment is null (plain text). If 9010, it uses SSL.
+            connector = JMXConnectorFactory.connect(jmxServiceURL, environment);
             mBeanServerConnection = connector.getMBeanServerConnection();
 
             this.host = host;
             this.port = port;
 
-            log.info("Successfully connected to Secure Target JVM at {}", url);
+            log.info("Successfully connected to Target JVM at {}", url);
             wasConnected = true;
 
         } catch (IOException e) {
             if (wasConnected) {
-                log.warn("Target JVM is disconnected (Connection Refused). Waiting for it to boot...");
+                log.warn("Target JVM is disconnected. Waiting for it to boot...");
                 wasConnected = false;
             }
-            throw e; // We must throw this so the caller knows it failed
+            throw e;
         }
     }
 

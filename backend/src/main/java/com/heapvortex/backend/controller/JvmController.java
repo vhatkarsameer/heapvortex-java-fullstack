@@ -3,6 +3,7 @@ package com.heapvortex.backend.controller;
 import com.heapvortex.backend.dto.*;
 import com.heapvortex.backend.jmx.JmxConnectionService;
 import com.sun.management.HotSpotDiagnosticMXBean;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,6 +28,9 @@ public class JvmController {
 
     private JmxConnectionService jmxConnectionService;
 
+    @Value("${RUNNING_IN_DOCKER:false}")
+    private boolean isRunningInDocker;
+
     public JvmController(JmxConnectionService jmxConnectionService) {
         this.jmxConnectionService = jmxConnectionService;
     }
@@ -34,45 +38,47 @@ public class JvmController {
 
     @PostMapping("/trigger-remote-dump")
     public ResponseEntity<Map<String, Object>> triggerRemoteHeapDump(@RequestParam String host, @RequestParam int port) {
+
+        // Notice we added '&& port != 9999' so it leaves the local JVM alone!
+        if (isRunningInDocker && port != 9999 && ("localhost".equals(host) || "127.0.0.1".equals(host))) {
+            host = "host.docker.internal";
+        }
+
         Map<String, Object> response = new HashMap<>();
         try {
-            // 1. Build JMX URL
             String serviceUrl = String.format("service:jmx:rmi:///jndi/rmi://%s:%d/jmxrmi", host, port);
             JMXServiceURL url = new JMXServiceURL(serviceUrl);
 
-            // --- ADDED SSL ENVIRONMENT FIX ---
             Map<String, Object> environment = new HashMap<>();
             javax.rmi.ssl.SslRMIClientSocketFactory csf = new javax.rmi.ssl.SslRMIClientSocketFactory();
             environment.put("com.sun.jndi.rmi.factory.socket", csf);
 
-            // 2. Connect to Target JVM over JMX using the SSL environment map (No longer 'null'!)
             try (JMXConnector jmxConnector = JMXConnectorFactory.connect(url, environment)) {
                 MBeanServerConnection mbeanConn = jmxConnector.getMBeanServerConnection();
-
                 HotSpotDiagnosticMXBean mxBean = ManagementFactory.newPlatformMXBeanProxy(
                         mbeanConn,
                         "com.sun.management:type=HotSpotDiagnostic",
                         HotSpotDiagnosticMXBean.class
                 );
 
-                // 3. Ensure 'uploads' directory exists
-                Path uploadDir = Paths.get("uploads");
-                if (!Files.exists(uploadDir)) {
-                    Files.createDirectories(uploadDir);
-                }
-
                 String fileName = "remote_target_dump.hprof";
-                File dumpFile = uploadDir.resolve(fileName).toFile();
 
-                // Delete existing dump file if present to avoid locks
-                if (dumpFile.exists()) {
-                    dumpFile.delete();
+                // 1. THE DOCKER PATH: Where HeapVortex looks for the file inside the container
+                Path dockerUploadDir = Paths.get("/app/uploads");
+                if (!Files.exists(dockerUploadDir)) {
+                    Files.createDirectories(dockerUploadDir);
+                }
+                File dockerFile = dockerUploadDir.resolve(fileName).toFile();
+                if (dockerFile.exists()) {
+                    dockerFile.delete(); // Delete old dump inside Docker
                 }
 
-                // 4. Trigger heap dump
-                mxBean.dumpHeap(dumpFile.getAbsolutePath(), true);
+                // 2. THE MAC PATH: The exact command sent to the Target JVM running on your Mac
+                String macPath = "/Users/sameervhatkar/Study/Projects/HeapVortex/uploads/" + fileName;
 
-                // 5. Return JSON payload matching frontend expectation
+                // Target JVM writes to the Mac drive (which instantly syncs to Docker via docker-compose volume)
+                mxBean.dumpHeap(macPath, true);
+
                 response.put("fileName", fileName);
                 response.put("message", "Successfully generated remote dump!");
                 return ResponseEntity.ok(response);
@@ -83,7 +89,6 @@ public class JvmController {
             return ResponseEntity.status(500).body(response);
         }
     }
-
 
     /**
      * Dumps the heap of the CURRENT running Spring Boot application itself.

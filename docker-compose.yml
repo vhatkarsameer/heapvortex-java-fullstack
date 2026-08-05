@@ -11,9 +11,12 @@ services:
       - "9999:9999"
     environment:
       - SPRING_PROFILES_ACTIVE=prod
+      - RUNNING_IN_DOCKER=true
     volumes:
-      - heap_data:/app/uploads
-
+      # 1. The existing uploads mapping
+      - /Users/sameervhatkar/Study/Projects/HeapVortex/uploads:/app/uploads
+      # 2. NEW: Map your project folder so Docker can read the Truststore!
+      - /Users/sameervhatkar/Study/Projects/HeapVortex:/app/certs
   frontend:
     build:
       context: ./frontend
