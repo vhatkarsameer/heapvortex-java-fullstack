@@ -9,6 +9,7 @@ import org.apache.commons.csv.CSVRecord;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Reader;
@@ -42,14 +43,25 @@ public class MatHeapParser implements HeapParser {
     private Path executeOql(Path heapDumpPath, String oqlQuery) throws IOException {
         System.out.println("[MAT DEBUG] Executing OQL: " + oqlQuery);
 
+        // --- BULLETPROOF FIX 1: DELETE STALE RESULTS ---
+        // This guarantees we NEVER reuse an old CSV if the query fails!
+        Path queryDir = heapDumpPath.getParent().resolve(removeExtension(heapDumpPath.getFileName().toString()) + "_Query");
+        if (Files.exists(queryDir)) {
+            try (Stream<Path> walk = Files.walk(queryDir)) {
+                walk.sorted(Comparator.reverseOrder())
+                        .map(Path::toFile)
+                        .forEach(File::delete);
+            }
+        }
+
         ProcessBuilder processBuilder = new ProcessBuilder(
                 matCommand,
                 heapDumpPath.toAbsolutePath().toString(),
-                "-command=oql " + oqlQuery, // Back to your original correct syntax
-                "-format=csv",                        // Back to your original correct syntax
+                "-command=oql \"" + oqlQuery + "\"", // Wrapped in quotes so MAT CLI parser doesn't break
+                "-format=csv",
                 "-unzip",
                 "-limit=25000",
-                "org.eclipse.mat.api:query"           // MUST BE THE LAST ARGUMENT
+                "org.eclipse.mat.api:query"
         );
 
         processBuilder.directory(heapDumpPath.getParent().toFile());
@@ -79,51 +91,20 @@ public class MatHeapParser implements HeapParser {
                 realObjects.add(toHeapObject(iterator.next()));
         }
 
+        // --- THE MISSING SORTING LOGIC ---
+        // Sort by Retained Heap (or Shallow Heap if Retained is 0) in DESCENDING order
+        realObjects.sort((obj1, obj2) -> {
+            long size1 = obj1.getRetainedHeap() > 0 ? obj1.getRetainedHeap() : obj1.getShallowHeap();
+            long size2 = obj2.getRetainedHeap() > 0 ? obj2.getRetainedHeap() : obj2.getShallowHeap();
+            return Long.compare(size2, size1); // (size2, size1) forces descending order
+        });
+        // ---------------------------------
 
+        // Now that the heaviest objects are at the top, it is safe to truncate!
         if(realObjects.size() > 15000)
             return realObjects.subList(0, 15000);
 
         return realObjects;
-
-        // ==============================================================================
-        // AUDIT SCALER ENGINE: Scales the MAT 500-limit up to 10,000 mathematically accurate objects
-        // ==============================================================================
-//        int TARGET_COUNT = 10000;
-//        if (realObjects.isEmpty()) return realObjects;
-//        if (realObjects.size() >= TARGET_COUNT) return realObjects.subList(0, TARGET_COUNT);
-//
-//        List<HeapObject> finalObjects = new ArrayList<>(TARGET_COUNT);
-//        finalObjects.addAll(realObjects);
-//
-//        int needed = TARGET_COUNT - realObjects.size();
-//        Random rand = new Random(42); // Deterministic seed stops UI flickering
-//
-//        // Base memory address off the first real object
-//        long currentAddress;
-//        try {
-//            currentAddress = Long.parseLong(realObjects.get(0).getAddress().replace("0x", ""), 16);
-//        } catch (Exception e) {
-//            currentAddress = 0x700000000L; // Safe JVM heap fallback
-//        }
-//
-//        for (int i = 0; i < needed; i++) {
-//            HeapObject source = realObjects.get(i % realObjects.size());
-//
-//            // Advance memory pointer sequentially like a real JVM heap allocator
-//            long size = source.getShallowHeap() > 0 ? source.getShallowHeap() : 24;
-//            currentAddress += size;
-//
-//            // Add slight organic variance to size for WebGL visual density
-//            long newShallow = source.getShallowHeap() + (rand.nextBoolean() ? rand.nextInt(16) : 0);
-//
-//            finalObjects.add(new HeapObject(
-//                    source.getClassName(),
-//                    "0x" + Long.toHexString(currentAddress),
-//                    newShallow,
-//                    source.getRetainedHeap()
-//            ));
-//        }
-//        return finalObjects;
     }
 
     private HeapObject toHeapObject(CSVRecord record) {
@@ -146,11 +127,11 @@ public class MatHeapParser implements HeapParser {
         ProcessBuilder processBuilder = new ProcessBuilder(
                 matCommand,
                 heapDumpPath.toAbsolutePath().toString(),
-                "-command=histogram",       // Back to your original correct syntax
-                "-format=csv",              // Back to your original correct syntax
+                "-command=histogram",
+                "-format=csv",
                 "-unzip",
                 "-limit=25000",
-                "org.eclipse.mat.api:query" // MUST BE THE LAST ARGUMENT
+                "org.eclipse.mat.api:query"
         );
 
         processBuilder.directory(heapDumpPath.getParent().toFile());
@@ -166,19 +147,24 @@ public class MatHeapParser implements HeapParser {
     }
 
     private Path findLatestQueryCsv(Path heapDumpPath) throws IOException {
-        Path uploadDir = heapDumpPath.getParent();
-        System.out.println("[MAT DEBUG] Searching for CSV recursively in: " + uploadDir);
+        // --- BULLETPROOF FIX 2: STRICT SCOPED SEARCH ---
+        // Only look inside the newly generated query folder. Never search the root!
+        Path queryDir = heapDumpPath.getParent().resolve(removeExtension(heapDumpPath.getFileName().toString()) + "_Query");
+        System.out.println("[MAT DEBUG] Searching for CSV recursively in: " + queryDir);
 
-        // This will hunt down the CSV no matter how deep MAT buries it in the subfolders
-        try (Stream<Path> stream = Files.walk(uploadDir)) {
+        if (!Files.exists(queryDir)) {
+            throw new FileNotFoundException("[MAT ERROR] OQL crashed. The query directory was not generated.");
+        }
+
+        try (Stream<Path> stream = Files.walk(queryDir)) {
             Path csvPath = stream
+                    .filter(Files::isRegularFile)
                     .filter(p -> p.toString().endsWith(".csv"))
                     .max(Comparator.comparingLong(p -> p.toFile().lastModified()))
                     .orElse(null);
 
             if (csvPath == null) {
-                System.err.println("[MAT ERROR] No CSV found! MAT process failed to generate it.");
-                throw new FileNotFoundException("MAT successfully ran, but no CSV was found in the output directories!");
+                throw new FileNotFoundException("[MAT ERROR] MAT successfully ran, but no CSV was found in the output directories!");
             }
 
             System.out.println("[MAT DEBUG] Successfully found CSV: " + csvPath);
@@ -187,9 +173,7 @@ public class MatHeapParser implements HeapParser {
     }
 
     private Path findLatestHistogramCsv(Path heapDumpPath) throws IOException {
-
         try (Stream<Path> paths = Files.walk(heapDumpPath.getParent(), 5)) {
-
             return paths
                     .filter(Files::isRegularFile)
                     .filter(path -> path.getFileName().toString().endsWith(".csv"))
@@ -229,7 +213,11 @@ public class MatHeapParser implements HeapParser {
     @Override
     public List<HeapObject> getObjectsForClass(Path heapDumpPath, String className) throws IOException {
         String escaped = className.replace("[", "\\[").replace("]", "\\]");
-        return readHeapObjects(executeOql(heapDumpPath, "SELECT * FROM \"" + escaped + "\""));
+
+        // --- BULLETPROOF FIX 3: ESCAPE INNER QUOTES WITH BACKSLASHES ---
+        // This ensures the quotes survive ProcessBuilder and arrive safely inside MAT
+        String query = "SELECT * FROM \\\"" + escaped + "\\\"";
+        return readHeapObjects(executeOql(heapDumpPath, query));
     }
 
     @Override
@@ -261,14 +249,12 @@ public class MatHeapParser implements HeapParser {
 
             HeapObject heaviestParent = parents.stream()
                     .max((p1, p2) -> {
-                        // Compare by Retained Heap first. If not available, fall back to Shallow Heap.
                         long size1 = p1.getRetainedHeap() > 0 ? p1.getRetainedHeap() : p1.getShallowHeap();
                         long size2 = p2.getRetainedHeap() > 0 ? p2.getRetainedHeap() : p2.getShallowHeap();
                         return Long.compare(size1, size2);
                     })
-                    .orElse(parents.get(0)); // Safe fallback
+                    .orElse(parents.get(0));
 
-            // Add the heaviest parent to the chain and move up the tree
             chain.add(heaviestParent);
             currentAddress = heaviestParent.getAddress();
         }

@@ -16,15 +16,18 @@ It bridges the gap between static memory analysis and highly interactive 3D WebG
 
    - Connects to remote target JVMs using **JMX over SSL/TLS** (PKCS12 keystores/truststores).
    - Real-time streaming of Memory Pools, Heap vs. Non-Heap usage, Garbage Collection counts, Thread metrics, and Class Loading stats via WebSockets (`/ws`).
+   - Includes smart environment-aware networking that seamlessly bridges local development with containerized Docker deployments (`host.docker.internal` vs `localhost`) and applies conditional SSL bridging.
 
 2. **Headless Heap Dump Parsing (Eclipse MAT Engine)**
    - Integrates with the **Eclipse Memory Analyzer Tool (MAT)** CLI execution engine (`ParseHeapDump.sh`).
    - Programmatically executes Object Query Language (OQL) statements against uploaded `.hprof` files to extract class statistics, incoming references, outgoing references, and GC root paths.
+   - Features a bulletproof parsing architecture using isolated `_Query` directories and active file-destruction to completely prevent cross-pollination of stale heap data.
 
 3. **High-Performance 3D WebGL Visualization**
    - Built with **React, Three.js, and WebGL**.
    - Features a **Two-Hook Architecture** coupled with `THREE.InstancedMesh` and low-poly `IcosahedronGeometry` to render and auto-rotate **15,000+ JVM objects at a continuous 60 FPS**.
    - Fully interactive canvas: supports smooth orbit controls, zooming, raycasting for object click selection, and layout-isolated inspector panels.
+   - Object visualization is deterministically sorted by Retained/Shallow Heap size in the backend prior to UI extrapolation, guaranteeing the heaviest objects are always prioritized.
 
 4. 4. **Volume Stress-Testing Engine (Data Extrapolation)**
    - Includes a **Continuous Memory Extrapolation Engine** inside `MatHeapParser.java`.
@@ -61,6 +64,7 @@ Before running HeapVortex, ensure the following are installed:
 
         - *Mac Default Path:* `/Applications/MemoryAnalyzer.app/Contents/Eclipse/ParseHeapDump.sh`
         - *Linux/Windows:* Path to your local `ParseHeapDump.sh` or `ParseHeapDump.bat`.
+- Docker & Docker Compose (Highly recommended for seamless backend execution and OS-level path isolation).
 ---
 
 ## 🚀 Setup & Execution Guide
@@ -116,63 +120,34 @@ public class Main {
 -Djavax.net.ssl.trustStorePassword=changeit
 ````
 
-### Step 2: Configuring & Running the HeapVortex Backend
-#### A. Configure application.properties
-Located in backend/src/main/resources/application.properties:
-````
-spring.application.name=backend
+### Step 2: Running the HeapVortex Backend (Dockerized)
 
-# Default JMX Connection Settings
-jmx.host=localhost
-jmx.port=9999
+HeapVortex is fully configured to run inside Docker to eliminate OS-level file parsing errors and easily manage the Eclipse MAT CLI.
 
-# Directory where uploaded and generated .hprof dumps are stored
-heap.upload.directory=uploads
-
-# Local Path to Eclipse MAT executable CLI script
-mat.command=/Applications/MemoryAnalyzer.app/Contents/Eclipse/ParseHeapDump.sh
-
-spring.main.allow-bean-definition-overriding=true
-spring.servlet.multipart.max-file-size=1000MB
-spring.servlet.multipart.max-request-size=1000MB
-````
-#### B. HeapVortex Backend VM Options
-When launching the backend Spring Boot app, provide these VM options to enable SSL JMX communication and open reflective module access for Eclipse MAT dependencies: at the end also add this at end "--add-opens java.base/java.lang=ALL-UNNAMED
---add-opens java.base/java.lang.reflect=ALL-UNNAMED
---add-opens java.base/java.util=ALL-UNNAMED
---add-opens java.base/java.io=ALL-UNNAMED"
-
-````Properties
--Dcom.sun.management.jmxremote.port=9999
--Dcom.sun.management.jmxremote.rmi.port=9999
--Dcom.sun.management.jmxremote.authenticate=false
--Dcom.sun.management.jmxremote.ssl=true
--Dcom.sun.management.jmxremote.registry.ssl=true
--Dcom.sun.management.jmxremote.ssl.need.client.auth=false
--Djavax.net.ssl.keyStoreType=PKCS12
--Djavax.net.ssl.keyStore=/Users/sameervhatkar/Study/Projects/HeapVortex/server-keystore.jks
--Djavax.net.ssl.keyStorePassword=changeit
--Djavax.net.ssl.trustStoreType=PKCS12
--Djavax.net.ssl.trustStore=/Users/sameervhatkar/Study/Projects/HeapVortex/client-truststore.jks
--Djavax.net.ssl.trustStorePassword=changeit
-
-````
-
-#### C. Run the Backend
-
-````bash
+1. **Recompile the Java Code:**
+```bash
 cd backend
-./mvnw clean compile spring-boot:run
-````
+./mvnw clean package -DskipTests
+```
+2. **Boot the Backend Container:**
+Run this from the root directory where your `docker-compose.yml` is located:
+```
+docker-compose up --build -d backend
+```
 
-### Step 3: Running the Frontend
-Open a new terminal window
-````bash
-cd HeapVortex-frontend
-npm install
-npm run dev
-````
-Navigate to http://localhost:5173 in your browser.
+
+### Step 3: Running the HeapVortex Frontend (Dockerized)
+The React/Vite frontend is fully integrated into the Docker Compose network.
+
+1. **Boot the Frontend Container:**
+Run this from the root directory where your docker-compose.yml is located:
+```
+docker-compose up --build -d frontend
+```
+(Note: You can boot both the backend and frontend simultaneously by simply running docker-compose up --build -d from the root directory).
+
+2. **Access the Application:**
+Open your browser and navigate to http://localhost.
 
 # 📂 Heap Dump Storage & Data Lifecycle
 1. **Upload / Remote Generation**: When an .hprof heap dump is uploaded or remotely dumped via JMX, it is saved directly into the backend/uploads/ directory (e.g., uploads/self_jvm_dump_xxxx.hprof).

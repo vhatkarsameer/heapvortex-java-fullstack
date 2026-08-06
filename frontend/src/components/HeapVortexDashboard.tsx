@@ -18,6 +18,8 @@ export default function HeapVortexDashboard() {
   // JMX Remote Connection State
   const [jmxHost, setJmxHost] = useState<string>("");
   const [jmxPort, setJmxPort] = useState<string>("");
+  const [activeHost, setActiveHost] = useState<string>("");
+  const [activePort, setActivePort] = useState<string>("");
   const [jmxConnecting, setJmxConnecting] = useState<boolean>(false);
   const [jmxConnected, setJmxConnected] = useState<boolean>(false);
   const [jmxMessage, setJmxMessage] = useState<string>("");
@@ -40,6 +42,9 @@ export default function HeapVortexDashboard() {
 
     const targetHost = jmxHost || "localhost";
     const targetPort = jmxPort || "9999";
+
+    setActiveHost(targetHost);
+    setActivePort(targetPort);
 
     try {
       const res = await fetch("http://localhost:8080/api/jvm/connect", {
@@ -141,6 +146,9 @@ export default function HeapVortexDashboard() {
         setUploadStatus("uploading");
         setStatusMessage("Dumping local HeapVortex JVM...");
 
+        setActiveHost("localhost");
+        setActivePort("9999");
+
         try {
           // 1. Tell backend to connect to itself (Silent background connection)
           await fetch("http://localhost:8080/api/jvm/connect", {
@@ -183,6 +191,9 @@ export default function HeapVortexDashboard() {
     setObjects([]);
     setUploadStatus("uploading");
     setStatusMessage(`Triggering remote dump on ${jmxHost}:${jmxPort}...`);
+
+    setActiveHost(jmxHost);
+    setActivePort(jmxPort);
 
     try {
       const url = `http://localhost:8080/api/jvm/trigger-remote-dump?host=${encodeURIComponent(
@@ -250,7 +261,13 @@ export default function HeapVortexDashboard() {
               type="text"
               placeholder="9999"
               value={jmxPort}
-              onChange={(e) => setJmxPort(e.target.value)}
+              onChange={(e) => {
+              const val = e.target.value;
+              // Only allow empty strings OR pure numbers up to 65535
+              if (val === '' || (/^\d+$/.test(val) && val.length <= 5 && parseInt(val, 10) <= 65535)) {
+                    setJmxPort(val);
+              }
+              }}
               style={{ backgroundColor: "#111827", border: "1px solid #4b5563", color: "#ffffff", padding: "4px 8px", borderRadius: "6px", fontSize: "11px", width: "65px" }}
             />
             <button
@@ -347,7 +364,7 @@ export default function HeapVortexDashboard() {
                 3D Heap Memory Space
                 {fileName && (
                   <span style={{ marginLeft: "10px", fontSize: "11px", color: "#6ee7b7", backgroundColor: "#064e3b", padding: "2px 6px", borderRadius: "4px", border: "1px solid #059669" }}>
-                    Target: {fileName.includes("remote") ? `${jmxHost}:${jmxPort}` : fileName.includes("self") ? "Local Backend JVM" : fileName}
+                    Target: {fileName.includes("remote") ? `${activeHost}:${activePort}` : fileName.includes("self") ? "Local Backend JVM" : fileName}
                   </span>
                 )}
               </h2>
@@ -438,8 +455,8 @@ export default function HeapVortexDashboard() {
                             ? "Local Backend JVM"
 
                           // 2. Otherwise, if the user typed an IP/Port and clicked connect, use that
-                          : (jmxHost && jmxPort)
-                            ? `${jmxHost}:${jmxPort}`
+                          : (activeHost && activePort)
+                            ? `${activeHost}:${activePort}`
 
                           // 3. Fallback to the default string if nothing is connected yet
                           : "Not Connected"

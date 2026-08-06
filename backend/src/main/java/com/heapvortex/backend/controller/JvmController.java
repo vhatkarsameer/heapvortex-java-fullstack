@@ -38,8 +38,7 @@ public class JvmController {
 
     @PostMapping("/trigger-remote-dump")
     public ResponseEntity<Map<String, Object>> triggerRemoteHeapDump(@RequestParam String host, @RequestParam int port) {
-
-        // Notice we added '&& port != 9999' so it leaves the local JVM alone!
+        // --- SMART INTERCEPTOR ---
         if (isRunningInDocker && port != 9999 && ("localhost".equals(host) || "127.0.0.1".equals(host))) {
             host = "host.docker.internal";
         }
@@ -49,9 +48,13 @@ public class JvmController {
             String serviceUrl = String.format("service:jmx:rmi:///jndi/rmi://%s:%d/jmxrmi", host, port);
             JMXServiceURL url = new JMXServiceURL(serviceUrl);
 
-            Map<String, Object> environment = new HashMap<>();
-            javax.rmi.ssl.SslRMIClientSocketFactory csf = new javax.rmi.ssl.SslRMIClientSocketFactory();
-            environment.put("com.sun.jndi.rmi.factory.socket", csf);
+            // --- CONDITIONAL SSL FIX (Just like in JmxConnectionService!) ---
+            Map<String, Object> environment = null;
+            if (port != 9999) {
+                environment = new HashMap<>();
+                javax.rmi.ssl.SslRMIClientSocketFactory csf = new javax.rmi.ssl.SslRMIClientSocketFactory();
+                environment.put("com.sun.jndi.rmi.factory.socket", csf);
+            }
 
             try (JMXConnector jmxConnector = JMXConnectorFactory.connect(url, environment)) {
                 MBeanServerConnection mbeanConn = jmxConnector.getMBeanServerConnection();
@@ -62,22 +65,31 @@ public class JvmController {
                 );
 
                 String fileName = "remote_target_dump.hprof";
-
-                // 1. THE DOCKER PATH: Where HeapVortex looks for the file inside the container
                 Path dockerUploadDir = Paths.get("/app/uploads");
                 if (!Files.exists(dockerUploadDir)) {
                     Files.createDirectories(dockerUploadDir);
                 }
+
+                // Delete old dump inside Docker
                 File dockerFile = dockerUploadDir.resolve(fileName).toFile();
                 if (dockerFile.exists()) {
-                    dockerFile.delete(); // Delete old dump inside Docker
+                    dockerFile.delete();
                 }
 
-                // 2. THE MAC PATH: The exact command sent to the Target JVM running on your Mac
-                String macPath = "/Users/sameervhatkar/Study/Projects/HeapVortex/uploads/" + fileName;
+                // --- THE SELF-AWARE PATH LOGIC ---
+                String targetPath;
+                if (port == 9999) {
+                    // If they are pointing at port 9999, the JVM executing the dump is INSIDE Docker.
+                    // It must write to the internal Linux path.
+                    targetPath = dockerFile.getAbsolutePath();
+                } else {
+                    // If they are pointing outside (9010), the JVM executing the dump is on the Mac.
+                    // It must write to the absolute Mac path.
+                    targetPath = "/Users/sameervhatkar/Study/Projects/HeapVortex/uploads/" + fileName;
+                }
 
-                // Target JVM writes to the Mac drive (which instantly syncs to Docker via docker-compose volume)
-                mxBean.dumpHeap(macPath, true);
+                // Tell the target JVM to execute the dump using the correct OS path
+                mxBean.dumpHeap(targetPath, true);
 
                 response.put("fileName", fileName);
                 response.put("message", "Successfully generated remote dump!");
